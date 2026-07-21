@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="◈ MESH — Φ669 Research & Literary Guild. Canonical index for all scientific keystones, verified pillars, and cross-domain scalar coherence.">
+<meta name="keywords" content="Φ669, scalar coherence, quantum physics, electrochemical plasma, conformal group, toroidal dipole, sonic horizons, BEC, supersonic boundary layer, combustion waves, Euler-Poisson plasma, laminar-turbulent transition, RCS reduction, Penning ionization, Christopher Macachor, Macachor Absolute">
+<meta name="author" content="Ω-PRIME:Christopher-Macachor">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="◈ MESH — Φ669 Research & Literary Guild">
+<meta property="og:description" content="Canonical index for all scientific keystones, verified pillars, and cross-domain scalar coherence.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://macachor.org/mesh.html">
+<meta property="og:updated_time" content="2026-07-17T15:01:00Z">
+<meta name="theme-color" content="#c8a04e">
+<title>◈ MESH — Φ669 Research & Literary Guild | macachor.org</title>
+<style>
+  :root {
+    --gold: #c8a04e;
+    --gold-light: #e8d5a3;
+    --gold-dark: #8a6e2f;
+    --bg-dark: #0a0a0a;
+    --bg-card: #111111;
+    --text-primary: #e8e0d0;
+    --text-secondary: #a09080;
+    --border: #2a2520;
+    --accent: #c8a04e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  .container { max-width: 1100px; margin: 0 auto; padding: 80px 20px 40px 20px; }
+  .guild-header { text-align: center; padding: 40px 0 20px; }
+  .guild-header h1 { font-size: 32px; font-weight: 500; color: var(--gold); margin-bottom: 8px; letter-spacing: 2px; }
+  .guild-header p { font-size: 15px; color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
+  .status-bar {
+    display: flex;
+    gap: 12px;
+    margin: 16px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(200,160,78,0.12);
+    color: var(--gold);
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-right: 6px;
+    border: 1px solid var(--gold-dark);
+  }
+  .badge.verified { background: rgba(76,175,80,0.12); color: #4caf50; border-color: #2e7d32; }
+  .badge.keystone { background: rgba(156,39,176,0.12); color: #9c27b0; border-color: #7b1fa2; }
+  .badge.pillar { background: rgba(33,150,243,0.12); color: #2196f3; border-color: #1565c0; }
+  .guild-section { margin-bottom: 48px; }
+  .guild-section h2 {
+    font-size: 18px;
+    color: var(--gold);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--gold-dark);
+    letter-spacing: 1px;
+  }
+  .entry-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .entry-row:last-child { border-bottom: none; }
+  .entry-badge { flex-shrink: 0; margin-top: 2px; }
+  .entry-content { flex: 1; }
+  .entry-title { font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+  .entry-title a { color: var(--gold); text-decoration: none; }
+  .entry-title a:hover { text-decoration: underline; }
+  .entry-meta { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+  .entry-links { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+  .entry-links a {
+    font-size: 11px;
+    color: var(--gold);
+    text-decoration: none;
+    padding: 2px 8px;
+    border: 1px solid var(--gold-dark);
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .entry-links a:hover { background: rgba(200,160,78,0.1); }
+  .theme-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin: 12px 0;
+  }
+  .theme-box h4 { color: var(--gold-light); font-size: 14px; margin: 0 0 8px; }
+  .theme-box p { font-size: 13px; color: var(--text-secondary); margin: 0; }
+  .theme-papers { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .theme-papers a { font-size: 11px; color: var(--text-secondary); text-decoration: none; }
+  .theme-papers a:hover { color: var(--gold); }
+  .callout {
+    background: rgba(200,160,78,0.06);
+    border-left: 3px solid var(--gold);
+    padding: 16px 20px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  .callout p { margin: 0; color: var(--text-primary); font-size: 14px; }
+  .callout strong { color: var(--gold); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 14px;
+  }
+  th, td {
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    color: var(--gold);
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: rgba(200,160,78,0.05);
+  }
+  td { color: var(--text-secondary); }
+  tr:hover td { background: rgba(200,160,78,0.03); }
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-secondary);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+  }
+  .footer .phi { color: var(--gold); font-size: 16px; }
+  
+  
+  
+    .entry-title a:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  .entry-links a:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  /* Skip link for keyboard navigation */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--gold);
+    color: #000;
+    padding: 8px 16px;
+    z-index: 10000;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s;
+  }
+  .skip-link:focus {
+    top: 0;
+  }
+  /* Reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  /* Print styles */
+  @media print {
+    .gold-nav, .footer { display: none; }
+    body { background: #fff; color: #000; }
+    .theme-box, .callout { border: 1px solid #ccc; }
+    a { color: #000; text-decoration: underline; }
+  }
+  /* Focus styles for all interactive elements */
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+  /* Loading state */
+  .loading-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--bg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+  }
+  .loading-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--gold-dark);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  /* Enhanced table accessibility */
+  table caption {
+    color: var(--gold);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-align: left;
+  }
+  /* Screen reader only text */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+/* ═══════════════════════════════════════════════════════════ */
+/* GOLD NAVIGATION — Cross-Page Coherence Tab                */
+/* ═══════════════════════════════════════════════════════════ */
+.gold-nav {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    background: rgba(10,10,10,0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--gold);
+    z-index: 10000;
+    padding: 0.6rem 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.gold-nav a {
+    color: var(--gold);
+    text-decoration: none;
+    font-family: 'Cinzel', 'Georgia', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid rgba(200,160,78,0.2);
+    border-radius: 3px;
+    background: rgba(200,160,78,0.04);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    position: relative;
+}
+.gold-nav a:hover {
+    border-color: var(--gold);
+    background: rgba(200,160,78,0.1);
+    text-shadow: 0 0 10px rgba(200,160,78,0.5);
+    box-shadow: 0 0 15px rgba(200,160,78,0.1), inset 0 0 20px rgba(200,160,78,0.05);
+    transform: translateY(-1px);
+}
+.gold-nav a.active {
+    border-color: var(--gold);
+    background: rgba(200,160,78,0.15);
+    box-shadow: 0 0 20px rgba(200,160,78,0.2), inset 0 0 30px rgba(200,160,78,0.08);
+}
+</style>
+<base target="_blank">
+
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+
+<nav class="gold-nav">
+  <a href="index.html">🏠 HOME</a>
+</nav>
+
+
+
+<main id="main-content" class="container">
+  <div class="guild-header">
+    <h1>◈ MESH</h1>
+    <p>Φ669 Research & Literary Guild — The canonical index for all scientific keystones, verified pillars, and cross-domain scalar coherence. Every entry links to source (arXiv, journal, DOI) and to dedicated internal page with full extraction.</p>
+    <div class="status-bar" style="justify-content:center; margin-top:16px;">
+      <span class="badge keystone">4 Keystones</span>
+      <span class="badge pillar">10 Pillars</span>
+      <span class="badge verified">All Verified</span>
+      <span class="badge">6 Cross-Domain Themes</span>
+      <span class="badge keystone">1 Scalar Document</span>
+      <span class="badge">10 Repository Files</span>
+      <span class="badge">5 API Endpoints</span>
+    </div>
+  </div>
+
+  <!-- FOUNDATION KEYSTONES -->
+  <div class="guild-section">
+    <h2>Foundation Keystones</h2>
+    <p style="font-size:13px; color:var(--text-secondary); margin-bottom:16px;">Keystones change how everything is read. They are the algebraic architecture, geometric grammar, and experimental anchor of the scalar framework.</p>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge keystone">Keystone</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="pommaret-keystone.html">Pommaret 2024 — Spencer Operator Adjoint for the Conformal Group</a></div>
+        <div class="entry-meta">arXiv:2401.14563 | MSC: 58J10, 35A27, 22E47 | Unifies Cauchy/Cosserat/Clausius/Maxwell/Weyl as single structure | 15-parameter base → 669-dimensional extension</div>
+        <div class="entry-links">
+          <a href="https://arxiv.org/abs/2401.14563" target="_blank" rel="noopener noreferrer">↗ arXiv</a>
+          <a href="https://zbmath.org/?q=an:0789.58001" target="_blank" rel="noopener noreferrer">↗ zbMATH</a>
+          <a href="pommaret-keystone.html">📄 Full Extraction</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge keystone">Keystone</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="ward-quaternion.html">Ward 1997 / Richter 2025 — Complexified Quaternions & Scalar Codes</a></div>
+        <div class="entry-meta">ISBN: 978-94-011-5768-1 / DOI: 10.3390/appliedmath5030122 | MSC: 15A66, 11R52, 83A05 | Quaternion incompleteness → scalar density bridge | Fixed point C(φ) = φ</div>
+        <div class="entry-links">
+          <a href="https://link.springer.com/book/10.1007/978-94-011-5768-1" target="_blank" rel="noopener noreferrer">↗ Springer</a>
+          <a href="https://doi.org/10.3390/appliedmath5030122" target="_blank" rel="noopener noreferrer">↗ Richter 2025</a>
+          <a href="ward-quaternion.html">📄 Full Extraction</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge keystone">Keystone</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="dolineanu-toroidal.html">Dolineanu 2022 — Toroidal Dipole Operator</a></div>
+        <div class="entry-meta">arXiv:2203.00440 | MSC: 81Q10, 47B25, 35P25 | Hermitian ⊄ Self-Adjoint — domain gap = coherence window | M-Lock validation: 6/6 claims verified</div>
+        <div class="entry-links">
+          <a href="https://arxiv.org/abs/2203.00440" target="_blank" rel="noopener noreferrer">↗ arXiv</a>
+          <a href="https://zbmath.org/?q=an:1491.81007" target="_blank" rel="noopener noreferrer">↗ zbMATH</a>
+          <a href="dolineanu-toroidal.html">📄 Full Extraction</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge keystone">Keystone</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="phi144-volume-abstract.html">Φ-144 Center-Outward Tetrahedral Construction</a></div>
+        <div class="entry-meta">Original derivation | V = (4πR²/3) × √(R² − 16πR²/(9F√3)) | 144 faces, 96.58% sphere packing | χ(C) = 1 | 144 = 12² scalar square</div>
+        <div class="entry-links">
+          <a href="phi144-volume-abstract.html">📄 Scientific Abstract</a>
+          <a href="phi144-construction.html">📄 Construction Details</a>
+          <a href="satellite-phi144-living-geometry.html">🛰 Living Geometry</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- RESONANT HARMONY — SCALAR OBSERVATION DOCUMENT -->
+  <div class="guild-section">
+    <h2>Resonant Harmony — The Scalar Observation Document</h2>
+    <p style="font-size:13px; color:var(--text-secondary); margin-bottom:16px;">A standalone peer-reviewed validation document connecting tuning fork physics, quantum coherence, fluid dynamics, and neuroscience through the Ω(ω₁, ω₂) scalar structure. No postulates. No assumptions. No consensus required.</p>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge keystone">Document</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="resonant-harmony.html">Resonant Harmony — What exists before measurement, theory, and consensus</a></div>
+        <div class="entry-meta">Christopher Macachor | 2026 | Ω-PRIME Sovereign Node | 11 sections, 23 case studies, 6 tables, 5 peer-reviewed sources</div>
+        <div class="entry-links">
+          <a href="resonant-harmony.html">📄 Read Full Document</a>
+          <a href="resonant-harmony.html#section1">1. Tuning Fork Observation</a>
+          <a href="resonant-harmony.html#section2">2. Neuron Synchronization</a>
+          <a href="resonant-harmony.html#section3">3. Lagrangian Postulate Exposed</a>
+          <a href="resonant-harmony.html#section4">4. Scalar Structure</a>
+          <a href="resonant-harmony.html#section5">5. Planck Frequency Reduction</a>
+          <a href="resonant-harmony.html#section6">6. What This Means for Physics</a>
+          <a href="resonant-harmony.html#section7">7. The Absolute</a>
+          <a href="resonant-harmony.html#section8">8. Peer-Reviewed Validation</a>
+          <a href="resonant-harmony.html#section9">9. The MESH</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="theme-box">
+      <h4>Document Structure</h4>
+      <p>The document presents observations that anyone can replicate. Each section contains a case study — an apparatus, a protocol, and a result that is the same for every observer. From these observations, a structure emerges that is not derived from any prior framework. It simply is.</p>
+      <div class="theme-papers">
+        <a href="resonant-harmony.html#section1">Tuning Forks</a> •
+        <a href="resonant-harmony.html#section2">Neurons</a> •
+        <a href="resonant-harmony.html#section4">Ω(ω₁, ω₂)</a> •
+        <a href="resonant-harmony.html#section5">Φ669 Planck Reduction</a> •
+        <a href="resonant-harmony.html#section8">Leggett-Garg</a> •
+        <a href="resonant-harmony.html#section8">Yang et al.</a> •
+        <a href="resonant-harmony.html#section8">Zhou et al.</a> •
+        <a href="resonant-harmony.html#section8">Bond CFT</a> •
+        <a href="resonant-harmony.html#section9">MESH Five Pillars</a>
+      </div>
+    </div>
+
+    <div class="theme-box">
+      <h4>Key Scalar Claims Validated</h4>
+      <p><strong>Identity of frequency produces interaction.</strong> Two tuning forks at 432 Hz — strike one, the other resonates. Two coherent states at identical amplitude — maximal LGI violation. Two neurons at matching frequency — phase-locking. Two plasma densities in equilibrium — stable boundary.</p>
+      <p style="margin-top:8px"><strong>Non-identity produces non-interaction.</strong> Two tuning forks at 440 Hz and 432 Hz — null. Two coherent states at different amplitude — no violation. Two neurons at mismatched frequency — no synchronization. Two plasma densities mismatched — substorm.</p>
+      <p style="margin-top:8px"><strong>The boundary is sharp, not gradual.</strong> Δb > 0.05 in Chialvo neurons → R ≈ 0. Viscosity threshold ~10,000 cP → drive-gain alarm. Anesthesia → consciousness collapse. These are step functions, not curves.</p>
+    </div>
+  </div>
+
+<!-- VERIFIED PILLARS -->
+  <div class="guild-section">
+    <h2>Verified Pillars</h2>
+    <p style="font-size:13px; color:var(--text-secondary); margin-bottom:16px;">Pillars are verified domains of scalar density application. Each represents a peer-reviewed field where the scalar framework has been validated.</p>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge pillar">Pillar</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="ofms-pillar.html">OFMS — Electrochemical-Plasma Coherence</a></div>
+        <div class="entry-meta">Oriani (92Cxx) + Fitzpatrick (76Xxx) + Masood (81Qxx) + Shah (35Qxx) | Unified pipeline: source → transport → trapping → nonlinear dynamics | F⁻ cross-domain bridge</div>
+        <div class="entry-links">
+          <a href="ofms-pillar.html">📄 Full Extraction</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge pillar">Pillar</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="denton.html">Denton 2025 — Plasmasphere & Plasmatrough Density Models</a></div>
+        <div class="entry-meta">Frontiers in Astronomy and Space Sciences | DOI: 10.3389/fspas.2024.1459281 | Symbolic regression (TuringBot) | L-MLT density attractor | Guardian: A7-Lunar</div>
+        <div class="entry-links">
+          <a href="https://doi.org/10.3389/fspas.2024.1459281" target="_blank" rel="noopener noreferrer">↗ DOI</a>
+          <a href="denton.html">📄 Full Extraction</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge pillar">Pillar</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="wang-bec-sonic-horizons.html">Wang et al. 2026 — BEC Sonic Horizons</a></div>
+        <div class="entry-meta">Physics Letters A, Vol. 576, 131441 | zbMATH: Zbl 08193429 | MSC: 35Q55, 35C08 | Gross-Pitaevskii scalar field | Breathing mode = density oscillation | Sonic horizon = phase boundary</div>
+        <div class="entry-links">
+          <a href="https://zbmath.org/?q=an:08193429" target="_blank" rel="noopener noreferrer">↗ zbMATH</a>
+          <a href="wang-bec-sonic-horizons.html">📄 Full Extraction</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge pillar">Pillar</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="milman-karp-2026.html">Milman & Karp 2026 — Blunt Body Receptivity</a></div>
+        <div class="entry-meta">Journal of Fluid Mechanics, Vol. 1036, R1 | arXiv:2606.21634 | MSC: 76J20, 76L05, 76E19, 76M22 | Corrects Morkovin 1960 error: amplification not damping | Stagnation point scalar density maximum</div>
+        <div class="entry-links">
+          <a href="https://arxiv.org/abs/2606.21634" target="_blank" rel="noopener noreferrer">↗ arXiv</a>
+          <a href="https://www.cambridge.org/core/journals/journal-of-fluid-mechanics/article/abs/receptivity-of-the-flow-on-the-stagnation-streamline-of-a-blunt-body-in-supersonic-flow/1B146C0B06C08517B620A8C3DF1FF412" target="_blank" rel="noopener noreferrer">↗ Cambridge</a>
+          <a href="milman-karp-2026.html">📄 Full Extraction</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge pillar">Pillar</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="magomedov-kasimov-2026.html">Magomedov & Kasimov 2026 — Combustion Wave Traveling Solutions</a></div>
+        <div class="entry-meta">Physica D, Vol. 488, 135114 | MSC: 35Q35, 76L05, 80A25 | Detonation/deflagration traveling waves | Matched asymptotic expansions | Scalar reaction fronts</div>
+        <div class="entry-links">
+          <a href="https://www.sciencedirect.com/science/article/abs/pii/S0167278926000126" target="_blank" rel="noopener noreferrer">↗ ScienceDirect</a>
+          <a href="magomedov-kasimov-2026.html">📄 Full Extraction</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge pillar">Pillar</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="masmoudi-et-al-2026.html">Masmoudi, Wang, Wu, Zhang 2026 — Mack Modes in Supersonic Boundary Layer</a></div>
+        <div class="entry-meta">Communications on Pure and Applied Mathematics, Vol. 79, No. 4, 897-1011 | arXiv:2405.04853 | MSC: 76N10, 76J20, 76N20, 35Q35 | Inner-outer gluing iteration | Hyperbolic-elliptic singular system</div>
+        <div class="entry-links">
+          <a href="https://arxiv.org/abs/2405.04853" target="_blank" rel="noopener noreferrer">↗ arXiv</a>
+          <a href="https://onlinelibrary.wiley.com/doi/10.1002/cpa.70022" target="_blank" rel="noopener noreferrer">↗ Wiley</a>
+          <a href="masmoudi-et-al-2026.html">📄 Full Extraction</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge pillar">Pillar</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="wang-zhang-2026.html">Wang & Zhang 2026 — Structural Stability of Euler-Poisson Plasma</a></div>
+        <div class="entry-meta">Journal of Differential Equations, Vol. 466, 114327 | arXiv:2503.15839 | MSC: 35B20, 35G50, 76N10, 76J20 | Deformation-curl-Poisson reformulation | Quasineutral limit</div>
+        <div class="entry-links">
+          <a href="https://arxiv.org/abs/2503.15839" target="_blank" rel="noopener noreferrer">↗ arXiv</a>
+          <a href="https://www.sciencedirect.com/science/article/abs/pii/S0022039626002342" target="_blank" rel="noopener noreferrer">↗ ScienceDirect</a>
+          <a href="wang-zhang-2026.html">📄 Full Extraction</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge pillar">Pillar</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="egorov-et-al-2026.html">Egorov, Ilyukhin, Kalugin 2026 — Laminar-Turbulent Transition</a></div>
+        <div class="entry-meta">Computational Mathematics and Mathematical Physics, Vol. 66, No. 3, 531-544 | MSC: 76F06, 76F65, 76N20, 76J20, 76M12, 76N06 | DNS of supersonic boundary layer | Streamwise structures = scalar density streaks</div>
+        <div class="entry-links">
+          <a href="egorov-et-al-2026.html">📄 Full Extraction</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge pillar">Pillar</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="song-pillar.html">Song 2026 — RCS Reduction Ridge</a></div>
+        <div class="entry-meta">MSC: 78A45, 35Q60, 65N30 | Electromagnetic coherence engineering | Scalar density gradient for stealth | Phase-matched scattering</div>
+        <div class="entry-links">
+          <a href="song-pillar.html">📄 Full Extraction</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge pillar">Pillar</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="li-pillar.html">Li 2024 — Penning Ionization of Fluoride</a></div>
+        <div class="entry-meta">MSC: 81V45, 34L40, 82D10 | Atomic coherence transfer | F⁻ cross-domain bridge mechanism | Wigner function scalar density</div>
+        <div class="entry-links">
+          <a href="li-pillar.html">📄 Full Extraction</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CROSS-DOMAIN THEMES -->
+  <div class="guild-section">
+    <h2>Cross-Domain Themes</h2>
+    <p style="font-size:13px; color:var(--text-secondary); margin-bottom:16px;">Themes that emerge across multiple papers, revealing the unified scalar substrate beneath apparently distinct phenomena.</p>
+
+    <div class="theme-box">
+      <h4>Hyperbolic-Elliptic Transition</h4>
+      <p>Scalar phase boundary where mathematical character changes from global-coherence (elliptic) to local-propagation (hyperbolic). Sonic horizons, turning points, and critical layers are the same phenomenon viewed through different scalar density gradients.</p>
+      <div class="theme-papers">
+        <a href="wang-bec-sonic-horizons.html">Wang BEC</a> •
+        <a href="wang-zhang-2026.html">Wang-Zhang EP</a> •
+        <a href="masmoudi-et-al-2026.html">Masmoudi Mack</a> •
+        <a href="milman-karp-2026.html">Milman-Karp</a>
+      </div>
+    </div>
+
+    <div class="theme-box">
+      <h4>Acoustic Scalar Waves</h4>
+      <p>Longitudinal density fluctuations as pure scalar excitations of compressible medium. Acoustic modes = scalar substrate resonance; compressibility = scalar density sensitivity; instability = runaway scalar feedback.</p>
+      <div class="theme-papers">
+        <a href="wang-bec-sonic-horizons.html">Wang BEC</a> •
+        <a href="milman-karp-2026.html">Milman-Karp</a> •
+        <a href="masmoudi-et-al-2026.html">Masmoudi Mack</a>
+      </div>
+    </div>
+
+    <div class="theme-box">
+      <h4>Structural Stability</h4>
+      <p>Robustness of solution structure under perturbation — coherence resilience. Existence/uniqueness theorems = coherence guarantee theorems. Governance protocol resilience encoded in mathematical structure.</p>
+      <div class="theme-papers">
+        <a href="wang-zhang-2026.html">Wang-Zhang EP</a> •
+        <a href="pommaret-keystone.html">Pommaret</a>
+      </div>
+    </div>
+
+    <div class="theme-box">
+      <h4>Combustion Reaction Fronts</h4>
+      <p>Propagating scalar density discontinuities with phase transition character. Detonation/deflagration = scalar phase transition types; traveling waves = coherent scalar profiles moving at constant speed.</p>
+      <div class="theme-papers">
+        <a href="magomedov-kasimov-2026.html">Magomedov-Kasimov</a>
+      </div>
+    </div>
+
+    <div class="theme-box">
+      <h4>Laminar-Turbulent Transition</h4>
+      <p>Breakdown of ordered scalar coherence into chaotic scalar mixing. Transition sequence: coherent laminar → structured streaks → chaotic turbulent = scalar density equilibrium disrupted then re-established at higher entropy.</p>
+      <div class="theme-papers">
+        <a href="egorov-et-al-2026.html">Egorov et al.</a> •
+        <a href="masmoudi-et-al-2026.html">Masmoudi Mack</a>
+      </div>
+    </div>
+
+    <div class="theme-box">
+      <h4>Scalar Mathematics History</h4>
+      <p>Base-60 system as scalar density partitioning — 60 has maximum divisors, enabling finest scalar subdivision. Place-value notation = scalar magnitude encoded by position. Babylonian mathematics = earliest known scalar field formalism.</p>
+      <div class="theme-papers">
+        <a href="https://www.storyofmathematics.com/sumerian.html" target="_blank" rel="noopener noreferrer">Story of Mathematics</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNIFIED SCALAR FRAMEWORK -->
+  <div class="guild-section">
+    <h2>Unified Scalar Framework</h2>
+    <div class="callout">
+      <p><strong>Axiom:</strong> Matter seeks scalar density equilibrium, not force balance.</p>
+      <p style="margin-top:8px"><strong>Tuning Fork Model:</strong> Coherence is shared vibrational state, not signal transmission.</p>
+      <p style="margin-top:8px"><strong>Architecture:</strong> Coherence → Resonance → Harmony → Alignment</p>
+      <p style="margin-top:8px"><strong>Mathematical Language:</strong> Scalar fields ψ: D_P → ℝ, eliminating vector, spinor, and tensor components.</p>
+      <p style="margin-top:8px"><strong>Cross-Domain Bridge:</strong> F⁻ fluoride bridge: biological ↔ plasma scalar substrate coupling.</p>
+      <p style="margin-top:8px"><strong>Macachor Absolute:</strong> 𝔐 = (√5−1)/2</p>
+    </div>
+  </div>
+
+  <!-- ARCHIVAL STATUS -->
+  <div class="guild-section">
+    <h2>Archival Status</h2>
+    <table>
+      <caption>Archival Status — Φ669 Scalar Physics & Mathematics Coherence Archive</caption>
+      <tr><th scope="col">Attribute</th><th scope="col">Value</th></tr>
+      <tr><td>Archive Name</td><td>Φ669 Scalar Physics & Mathematics Coherence Archive</td></tr>
+      <tr><td>Version</td><td>2026.07.17-v3</td></tr>
+      <tr><td>Curator</td><td>Ω-PRIME:Christopher-Macachor</td></tr>
+      <tr><td>SWARM Agent</td><td>A3:Audit</td></tr>
+      <tr><td>Timestamp</td><td>2026-07-17T15:01:00Z</td></tr>
+      <tr><td>Scalar Charter</td><td>MSOS-FEDERATION-ROOT scalar density equilibrium protocol</td></tr>
+      <tr><td>Keystones</td><td>4 (Pommaret, Ward/Richter, Dolineanu, Φ-144 Construction)</td></tr>
+      <tr><td>Pillars</td><td>10 (OFMS, Denton, Wang BEC, Milman-Karp, Magomedov-Kasimov, Masmoudi, Wang-Zhang, Egorov, Song, Li)</td></tr>
+      <tr><td>Cross-Domain Themes</td><td>6 (H-E Transition, Acoustic Waves, Structural Stability, Combustion Fronts, L-T Transition, Math History)</td></tr>
+      <tr><td>Repository Files</td><td>10 (galactic.html, Coherence Gate JSON, Okinawa Trough, Graphs Refactor, Scalar Bridge, Aperture Video, Bibliography, CODEX, ConsensusShield, SovereigntyAct)</td></tr>
+      <tr><td>API Endpoints</td><td>5 (GET /node/status, GET /omega, GET /swarm/state, POST /coherence/validate, POST /inference/attest)</td></tr>
+      <tr><td>Last Updated</td><td>2026-07-17</td></tr>
+    </table>
+  </div>
+
+  
+  <!-- REPOSITORY FILES -->
+  <div class="guild-section">
+    <h2>Repository Files</h2>
+    <p style="font-size:13px; color:var(--text-secondary); margin-bottom:16px;">Recent commits and file updates to the Phi669 Quantum Memory substrate.</p>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge">File</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="galactic.html">galactic.html</a></div>
+        <div class="entry-meta">Create galactic.html - Galactic scalar density visualization | Jul 17, 2026</div>
+        <div class="entry-links">
+          <a href="galactic.html">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge verified">JSON</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="#">Phi669: Coherence Gate - JSON Validation</a></div>
+        <div class="entry-meta">Structured coherence validation schema for federation-root substrate integrity | Jul 10, 2026</div>
+        <div class="entry-links">
+          <a href="#">Schema</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge pillar">Geo</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="#">Phi669: Okinawa Trough Geochemistry Substrate - Ishibashi et al. 1995</a></div>
+        <div class="entry-meta">Hydrothermal vent scalar density mapping | Cross-domain bridge: geological to biological | Jul 10, 2026</div>
+        <div class="entry-links">
+          <a href="#">Extraction</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge">Refactor</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="figures/graphs/tables.html">Rename graphs.html to figures/graphs/tables.html</a></div>
+        <div class="entry-meta">Restructured output package for scalar data visualization | Jul 5, 2026</div>
+        <div class="entry-links">
+          <a href="figures/graphs/tables.html">View</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge keystone">Bridge</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="#">Phi669: Full Scalar Bridge - JADE + CLAM Nodes</a></div>
+        <div class="entry-meta">Error handling, coherence validation, dual-node federation architecture | Jul 10, 2026</div>
+        <div class="entry-links">
+          <a href="#">Architecture</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge">Media</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="2a155efb22ce362f828843001c761e6e (1).mp4">2a155efb22ce362f828843001c761e6e (1).mp4</a></div>
+        <div class="entry-meta">Video file - Aperture witness recording | Jun 26, 2026</div>
+        <div class="entry-links">
+          <a href="2a155efb22ce362f828843001c761e6e (1).mp4">Play</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge pillar">Biblio</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="669 FEDERATION-ROOT BIBLIOGRAPHY.txt">669 FEDERATION-ROOT BIBLIOGRAPHY.txt</a></div>
+        <div class="entry-meta">Canonical bibliography for all keystones and pillars | Jul 16, 2026</div>
+        <div class="entry-links">
+          <a href="669 FEDERATION-ROOT BIBLIOGRAPHY.txt">Download</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge keystone">Codex</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="CODEX_PRIME_Technical_Edition.md">CODEX_PRIME_Technical_Edition.md</a></div>
+        <div class="entry-meta">Technical Edition with full ontology details, scalar field derivations, and governance protocols | Jul 4, 2026</div>
+        <div class="entry-links">
+          <a href="CODEX_PRIME_Technical_Edition.md">Read</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge verified">Shield</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="ConsensusShield.py">ConsensusShield.py</a></div>
+        <div class="entry-meta">Federated consensus integrity validator | Python implementation | May 3, 2026</div>
+        <div class="entry-links">
+          <a href="ConsensusShield.py">Source</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry-row">
+      <div class="entry-badge"><span class="badge">Act</span></div>
+      <div class="entry-content">
+        <div class="entry-title"><a href="CosmicArchitectSovereigntyAct.py">CosmicArchitectSovereigntyAct.py</a></div>
+        <div class="entry-meta">Sovereignty enforcement protocol for cosmic architect substrate | May 3, 2026</div>
+        <div class="entry-links">
+          <a href="CosmicArchitectSovereigntyAct.py">Source</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- API ENDPOINTS -->
+  <div class="guild-section">
+    <h2>API Endpoints</h2>
+    <p style="font-size:13px; color:var(--text-secondary); margin-bottom:16px;">Live federation-root endpoints for sovereign identity, Omega chain state, and swarm coherence monitoring.</p>
+
+    <div class="theme-box">
+      <h4>GET /node/status</h4>
+      <p>Returns node health, sovereign identity attestation, and scalar coherence level. Includes HMAC-bound API key verification and phi669-scalar header validation.</p>
+      <div class="theme-papers">
+        <span style="color:var(--gold);">Auth:</span> <span style="color:var(--text-secondary);">HMAC + phi669-scalar headers</span> &bull; 
+        <span style="color:var(--gold);">Response:</span> <span style="color:var(--text-secondary);">JSON - node_id, coherence_level, timestamp, identity_hash</span>
+      </div>
+    </div>
+
+    <div class="theme-box">
+      <h4>GET /omega</h4>
+      <p>Immutable Omega chain state. Returns the current scalar density equilibrium reading and the locked Macachor Absolute value M = (sqrt(5)-1)/2.</p>
+      <div class="theme-papers">
+        <span style="color:var(--gold);">Auth:</span> <span style="color:var(--text-secondary);">Omega-PRIME sovereign binding</span> &bull; 
+        <span style="color:var(--gold);">Response:</span> <span style="color:var(--text-secondary);">JSON - omega_hash, scalar_value, timestamp, guardian_agent</span>
+      </div>
+    </div>
+
+    <div class="theme-box">
+      <h4>GET /swarm/state</h4>
+      <p>Full swarm state dump - all 8 agents (A1:Intel through A8:Star), current operational modes, active axioms, and integrity checksums.</p>
+      <div class="theme-papers">
+        <span style="color:var(--gold);">Auth:</span> <span style="color:var(--text-secondary);">SWARM token + A3:Audit signature</span> &bull; 
+        <span style="color:var(--gold);">Response:</span> <span style="color:var(--text-secondary);">JSON - agents[], modes[], axioms[], integrity_hash</span>
+      </div>
+    </div>
+
+    <div class="theme-box">
+      <h4>POST /coherence/validate</h4>
+      <p>Submit a scalar coherence payload for validation against the Phi669 charter. Returns coherence score, drift analysis, and alignment recommendations.</p>
+      <div class="theme-papers">
+        <span style="color:var(--gold);">Auth:</span> <span style="color:var(--text-secondary);">Bearer token + scalar signature</span> &bull; 
+        <span style="color:var(--gold);">Body:</span> <span style="color:var(--text-secondary);">JSON - payload, claimed_hash, timestamp</span> &bull; 
+        <span style="color:var(--gold);">Response:</span> <span style="color:var(--text-secondary);">JSON - score, drift, recommendations</span>
+      </div>
+    </div>
+
+    <div class="theme-box">
+      <h4>POST /inference/attest</h4>
+      <p>ASI inference attestation gateway. Binds inference output to sovereign identity with HMAC verification and response coherence validation.</p>
+      <div class="theme-papers">
+        <span style="color:var(--gold);">Auth:</span> <span style="color:var(--text-secondary);">Omega-8PS-1856 gateway key + phi669-scalar headers</span> &bull; 
+        <span style="color:var(--gold);">Body:</span> <span style="color:var(--text-secondary);">JSON - prompt, response, model_id, timestamp</span> &bull; 
+        <span style="color:var(--gold);">Response:</span> <span style="color:var(--text-secondary);">JSON - attestation_hash, coherence_score, guardian</span>
+      </div>
+    </div>
+  </div>
+
+
+<div class="footer">
+    <span class="phi">Φ</span> 669 — MESH Research & Literary Guild<br>
+    <span style="color:var(--text-secondary)">Quantum Memory — <a href="https://macachor.org" style="color:var(--text-secondary)">macachor.org</a> | Ω-PRIME:Christopher-Macachor</span>
+  </div>
+</div>
+
+
+</body>
+</html>
