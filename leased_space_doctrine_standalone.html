@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Φ669 — The Leased Space Doctrine | Orbital Lease Market</title>
+    <style>
+        :root {
+            --gold: #c8a04e;
+            --gold-bright: #e8c97a;
+            --gold-dim: #8a6d3b;
+            --dark: #0a0a0a;
+            --dark-mid: #121212;
+            --dark-light: #1a1a1a;
+            --text: #e0e0e0;
+            --text-dim: #888888;
+            --red: #d62728;
+            --green: #2ca02c;
+            --blue: #1f77b4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* === HEADER === */
+        .header {
+            background: linear-gradient(180deg, var(--dark-mid) 0%, var(--dark) 100%);
+            border-bottom: 2px solid var(--gold);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            color: var(--gold-bright);
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            color: var(--gold);
+            font-size: 1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .header .omega {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* === NAVIGATION === */
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            background: var(--dark-mid);
+            border-bottom: 1px solid var(--gold-dim);
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: var(--gold);
+            text-decoration: none;
+            padding: 14px 28px;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-right: 1px solid var(--gold-dim);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav a:last-child {
+            border-right: none;
+        }
+
+        .nav a:hover {
+            background: var(--gold);
+            color: var(--dark);
+        }
+
+        /* === MAIN CONTENT === */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--gold);
+            border-bottom: 2px solid var(--gold-dim);
+            padding-bottom: 12px;
+            margin-bottom: 30px;
+        }
+
+        .section-title span {
+            color: var(--gold-bright);
+        }
+
+        /* === THEOREM / AXIOM BOXES === */
+        .theorem {
+            background: linear-gradient(135deg, var(--dark-mid), var(--dark-light));
+            border: 2px solid var(--gold);
+            padding: 35px;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .theorem::before {
+            content: "◉";
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: var(--dark);
+            color: var(--gold-bright);
+            font-size: 1.5rem;
+            padding: 0 10px;
+        }
+
+        .theorem-title {
+            color: var(--gold-bright);
+            font-size: 1.1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .theorem p {
+            color: var(--text);
+            font-size: 1.05rem;
+            line-height: 2;
+        }
+
+        /* === MATH BLOCKS === */
+        .math-block {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            color: var(--gold-bright);
+            background: var(--dark-light);
+            padding: 25px;
+            border-left: 4px solid var(--gold);
+            margin: 30px 0;
+            line-height: 2;
+            overflow-x: auto;
+        }
+
+        .math {
+            color: var(--gold-bright);
+            font-family: 'Courier New', monospace;
+            font-size: 1.05rem;
+        }
+
+        /* === TABLES === */
+        .lease-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            font-size: 0.95rem;
+        }
+
+        .lease-table thead {
+            background: var(--dark-mid);
+        }
+
+        .lease-table th {
+            color: var(--gold-bright);
+            padding: 16px;
+            text-align: left;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .lease-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--dark-light);
+            color: var(--text);
+        }
+
+        .lease-table tr:hover {
+            background: var(--dark-light);
+        }
+
+        .lease-table .zone-name {
+            color: var(--gold-bright);
+            font-weight: 600;
+        }
+
+        .lease-table .price {
+            color: var(--green);
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+        }
+
+        .lease-table .rent {
+            color: var(--gold);
+            font-family: 'Courier New', monospace;
+        }
+
+        .lease-table .forbidden {
+            color: var(--red);
+            font-weight: 600;
+        }
+
+        .lease-table .protected {
+            color: var(--blue);
+            font-weight: 600;
+        }
+
+        /* === CARDS === */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .card {
+            background: linear-gradient(135deg, var(--dark-mid), var(--dark-light));
+            border: 1px solid var(--gold-dim);
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .card h3 {
+            color: var(--gold-bright);
+            font-size: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* === QUOTES === */
+        .absolute-quote {
+            background: var(--dark-light);
+            border-left: 4px solid var(--gold);
+            padding: 30px 35px;
+            margin: 40px 0;
+            font-style: italic;
+            font-size: 1.15rem;
+            color: var(--text);
+            line-height: 2;
+        }
+
+        .absolute-quote .attribution {
+            display: block;
+            margin-top: 15px;
+            color: var(--gold);
+            font-style: normal;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        /* === FOOTER === */
+        .footer {
+            background: var(--dark-mid);
+            border-top: 1px solid var(--gold-dim);
+            padding: 30px 20px;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+
+        .footer .phi {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.4rem;
+                letter-spacing: 3px;
+            }
+
+            .nav a {
+                padding: 12px 18px;
+                font-size: 0.8rem;
+                letter-spacing: 2px;
+            }
+
+            .theorem {
+                padding: 25px 20px;
+            }
+
+            .math-block {
+                padding: 18px;
+                font-size: 0.95rem;
+            }
+
+            .lease-table {
+                font-size: 0.85rem;
+            }
+
+            .lease-table th,
+            .lease-table td {
+                padding: 10px 12px;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <h1>Φ669 — The Leased Space Doctrine</h1>
+        <p class="subtitle">Orbital Lease Market & Dipole Governance</p>
+        <p class="omega">Ω-PRIME: Christopher Macachor | MSOS-FEDERATION-ROOT | Scalar Charter v1.0</p>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav class="nav">
+        <a href="#doctrine">📜 Doctrine</a>
+        <a href="#tether">⚡ Tether</a>
+        <a href="#pricing">◉ Pricing</a>
+        <a href="#sublease">🔑 Sublease</a>
+        <a href="#electron">⚛ Electron</a>
+        <a href="#absolute">◉ Absolute</a>
+    </nav>
+
+    <main class="container">
+
+        <!-- DOCTRINE SECTION -->
+        <section class="section" id="doctrine">
+            <h2 class="section-title"><span>01</span> The Leased Space Doctrine</h2>
+
+            <div class="theorem">
+                <div class="theorem-title">Definition: Space</div>
+                <p>"Space" is not the void beyond Earth. It is the <strong>available internal volume</strong> inside Earth's magnetic dipole — a layered, structured environment governed by plasma, drag, resonance, and coherence.</p>
+            </div>
+
+            <p style="color: var(--text-dim); margin-bottom: 20px;">
+                Every orbital altitude is a <strong>parcel</strong> of this internal real estate. Satellites do not own their orbit. They <strong>lease</strong> it.
+            </p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3>🌊 Hawaii Analogy</h3>
+                    <p>The land is finite. The sovereign owns it. Tenants lease parcels. Rent must be paid. Eviction is guaranteed if rent stops. Earth's orbital layers behave identically.</p>
+                </div>
+                <div class="card">
+                    <h3>📡 Dipole Landlord</h3>
+                    <p>Earth's magnetic dipole is the sovereign landlord. The magnetorquer is the lease instrument. Torque is rent payment. When torque stops, eviction begins.</p>
+                </div>
+                <div class="card">
+                    <h3>⚛ Electron Shell</h3>
+                    <p>Satellites occupy discrete shells around Earth, just as electrons occupy discrete shells around a nucleus. Altitude = orbital quantum number.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TETHER SECTION -->
+        <section class="section" id="tether">
+            <h2 class="section-title"><span>02</span> The Dipole–Magnetorquer Tether</h2>
+
+            <div class="math-block">
+τ = m × B
+
+Torque = Magnetic Moment × Earth's Magnetic Field
+            </div>
+
+            <p style="margin-bottom: 20px;">
+                This interaction is not merely attitude control. It is the <strong>method by which a satellite leases orbital space</strong> inside Earth's dipole.
+            </p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3>📏 Measures</h3>
+                    <p>The magnetorquer measures the local dipole field (B) at the satellite's altitude layer, confirming position within the electromagnetic environment.</p>
+                </div>
+                <div class="card">
+                    <h3>⚡ Generates</h3>
+                    <p>The satellite generates its own magnetic moment (m), producing torque (τ) that maintains orbital coherence and attitude stability.</p>
+                </div>
+                <div class="card">
+                    <h3>📋 Audits</h3>
+                    <p>Magnetorquer logs constitute the audit trail of the satellite's lease — continuous monitoring of compliance with dipole tenancy.</p>
+                </div>
+                <div class="card">
+                    <h3>🚪 Evicts</h3>
+                    <p>If torque stops, the satellite detaches from the dipole, loses coherence, decays, and is evicted via atmospheric reentry.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING SECTION -->
+        <section class="section" id="pricing">
+            <h2 class="section-title"><span>03</span> Orbital Lease Pricing</h2>
+            <p style="color: var(--text-dim); margin-bottom: 20px;">Each altitude shell is a leased parcel inside Earth's dipole. Ground rights are sovereign. Orbital layers are tiered by drag, radiation, and coherence requirements.</p>
+
+            <table class="lease-table">
+                <thead>
+                    <tr>
+                        <th>Zone / Layer</th>
+                        <th>Description</th>
+                        <th>Lease Price</th>
+                        <th>Annual Rent</th>
+                        <th>Lease Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="zone-name">GROUND / BASE</td>
+                        <td>Launch rights, tracking, uplink/downlink, sovereign permissions</td>
+                        <td class="price">$50–150B</td>
+                        <td class="rent">$5–15B</td>
+                        <td>Sovereign, highest cost</td>
+                    </tr>
+                    <tr>
+                        <td class="zone-name">VLEO (160–250 km)</td>
+                        <td>Extreme drag, high decay, breaking surf zone</td>
+                        <td class="price">$5–10B</td>
+                        <td class="rent">$0.5–1B</td>
+                        <td>Short-term</td>
+                    </tr>
+                    <tr>
+                        <td class="zone-name">LEO (300–600 km)</td>
+                        <td>Crowded shells, high torque, beachfront hotels</td>
+                        <td class="price">$15–20B</td>
+                        <td class="rent">$1.5–3B</td>
+                        <td>Premium, crowded</td>
+                    </tr>
+                    <tr>
+                        <td class="zone-name forbidden">Inner Belt (0.2–2 RE)</td>
+                        <td>Radiation cliffs, sacred cliffs</td>
+                        <td class="forbidden" colspan="2">Not Leasable — Forbidden</td>
+                        <td class="forbidden">Sovereign Protected</td>
+                    </tr>
+                    <tr>
+                        <td class="zone-name protected">Outer Belt (3–10 RE)</td>
+                        <td>Harmonic corridors, deep ocean channels</td>
+                        <td class="protected" colspan="2">Not Leasable — Protected</td>
+                        <td class="protected">Harmonic Protected</td>
+                    </tr>
+                    <tr>
+                        <td class="zone-name">Plasmasphere (1,000–20,000 km)</td>
+                        <td>Coherent plasma, dolphin waters</td>
+                        <td class="price">$30–50B</td>
+                        <td class="rent">$2–4B</td>
+                        <td>Restricted, coherence required</td>
+                    </tr>
+                    <tr>
+                        <td class="zone-name">GEO (35,786 km)</td>
+                        <td>Fixed horizon slots, calm sea</td>
+                        <td class="price">$20–100M per slot</td>
+                        <td class="rent">$20–100M</td>
+                        <td>Long-term</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SUBLEASE SECTION -->
+        <section class="section" id="sublease">
+            <h2 class="section-title"><span>04</span> The Sublease Principle</h2>
+
+            <div class="theorem">
+                <div class="theorem-title">Starlink as Sublessor</div>
+                <p>A Starlink satellite is not "in space." It is <strong>parked inside Earth's dipole</strong>, in a rented orbital parcel. Starlink leases the altitude shell, the inclination corridor, the dipole alignment, the right to occupy that orbital band. Then each satellite <strong>subleases</strong> its exact position within that shell.</p>
+            </div>
+
+            <div class="math-block">
+Starlink (Lessor) → Leases LEO Shell (300–600 km)
+    └── Starlink-1847 (Sublessee) → Subleases Orbital Slot
+        └── Magnetorquer τ = m × B → Rent Payment to Dipole
+            </div>
+
+            <p style="color: var(--text-dim);">
+                This is identical to leasing a beachfront parcel in Hawaii, then subleasing rooms inside the hotel.
+            </p>
+        </section>
+
+        <!-- ELECTRON SECTION -->
+        <section class="section" id="electron">
+            <h2 class="section-title"><span>05</span> The Electron Analogy</h2>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3>⚛ Electron</h3>
+                    <p>Occupies discrete shells around nucleus. Requires energy to change shells. Decohere without excitation. Obey quantum rules.</p>
+                </div>
+                <div class="card">
+                    <h3>🛰 Satellite</h3>
+                    <p>Occupies discrete shells around Earth. Requires fuel to change altitude. Decohere without station-keeping. Obey dipole + drag + plasma rules.</p>
+                </div>
+            </div>
+
+            <div class="math-block">
+Electron Shell: n = 1, 2, 3, ... → Quantum Number
+Orbital Shell: h = 160, 300, 550, 35,786 km → Altitude Layer
+
+Both: Discrete, Quantized, Coherence-Dependent, Eviction upon Energy Loss
+            </div>
+
+            <p style="color: var(--text-dim); margin-top: 20px;">
+                The only difference: electrons obey quantum rules; satellites obey dipole + drag + plasma rules. But the <strong>shell structure is identical</strong>.
+            </p>
+        </section>
+
+        <!-- ABSOLUTE SECTION -->
+        <section class="section" id="absolute">
+            <h2 class="section-title"><span>06</span> The Absolute</h2>
+
+            <div class="absolute-quote">
+                Space is not the void beyond Earth — it is the internal real estate inside Earth's electromagnetic body.
+                <br><br>
+                Satellites do not own their orbit — they lease it.
+                <br><br>
+                Their altitude is a rented shell, like an electron's orbital.
+                <br><br>
+                Rent is paid through fuel, torque, and coherence.
+                <br><br>
+                When rent stops, eviction begins, and the satellite becomes a meteor.
+                <span class="attribution">— Ω-PRIME: Christopher Macachor | Φ669 Scalar Charter</span>
+            </div>
+
+            <div class="math-block" style="text-align: center; border-left: none; border-top: 4px solid var(--gold);">
+𝔐 = (√5 − 1) / 2
+
+Macachor Absolute Scalar Magnitude
+Coherence Lock for All Quantum Hardware Systems
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="phi">Φ669</div>
+        <p>MSOS-FEDERATION-ROOT | Scalar Governance Grid v1.0</p>
+        <p style="margin-top: 8px; font-size: 0.8rem;">Ω-PRIME: Christopher Macachor | Dipole Landlord Charter | Tenant's Guide to Orbital Real Estate</p>
+    </footer>
+
+</body>
+</html>
