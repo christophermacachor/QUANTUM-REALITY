@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olinto De Pretto — The Forgotten Pioneer of E = mc²</title>
+<style>
+:root {
+  --gold: #c8a04e;
+  --gold-light: #e8c97a;
+  --gold-dark: #a07e30;
+  --bg-dark: #0a0a0f;
+  --bg-card: #111118;
+  --bg-card-hover: #1a1a25;
+  --text-primary: #e8e4dc;
+  --text-secondary: #9a9588;
+  --text-muted: #6a6558;
+  --border: #2a2a35;
+  --border-gold: #c8a04e40;
+  --accent-red: #c85050;
+  --accent-green: #50c880;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.75;
+  min-height: 100vh;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  padding: 80px 20px 60px;
+  text-align: center;
+  background: linear-gradient(180deg, #0d0d15 0%, var(--bg-dark) 100%);
+  border-bottom: 1px solid var(--border-gold);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--gold);
+  margin-bottom: 12px;
+  text-shadow: 0 0 30px rgba(200,160,78,0.15);
+}
+
+.hero .subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+.hero .dates {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.hero .equation {
+  margin-top: 30px;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-family: 'Times New Roman', serif;
+  color: var(--gold-light);
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 20px rgba(232,201,122,0.2);
+}
+
+.hero .equation-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+/* ── NAV ── */
+.nav-bar {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 16px 20px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-bar a {
+  color: var(--gold);
+  text-decoration: none;
+  padding: 8px 20px;
+  border: 1px solid var(--border-gold);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.nav-bar a:hover {
+  background: var(--gold);
+  color: var(--bg-dark);
+  border-color: var(--gold);
+}
+
+/* ── CONTAINER ── */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* ── SECTIONS ── */
+.section {
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  color: var(--gold);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-gold);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-title .icon {
+  font-size: 1.3rem;
+  opacity: 0.8;
+}
+
+/* ── CARDS ── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--border-gold);
+  background: var(--bg-card-hover);
+}
+
+.card-title {
+  color: var(--gold-light);
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.card-meta {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* ── TABLE ── */
+.archives-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.archives-table th {
+  background: var(--bg-card-hover);
+  color: var(--gold);
+  padding: 14px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid var(--border-gold);
+}
+
+.archives-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  vertical-align: top;
+}
+
+.archives-table tr:hover td {
+  background: var(--bg-card-hover);
+}
+
+.archives-table td strong {
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ── QUOTE BLOCK ── */
+.quote-block {
+  background: linear-gradient(135deg, var(--bg-card) 0%, #151520 100%);
+  border-left: 3px solid var(--gold);
+  padding: 24px 28px;
+  margin: 28px 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text-secondary);
+  position: relative;
+}
+
+.quote-block::before {
+  content: '"';
+  font-size: 3rem;
+  color: var(--gold);
+  opacity: 0.3;
+  position: absolute;
+  top: 4px;
+  left: 12px;
+  line-height: 1;
+}
+
+.quote-block .attribution {
+  display: block;
+  margin-top: 12px;
+  font-style: normal;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* ── TIMELINE ── */
+.timeline {
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 28px;
+  padding-left: 20px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -26px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 10px rgba(200,160,78,0.4);
+}
+
+.timeline-date {
+  color: var(--gold);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.timeline-content {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.timeline-content strong {
+  color: var(--text-primary);
+}
+
+/* ── TAGS ── */
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+
+.tag-gold { background: rgba(200,160,78,0.15); color: var(--gold); border: 1px solid var(--border-gold); }
+.tag-red { background: rgba(200,80,80,0.15); color: var(--accent-red); border: 1px solid rgba(200,80,80,0.3); }
+.tag-green { background: rgba(80,200,128,0.15); color: var(--accent-green); border: 1px solid rgba(80,200,128,0.3); }
+
+/* ── NETWORK GRID ── */
+.network-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  padding: 40px 20px;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.footer a {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-dark); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .hero { padding: 50px 16px 40px; }
+  .container { padding: 24px 16px; }
+  .nav-bar { gap: 6px; }
+  .nav-bar a { padding: 6px 14px; font-size: 0.75rem; }
+  .archives-table th, .archives-table td { padding: 10px 12px; font-size: 0.8rem; }
+  .network-grid { grid-template-columns: 1fr; }
+}
+
+/* ── SMOOTH SCROLL ── */
+html { scroll-behavior: smooth; }
+
+/* ── SELECTION ── */
+::selection { background: rgba(200,160,78,0.3); color: var(--text-primary); }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     HERO
+     ════════════════════════════════════════ -->
+<section class="hero">
+  <h1>Olinto De Pretto</h1>
+  <p class="subtitle">Italian Industrialist, Geologist &amp; Self-Taught Physicist</p>
+  <p class="dates">26 April 1857 — 16 March 1921 · Schio, Vicenza</p>
+  <div class="equation">E = mc²</div>
+  <p class="equation-note">Published <strong>1903</strong> — two years before Einstein's 1905 derivation</p>
+</section>
+
+<!-- ════════════════════════════════════════
+     NAVIGATION
+     ════════════════════════════════════════ -->
+<nav class="nav-bar">
+  <a href="#archives">📜 Archives</a>
+  <a href="#network">⚡ Network</a>
+  <a href="#formula">◉ The Formula</a>
+  <a href="#murder">◈ The Murder</a>
+  <a href="#timeline">⧗ Timeline</a>
+</nav>
+
+<!-- ════════════════════════════════════════
+     MAIN CONTENT
+     ════════════════════════════════════════ -->
+<div class="container">
+
+  <!-- ── INTRO ── -->
+  <div class="section">
+    <p style="font-size:1.05rem; color:var(--text-secondary); text-align:center; max-width:700px; margin:0 auto 20px;">
+      Based on extensive Italian archival and biographical research, this page compiles what the Italian archives reveal about <strong style="color:var(--gold-light);">Olinto De Pretto</strong> — the man who derived the mass-energy equivalence formula <em>E = mc²</em> in 1903, two years before Albert Einstein's famous 1905 paper.
+    </p>
+    <div style="text-align:center; margin-top:16px;">
+      <span class="tag tag-gold">Reale Istituto Veneto</span>
+      <span class="tag tag-gold">Società Geologica Italiana</span>
+      <span class="tag tag-red">Murdered 1921</span>
+      <span class="tag tag-green">E = mc² — 1903</span>
+    </div>
+  </div>
+
+  <!-- ── SECTION 1: ARCHIVES ── -->
+  <section class="section" id="archives">
+    <h2 class="section-title"><span class="icon">📜</span> Italian Archives Holding De Pretto's Legacy</h2>
+    <table class="archives-table">
+      <thead>
+        <tr>
+          <th>Archive</th>
+          <th>Location</th>
+          <th>What It Holds</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Archivio Storico dell'Istituto Veneto di Scienze, Lettere ed Arti</strong></td>
+          <td>Venice (Palazzo Loredan, San Marco 2945)</td>
+          <td>The original <em>Atti</em> (Vol. LXIII, Part II, pp. 439–500) containing De Pretto's 1903–1904 paper <em>"Ipotesi dell'etere nella vita dell'universo"</em>, presented 29 November 1903. Open to the public by appointment.</td>
+        </tr>
+        <tr>
+          <td><strong>Archivio Storico FIAT</strong></td>
+          <td>Turin</td>
+          <td>Documents confirming De Pretto's company (Società Esercizi Pubblici di Schio) was the <strong>first to order FIAT omnibuses</strong> in 1906 for the Schio–Rovereto route.</td>
+        </tr>
+        <tr>
+          <td><strong>Bollettino della Società Geologica Italiana</strong> (1921)</td>
+          <td>National geological archives</td>
+          <td>Complete commemoration of De Pretto by Ing. L. Maddalena, plus full list of De Pretto's scientific works (pp. LXXVIII–LXXX).</td>
+        </tr>
+        <tr>
+          <td><strong>Società Urania archives</strong> (1921)</td>
+          <td>Italian scientific society records</td>
+          <td>Prof. F. Sacco's commemoration and eulogy delivered 18 March 1921, calling De Pretto "a man of modesty, great heart, unblemished character, lover of the Alps, of vast culture, and a most diligent student of theoretical geology."</td>
+        </tr>
+        <tr>
+          <td><strong>Osservatorio Ximeniano</strong></td>
+          <td>Florence (Scolopi archives)</td>
+          <td>Correspondence from Padre G. Alfani (physicist/seismologist) dated 24 May 1921, thanking De Pretto's family for the gift of <em>Lo spirito dell'universo</em>.</td>
+        </tr>
+        <tr>
+          <td><strong>Vatican Observatory (Specola Vaticana)</strong></td>
+          <td>Vatican archives</td>
+          <td>Correspondence from astronomer Pio Emanuelli (1931) regarding De Pretto's ether theory, consulted by De Pretto's brother Silvio.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── SECTION 2: THE NETWORK ── -->
+  <section class="section" id="network">
+    <h2 class="section-title"><span class="icon">⚡</span> The Scientists Who Knew De Pretto</h2>
+    <div class="network-grid">
+
+      <div class="card">
+        <div class="card-title">Giovanni Schiaparelli</div>
+        <div class="card-meta">1835–1910 · Astronomer &amp; Senator</div>
+        <p>Endorsed De Pretto's work with a letter dated <strong>16 June 1903</strong>, comparing his ether-based gravity mechanism to <strong>Le Sage's theory of ultra-mundane corpuscles</strong>. Published as a preface to the 1904 <em>Atti</em>.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Conte Almerigo Da Schio</div>
+        <div class="card-meta">1844–1911 · Astronomer, Meteorologist, Aviator</div>
+        <p><strong>Presented De Pretto's paper</strong> to the Reale Istituto Veneto on <strong>29 November 1903</strong>. Promoter of the first Italian airship <em>"Italia"</em>, which flew over Schio on 17 June 1905 — an event De Pretto participated in.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Federico Sacco</div>
+        <div class="card-meta">1864–1948 · Geologist &amp; Paleontologist</div>
+        <p>Commemorated De Pretto at the <strong>Società Urania</strong> on 18 March 1921. On <strong>31 January 1921</strong>, informed De Pretto that his colleague in Physics, <strong>Majorana</strong>, had immediately taken up <em>Lo spirito dell'universo</em> to read.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Quirino Majorana</div>
+        <div class="card-meta">1871–1957 · Physicist, Royal Polytechnic of Turin</div>
+        <p>Read De Pretto's 1921 book with great interest because of his own work on gravity. Uncle of the more famous <strong>Ettore Majorana</strong>.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Gaetano Cantoni</div>
+        <div class="card-meta">1843–1887 · Professor, Scuola Superiore di Agricoltura di Milano</div>
+        <p>De Pretto was his assistant. Cantoni praised De Pretto's "laudable cooperation" in the introduction to his 1885 work <em>"L'agricoltura in Italia."</em></p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Carlo De Stefani</div>
+        <div class="card-meta">1851–1924 · Geologist, Istituto Superiore di Firenze</div>
+        <p>De Pretto wrote to him on <strong>19 August 1903</strong>, initially hoping to publish <em>Ipotesi dell'etere</em> in the <em>Bollettino della Società Geologica Italiana</em>.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Alessandro Tornquist</div>
+        <div class="card-meta">1868–1944 · German Geologist, Königlich Preussische Akademie (Berlin)</div>
+        <p>De Pretto personally guided him through the Alto Vicentino valleys in 1899, enabling publication of <em>Das Vicentinische Triasgebirge</em> (Stuttgart, 1901).</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Leonzio Maddalena</div>
+        <div class="card-meta">Engineer &amp; Geologist · De Pretto's Disciple</div>
+        <p>"We have lost in Olinto De Pretto one of the most sympathetic friends... He was surrounded by high consideration for his works." Delivered the commemoration at the <strong>Società Geologica Italiana</strong>.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Giovanni Dal Piaz</div>
+        <div class="card-meta">1872–1962 · Professor of Geology, Royal University of Padua</div>
+        <p>"The disappearance of Dr. De Pretto marks a grave loss for Science. Poor Olinto was one of those solitary scholars whose ranks, unfortunately, diminish every day." — <em>26 June 1921</em></p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Padre G. Alfani</div>
+        <div class="card-meta">Physicist &amp; Seismologist, Osservatorio Ximeniano di Firenze</div>
+        <p>"Although I am still in poor health, I have already begun to read that most suggestive volume... I feel that my soul accepts very willingly everything the Illustrious Author writes." — <em>24 May 1921</em></p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Pio Emanuelli</div>
+        <div class="card-meta">1888–1946 · Vatican Astronomer, Specola Vaticana</div>
+        <p>Consulted by Silvio De Pretto in 1931 about Olinto's ether theory. Dismissively replied: "What is known of the ether: does it exist or not?... Physicists seem to be of the opinion that the ether does not exist."</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Michele Besso</div>
+        <div class="card-meta">1873–1955 · Engineer, Einstein's Closest Friend &amp; Collaborator</div>
+        <p>The hypothesized — but unproven — pathway: De Pretto's brother <strong>Augusto</strong> (railway inspector in Rome) may have given copies of <em>Ipotesi dell'etere</em> to colleagues including <strong>Beniamino Besso</strong> (Director of Sardinian Railways), with whom young Michele Besso had stayed during his studies.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">L. Palazzo</div>
+        <div class="card-meta">Royal Central Office of Meteorology &amp; Geodynamics, Rome</div>
+        <p>"I assure you that the things read there made me think and meditate very much. It is always attractive for the human spirit to investigate the intimate mechanism of the universe!" — <em>23 April 1904</em></p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Sem Benelli</div>
+        <div class="card-meta">1877–1949 · Famous Playwright</div>
+        <p>Declared himself inspired by the "great Italian Olinto De Pretto" to express universal harmony in his drama <em>Con le stelle</em> (1927).</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── SECTION 3: THE FORMULA ── -->
+  <section class="section" id="formula">
+    <h2 class="section-title"><span class="icon">◉</span> The Formula — E = mc² in De Pretto's Own Words</h2>
+    <p style="color:var(--text-secondary); margin-bottom:20px;">
+      From <strong>Chapter 3</strong> of <em>Ipotesi dell'etere nella vita dell'universo</em> (1903):
+    </p>
+    <div class="quote-block">
+      Therefore when we say that matter is inert, we must not understand by this that it is inactive; the word 'inert' explains the true office of matter with respect to the activity of the ether. Matter in fact obeys the action of the ether, utilizes and stores its energies, like the flywheel of a steam engine, which moves by the impulse of steam and stores its energy in the form of living force through inertia. Now if the entire intimate fabric of a body is animated by infinitesimal but extremely rapid movements, perhaps equal to those of the ether, movements to which no particle is exempt, one must conclude that the matter of any body contains within itself a sum of energy represented by the entire mass of the body, moving all united and in block through space, with the same velocity as the individual particles. But such a deduction leads us to unexpected and incredible consequences. A kilogram of matter, launched at the speed of light, would represent a sum of energy such that it cannot even be conceived. The formula mv² gives us the living force...
+      <span class="attribution">— Olinto De Pretto, <em>Ipotesi dell'etere nella vita dell'universo</em>, 1903</span>
+    </div>
+    <div class="card">
+      <div class="card-title">The Calculation</div>
+      <p>De Pretto calculated: <strong>1 kg × (300,000,000 m/s)² ÷ 8338 = over 10 million billion calories</strong>, concluding that this latent energy was equivalent to millions of kilograms of coal.</p>
+      <p style="margin-top:12px;">He derived <em>E = mc²</em> from the classical <strong>vis viva</strong> (living force) concept — <em>mv²</em> — by asserting that matter's constituent particles vibrate at the speed of light <em>c</em> within the luminiferous ether. While his derivation lacked the relativistic framework Einstein later developed, the formal result is identical.</p>
+    </div>
+  </section>
+
+  <!-- ── SECTION 4: THE MURDER ── -->
+  <section class="section" id="murder">
+    <h2 class="section-title"><span class="icon">◈</span> The Murder — Archival Confirmation</h2>
+    <div class="card" style="border-color:rgba(200,80,80,0.3);">
+      <div class="card-title" style="color:var(--accent-red);">16 March 1921 · Schio, Vicenza</div>
+      <p>On the evening of <strong>16 March 1921</strong>, after leaving the foundry and accompanying his brother Silvio home, Olinto De Pretto was confronted at the gate and <strong>shot dead by a woman</strong> — the wife of a certain Sandri.</p>
+      <p style="margin-top:12px;">The couple owned land where a <strong>lignite deposit</strong> had been discovered and partially exploited during the war. They feared they had not been sufficiently compensated by the mining research society of which De Pretto was president.</p>
+      <p style="margin-top:12px;"><strong>The murder was for private financial reasons</strong>, not political or scientific conspiracy.</p>
+      <div style="margin-top:16px;">
+        <span class="tag tag-red">Murdered at Age 63</span>
+        <span class="tag tag-red">Financial Dispute</span>
+        <span class="tag tag-red">Lignite Mining</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECTION 5: TIMELINE ── -->
+  <section class="section" id="timeline">
+    <h2 class="section-title"><span class="icon">⧗</span> Life Timeline</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">26 April 1857</div>
+        <div class="timeline-content">Born in <strong>Schio, Vicenza</strong> — sixth of seven children to architect Pietro De Pretto and Angelica Boschetti.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">1879</div>
+        <div class="timeline-content">Earned degree in <strong>agronomics</strong> from the Superior School of Agriculture in Milan. Became assistant to Professor Gaetano Cantoni.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">1885</div>
+        <div class="timeline-content">Praised by Cantoni for "laudable cooperation" in <em>L'agricoltura in Italia</em>.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">1888</div>
+        <div class="timeline-content">Co-authored with brother Augusto: <em>L'influenza della crescita e del degrado delle montagne nello sviluppo dei ghiacciai</em>.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">1896</div>
+        <div class="timeline-content">Co-founded the <strong>Schio Alpinistic Circle</strong> with brothers Silvio and Augusto. Published <em>Il degradamento delle montagne e la sua influenza sui ghiacciai</em> in the <em>Bollettino della Società Geologica Italiana</em>.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">1899</div>
+        <div class="timeline-content">Published <em>Segni geologici nei dintorni di Schio</em>. Began studying nuclear physics and ether theory.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">1903</div>
+        <div class="timeline-content"><strong style="color:var(--gold-light);">Published <em>Ipotesi dell'etere nella vita dell'universo</em></strong> — the 62-page paper deriving <em>E = mc²</em>. Presented 29 November 1903 to the Reale Istituto Veneto. Endorsed by Giovanni Schiaparelli.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">1904</div>
+        <div class="timeline-content">Paper republished in the <em>Atti</em> (Vol. LXIII, Part II, pp. 439–500), February 1904.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">1906</div>
+        <div class="timeline-content">Elected to the <strong>Accademia dei Lincei</strong>. His company became the first to order FIAT omnibuses for the Schio–Rovereto route.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">1921</div>
+        <div class="timeline-content">Published <em>Lo spirito dell'universo</em>. <strong style="color:var(--accent-red);">Murdered on 16 March 1921</strong> in a financial dispute over a lignite mining concession.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SUMMARY ── -->
+  <section class="section">
+    <h2 class="section-title"><span class="icon">◉</span> Summary: The Network</h2>
+    <div class="quote-block">
+      De Pretto was not an isolated crank. He was a <strong>respected member of the Italian scientific community</strong> — a member of the <strong>Società Geologica Italiana</strong>, connected to the <strong>Royal Society of London</strong> (via Ernesto Mancini), published in the <strong>Reale Istituto Veneto</strong>, and in correspondence with astronomers, geologists, physicists, and meteorologists across Italy. His 1903 paper was <strong>endorsed by Schiaparelli</strong>, presented by <strong>Da Schio</strong>, and read by <strong>Majorana</strong> and <strong>Alfani</strong>. The hypothesis of Einstein encountering his work through the <strong>Besso</strong> family network remains unproven but is the central claim of historian Umberto Bartocci's research.
+    </div>
+  </section>
+
+</div>
+
+<!-- ════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════ -->
+<footer class="footer">
+  <p>Compiled from Italian archival sources · <em>Ipotesi dell'etere nella vita dell'universo</em> (1903)</p>
+  <p style="margin-top:8px; font-size:0.8rem;">
+    Sources: Archivio Storico Istituto Veneto · Società Geologica Italiana · Società Urania · Osservatorio Ximeniano · Specola Vaticana
+  </p>
+  <p style="margin-top:12px; color:var(--gold); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase;">
+    Olinto De Pretto · 1857–1921
+  </p>
+</footer>
+
+</body>
+</html>
