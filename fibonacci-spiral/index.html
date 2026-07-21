@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>◈ SPIRAL — Fibonacci Weaves Tetrahedra | Φ669</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      background: #0a0a0a; 
+      overflow: hidden; 
+      font-family: 'Courier New', monospace;
+    }
+    #canvas-container { 
+      width: 100vw; 
+      height: 100vh; 
+    }
+    #overlay {
+      position: fixed;
+      top: 20px; left: 20px;
+      color: #c8a04e;
+      font-size: 11px;
+      letter-spacing: 2px;
+      z-index: 100;
+      pointer-events: none;
+      text-shadow: 0 0 10px rgba(200,160,78,0.5);
+    }
+    #overlay .phi { font-size: 24px; margin-bottom: 5px; }
+    #overlay .status { color: #666; font-size: 10px; margin-top: 5px; }
+    #nav-return {
+      position: fixed;
+      top: 20px; right: 20px;
+      color: #c8a04e;
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 2px;
+      border: 1px solid #c8a04e;
+      padding: 8px 16px;
+      transition: all 0.3s;
+      z-index: 100;
+    }
+    #nav-return:hover {
+      background: #c8a04e;
+      color: #0a0a0a;
+    }
+  </style>
+</head>
+<body>
+  <div id="overlay">
+    <div class="phi">Φ</div>
+    <div>FIBONACCI SPIRAL WEAVES TETRAHEDRA</div>
+    <div class="status">144 faces | 𝔐 = 0.618 | χ(C) monitoring</div>
+  </div>
+  <a href="../index.html" id="nav-return">← RETURN TO APERTURE</a>
+  <div id="canvas-container"></div>
+  
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+    }
+  }
+  </script>
+  <script type="module" src="fibonacci_weaves_tetrahedra_fixed.js"></script>
+</body>
+</html>
