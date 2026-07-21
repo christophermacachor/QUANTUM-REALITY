@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Φ669 — Optical Illusions</title>
+  <style>
+    :root {
+      --gold: #c8a04e;
+      --gold-dim: #8a6e30;
+      --gold-glow: rgba(200, 160, 78, 0.3);
+      --bg: #0a0a0f;
+      --bg-card: #111118;
+      --text: #d4c8a8;
+      --text-dim: #7a7060;
+      --border: #2a2520;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    .nav-bar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 20px;
+      background: rgba(10,10,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-tab {
+      color: var(--gold);
+      text-decoration: none;
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    .nav-tab:hover {
+      border-color: var(--gold);
+      background: var(--gold-glow);
+      text-shadow: 0 0 8px var(--gold);
+    }
+    .hero {
+      text-align: center;
+      padding: 60px 20px 30px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero h1 {
+      font-family: 'Courier New', monospace;
+      color: var(--gold);
+      font-size: 2.2rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin: 0 0 10px;
+      text-shadow: 0 0 20px var(--gold-glow);
+    }
+    .hero-sub {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      font-style: italic;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .hero-meta {
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      font-family: 'Courier New', monospace;
+      margin-top: 12px;
+      letter-spacing: 1px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+      padding: 40px 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(200,160,78,0.08);
+      border-color: var(--gold-dim);
+    }
+    .card-header {
+      padding: 16px 18px 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .card-num {
+      font-family: 'Courier New', monospace;
+      color: var(--gold-dim);
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+    }
+    .card-title {
+      color: var(--gold);
+      font-size: 1.1rem;
+      margin: 4px 0 0;
+      font-weight: 600;
+    }
+    .card-body {
+      padding: 16px 18px;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-desc {
+      padding: 0 18px 18px;
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+    .card-desc strong { color: var(--gold); }
+    .card-desc .date {
+      color: var(--gold-dim);
+      font-family: 'Courier New', monospace;
+      font-size: 0.7rem;
+      display: block;
+      margin-top: 6px;
+    }
+    canvas { display: block; }
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="index.html" class="nav-tab">⌂ Home</a>
+</nav>
+
+<header class="hero">
+  <h1>Φ669 — Optical Illusions</h1>
+  <p class="hero-sub">25 perceptual deceptions mapped to camouflage, tracking, and the art of visual warfare across 2,400 years.</p>
+  <p class="hero-meta">SOURCE: CREATIVE BLOQ &middot; SCALAR AUDIT: χ(C)=1.0 &middot; Ω-PRIME: CHRISTOPHER-MACACHOR</p>
+</header>
+
+<main class="gallery" id="gallery"></main>
+
+<footer class="footer">
+  Φ669 SCALAR ARCHIVE &middot; PERCEPTION IS THE FIRST BATTLEFIELD
+</footer>
+
+<script>
+const gallery = document.getElementById('gallery');
+
+function makeCard(num, title, desc, buildFn) {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="card-header">
+      <span class="card-num">ILLUSION ${String(num).padStart(2,'0')}</span>
+      <h3 class="card-title">${title}</h3>
+    </div>
+    <div class="card-body" id="canvas-wrap-${num}"></div>
+    <div class="card-desc">${desc}</div>
+  `;
+  gallery.appendChild(card);
+  requestAnimationFrame(() => buildFn(document.getElementById(`canvas-wrap-${num}`)));
+}
+
+// ── 01: SUPER MARIO STAIRCASE ──
+makeCard(1, 'Super Mario Staircase',
+  '<strong>Principle:</strong> Ambiguous depth cues — the brain cannot resolve 3D orientation from a 2D image without motion parallax.<br><strong>Camouflage:</strong> WWII Dazzle ships used ambiguous geometry to confuse U-boats about heading and speed.<br><strong>Tracking:</strong> Ghillie suits break silhouette resolution.<br><span class="date">ORIGIN: 1917 — Norman Wilkinson, British Admiralty</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    let t = 0;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      const steps = 6;
+      const stepW = W / steps;
+      const stepH = H / steps;
+      for (let i = 0; i < steps; i++) {
+        const x = i * stepW;
+        const y = H - (i+1) * stepH;
+        ctx.fillStyle = i % 2 === 0 ? '#c8a04e' : '#8a6e30';
+        ctx.fillRect(x, y, stepW, stepH);
+        ctx.fillStyle = i % 2 === 0 ? '#8a6e30' : '#c8a04e';
+        ctx.fillRect(x + stepW*0.3, y - stepH*0.3, stepW*0.7, stepH*0.3);
+      }
+      ctx.strokeStyle = '#d4c8a8';
+      ctx.setLineDash([4,4]);
+      ctx.beginPath();
+      ctx.moveTo(0, H);
+      for (let i = 0; i < steps; i++) {
+        ctx.lineTo((i+1)*stepW, H - (i+1)*stepH);
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+      t += 0.02;
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 02: DISAPPEARING ORANGE ──
+makeCard(2, 'The Disappearing Orange',
+  '<strong>Principle:</strong> Perfect surface texture mimicry eliminates edge detection.<br><strong>Camouflage:</strong> Active camouflage — camera-projected surroundings onto fabric.<br><strong>Tracking:</strong> Cuttlefish and octopuses match texture, color, and pattern in real time.<br><span class="date">ORIGIN: 1899 — Boer War uniform painting</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    let reveal = 0;
+    function draw() {
+      ctx.fillStyle = '#1a1510'; ctx.fillRect(0,0,W,H);
+      for (let i = 0; i < 60; i++) {
+        ctx.fillStyle = Math.random() > 0.5 ? '#2a2015' : '#0f0c08';
+        ctx.fillRect(Math.random()*W, Math.random()*H, Math.random()*30+5, Math.random()*3+1);
+      }
+      const cx = W/2, cy = H/2, r = 50;
+      ctx.save();
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.clip();
+      ctx.fillStyle = '#1a1510'; ctx.fillRect(0,0,W,H);
+      for (let i = 0; i < 40; i++) {
+        ctx.fillStyle = Math.random() > 0.5 ? '#2a2015' : '#0f0c08';
+        ctx.fillRect(Math.random()*W, Math.random()*H, Math.random()*30+5, Math.random()*3+1);
+      }
+      ctx.strokeStyle = `rgba(200,160,78,${reveal})`;
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2); ctx.stroke();
+      ctx.restore();
+      ctx.fillStyle = '#7a7060'; ctx.font = '11px "Courier New"'; ctx.textAlign = 'center';
+      ctx.fillText(reveal < 0.5 ? 'ORANGE HIDDEN' : 'ORANGE REVEALED', W/2, H-12);
+      reveal = 0.5 + 0.5*Math.sin(Date.now()/1500);
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 03: SLANTED LINES ──
+makeCard(3, 'Slanted Lines Illusion',
+  '<strong>Principle:</strong> Lateral inhibition — intersecting patterns trigger false tilt perception.<br><strong>Camouflage:</strong> Digital MARPAT uses micro-patterns to break edge detection at distance.<br><strong>Tracking:</strong> Tiger stripes exploit line-intersection confusion in predator vision.<br><span class="date">ORIGIN: 2002 — USMC adopts MARPAT digital pattern</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      const gap = 20;
+      ctx.strokeStyle = '#c8a04e'; ctx.lineWidth = 1.5;
+      for (let y = 0; y < H; y += gap) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      }
+      ctx.strokeStyle = '#8a6e30';
+      for (let x = -H; x < W; x += gap) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x + H, H); ctx.stroke();
+      }
+      ctx.strokeStyle = 'rgba(200,160,78,0.4)'; ctx.lineWidth = 0.5;
+      for (let x = 0; x < W; x += gap*2) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+      }
+      for (let y = 0; y < H; y += gap*2) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 04: HORSE AMBIGUOUS MOTION ──
+makeCard(4, 'Horse Ambiguous Motion',
+  '<strong>Principle:</strong> Motion parallax ambiguity + silhouette reversal.<br><strong>Camouflage:</strong> Scorpion II multi-env pattern breaks body-shape recognition from any angle.<br><strong>Tracking:</strong> Deer freeze to eliminate motion cues that resolve ambiguity.<br><span class="date">ORIGIN: 2014 — US Military Scorpion II pattern</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    let phase = 0;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      const cx = W/2, cy = H/2 + 10;
+      const s = 0.6;
+      ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+      ctx.fillStyle = '#c8a04e';
+      ctx.beginPath(); ctx.ellipse(0, -10, 50, 25, 0, 0, Math.PI*2); ctx.fill();
+      const headDir = Math.sin(phase) > 0 ? 1 : -1;
+      ctx.beginPath(); ctx.ellipse(headDir * 55, -35, 18, 22, headDir * 0.3, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#8a6e30';
+      for (let i = -1; i <= 1; i++) ctx.fillRect(i * 25 - 4, 10, 8, 40);
+      ctx.fillStyle = '#c8a04e';
+      ctx.beginPath(); ctx.ellipse(-55, -5, 8, 30, -0.3, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#7a7060'; ctx.font = '12px "Courier New"'; ctx.textAlign = 'center';
+      ctx.fillText(headDir > 0 ? '→ WALKING RIGHT' : '← WALKING LEFT', 0, 70);
+      ctx.restore();
+      phase += 0.03;
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 05: CHECKERBOARD DEPTH ──
+makeCard(5, 'Checkerboard Depth Illusion',
+  '<strong>Principle:</strong> Simultaneous contrast + shadow inference from dot placement.<br><strong>Camouflage:</strong> Shadow disruption — fake shadows painted on flat surfaces create false depth.<br><strong>Tracking:</strong> Ground-nesting birds sit in depressions to eliminate shadow.<br><span class="date">ORIGIN: Ancient — Greek entasis in architecture</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    let t = 0;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      const cols = 8, rows = 6;
+      const cw = W/cols, ch = H/rows;
+      for (let r = 0; r < rows; r++) {
+        for (let col = 0; col < cols; col++) {
+          const x = col * cw, y = r * ch;
+          const isDark = (r + col) % 2 === 0;
+          ctx.fillStyle = isDark ? '#1a1510' : '#2a2015';
+          ctx.fillRect(x, y, cw, ch);
+          const dotOff = Math.sin(t + col*0.5 + r*0.3) * 3;
+          ctx.fillStyle = isDark ? '#c8a04e' : '#8a6e30';
+          ctx.beginPath(); ctx.arc(x + cw/2 + dotOff, y + ch/2 + dotOff, 3, 0, Math.PI*2); ctx.fill();
+        }
+      }
+      t += 0.02;
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 06: BLINK AFTERIMAGE ──
+makeCard(6, 'Blink-and-Miss-It Afterimage',
+  '<strong>Principle:</strong> Neural adaptation — photoreceptors fatigue, creating complementary afterimages.<br><strong>Camouflage:</strong> Flash devices overload thermal/night vision sensors.<br><strong>Tracking:</strong> Dappled light creates afterimage confusion for pursuers.<br><span class="date">ORIGIN: 450 B.C. — Greek philosophers debate sensory betrayal</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    function draw() {
+      const cycle = (Date.now() % 4000) / 4000;
+      if (cycle < 0.1) {
+        const flash = 1 - cycle * 10;
+        ctx.fillStyle = `rgba(200,160,78,${flash})`; ctx.fillRect(0,0,W,H);
+      } else {
+        ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+        const after = Math.max(0, 1 - (cycle - 0.1) * 2);
+        ctx.fillStyle = `rgba(78,120,200,${after * 0.3})`;
+        ctx.fillRect(W/2 - 40, H/2 - 40, 80, 80);
+      }
+      ctx.strokeStyle = '#c8a04e'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(W/2, H/2, 30, 0, Math.PI*2); ctx.stroke();
+      ctx.fillStyle = '#7a7060'; ctx.font = '11px "Courier New"'; ctx.textAlign = 'center';
+      ctx.fillText('STARE AT CENTER', W/2, H-15);
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 07: LITERAL ILLUSION — FIGURE-GROUND ──
+makeCard(7, 'Literal Illusion — Figure-Ground',
+  '<strong>Principle:</strong> Figure-ground reversal — multiple images share the same contours.<br><strong>Camouflage:</strong> Decoy targets, dummy installations (Ghost Army inflatable tanks).<br><strong>Tracking:</strong> Predators mistake one animal for another in shared-silhouette moments.<br><span class="date">ORIGIN: 1944 — US Ghost Army operational</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      const t = (Date.now() % 3000) / 3000;
+      const alpha = Math.sin(t * Math.PI);
+      ctx.fillStyle = `rgba(200,160,78,${0.3 + alpha*0.4})`;
+      ctx.beginPath();
+      ctx.moveTo(40, H-20); ctx.quadraticCurveTo(40, 40, 100, 50);
+      ctx.quadraticCurveTo(140, 60, 120, 100); ctx.quadraticCurveTo(110, 140, 80, H-20);
+      ctx.fill();
+      ctx.fillStyle = `rgba(138,110,48,${0.5 - alpha*0.3})`;
+      ctx.beginPath();
+      ctx.moveTo(100, H-20); ctx.quadraticCurveTo(80, 120, 100, 80);
+      ctx.quadraticCurveTo(120, 40, 140, 80); ctx.quadraticCurveTo(160, 120, 140, H-20);
+      ctx.fill();
+      ctx.fillStyle = '#7a7060'; ctx.font = '11px "Courier New"'; ctx.textAlign = 'center';
+      ctx.fillText(alpha > 0.5 ? 'FACE PROFILE' : 'VASE / NEGATIVE', W/2, H-8);
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 08: COGNITIVE — FALSE PERSPECTIVE ──
+makeCard(8, 'Cognitive — False Perspective',
+  '<strong>Principle:</strong> Size constancy errors — the brain assumes parallel lines converge with distance.<br><strong>Camouflage:</strong> False perspective in architecture; sniper hide positioning.<br><strong>Tracking:</strong> Prey animals appear larger/smaller than actual distance suggests.<br><span class="date">ORIGIN: 15th Century — Renaissance perspective art</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      const vpX = W/2, vpY = H/2 - 20;
+      ctx.strokeStyle = '#c8a04e'; ctx.lineWidth = 1.5;
+      for (let i = -3; i <= 3; i++) {
+        ctx.beginPath(); ctx.moveTo(vpX + i*30, H); ctx.lineTo(vpX, vpY); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(vpX + i*30, 0); ctx.lineTo(vpX, vpY); ctx.stroke();
+      }
+      const d1 = 0.3, d2 = 0.7;
+      const s1 = 1 - d1*0.8, s2 = 1 - d2*0.8;
+      ctx.fillStyle = '#c8a04e';
+      const x1 = vpX + (40 - vpX) * d1, y1 = vpY + (H-30 - vpY) * d1;
+      ctx.fillRect(x1 - 8*s1, y1 - 30*s1, 16*s1, 30*s1);
+      const x2 = vpX + (40 - vpX) * d2, y2 = vpY + (H-30 - vpY) * d2;
+      ctx.fillStyle = '#8a6e30';
+      ctx.fillRect(x2 - 8*s2, y2 - 30*s2, 16*s2, 30*s2);
+      ctx.fillStyle = '#7a7060'; ctx.font = '10px "Courier New"'; ctx.textAlign = 'center';
+      ctx.fillText('SAME ACTUAL SIZE', W/2, H-8);
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 09: PHYSIOLOGICAL — DAZZLE PATTERN ──
+makeCard(9, 'Physiological — Dazzle Pattern',
+  '<strong>Principle:</strong> High-contrast geometric patterns overload edge-detection circuits.<br><strong>Camouflage:</strong> Dazzle ships — 4,000+ vessels in WWI/WWII. Confused speed, heading, size.<br><strong>Tracking:</strong> Op-art movement (1960s) was civilian dazzle renaissance.<br><span class="date">ORIGIN: 1917 — Norman Wilkinson, British Admiralty</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    let t = 0;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      const shapes = [
+        [0,0,60,40], [60,0,40,60], [100,0,80,30], [180,0,100,50],
+        [0,40,40,50], [40,60,60,40], [100,30,50,70], [150,50,80,40],
+        [230,50,50,60], [0,90,50,50], [50,100,70,40], [120,90,80,50],
+        [200,90,80,50], [0,140,80,40], [80,140,100,40], [180,140,100,40]
+      ];
+      shapes.forEach((s, i) => {
+        ctx.fillStyle = i % 2 === 0 ? '#c8a04e' : '#1a1510';
+        ctx.fillRect(s[0], s[1] + Math.sin(t + i)*2, s[2], s[3]);
+      });
+      ctx.strokeStyle = '#8a6e30'; ctx.lineWidth = 1;
+      ctx.strokeRect(10, 10, W-20, H-20);
+      t += 0.02;
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 10: MOTION — PHI PHENOMENON ──
+makeCard(10, 'Motion — Phi Phenomenon',
+  '<strong>Principle:</strong> Rapid static frames create apparent motion (persistence of vision).<br><strong>Camouflage:</strong> Motion decoys in hunting — rotating wings simulate bird flight.<br><strong>Tracking:</strong> Predators track apparent motion rather than actual position.<br><span class="date">ORIGIN: 19th Century — persistence of vision studies</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      const frames = 8;
+      const frame = Math.floor(Date.now() / 120) % frames;
+      const x = 30 + frame * 28;
+      const y = H/2 + Math.sin(frame * 0.8) * 30;
+      for (let i = 1; i <= 4; i++) {
+        const prev = (frame - i + frames) % frames;
+        const px = 30 + prev * 28;
+        const py = H/2 + Math.sin(prev * 0.8) * 30;
+        ctx.fillStyle = `rgba(200,160,78,${0.1 * (5-i)})`;
+        ctx.beginPath(); ctx.arc(px, py, 6, 0, Math.PI*2); ctx.fill();
+      }
+      ctx.fillStyle = '#c8a04e';
+      ctx.beginPath(); ctx.arc(x, y, 8, 0, Math.PI*2); ctx.fill();
+      ctx.strokeStyle = 'rgba(200,160,78,0.2)'; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.moveTo(30, H/2);
+      for (let i = 0; i < frames; i++) ctx.lineTo(30 + i*28, H/2 + Math.sin(i*0.8)*30);
+      ctx.stroke(); ctx.setLineDash([]);
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 11: DEPTH — FALSE 3D FROM 2D ──
+makeCard(11, 'Depth — False 3D from 2D',
+  '<strong>Principle:</strong> Binocular disparity cues exploited by single-image stereograms.<br><strong>Camouflage:</strong> Holographic decoys, projected camouflage on flat surfaces.<br><strong>Tracking:</strong> Predators misjudge depth of flat-patterned prey (moths on bark).<br><span class="date">ORIGIN: 20th Century — optics & holography research</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    let t = 0;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      const dots = 120;
+      for (let i = 0; i < dots; i++) {
+        const bx = (i * 137.5) % W;
+        const by = (i * 89.7) % H;
+        const depth = Math.sin(bx * 0.05 + t) * 10;
+        ctx.fillStyle = '#c8a04e'; ctx.fillRect(bx + depth, by, 2, 2);
+        ctx.fillStyle = '#8a6e30'; ctx.fillRect(bx + depth + 3, by, 2, 2);
+      }
+      ctx.strokeStyle = 'rgba(200,160,78,0.3)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.arc(W/2, H/2, 40 + Math.sin(t)*5, 0, Math.PI*2); ctx.stroke();
+      t += 0.03;
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 12: GHOST ARMY — INFLATABLE DECOY ──
+makeCard(12, 'Ghost Army — Inflatable Decoy',
+  '<strong>Principle:</strong> Literal illusion at scale — fake object indistinguishable from real at distance.<br><strong>Camouflage:</strong> 1,100 artists created inflatable tanks, fake radio traffic, sound effects.<br><strong>Tracking:</strong> Aerial reconnaissance completely fooled by dummy installations.<br><span class="date">ORIGIN: 1944 — US Ghost Army, Congressional Gold Medal 2024</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      const t = (Date.now() % 4000) / 4000;
+      const inflate = t < 0.5 ? t * 2 : 1;
+      ctx.fillStyle = '#1a1510'; ctx.fillRect(0, H-30, W, 30);
+      const cx = W/2, cy = H-30;
+      const s = 0.5 + inflate * 0.5;
+      ctx.save(); ctx.translate(cx, cy); ctx.scale(s, s);
+      ctx.fillStyle = inflate > 0.8 ? '#c8a04e' : '#8a6e30';
+      ctx.fillRect(-50, -25, 100, 25);
+      ctx.fillRect(-20, -45, 40, 20);
+      ctx.fillRect(20, -38, 35, 6);
+      ctx.fillStyle = '#1a1510'; ctx.fillRect(-55, -5, 110, 8);
+      ctx.restore();
+      ctx.fillStyle = '#7a7060'; ctx.font = '11px "Courier New"'; ctx.textAlign = 'center';
+      ctx.fillText(inflate < 0.3 ? 'DEFLATED (HIDDEN)' : inflate < 0.8 ? 'INFLATING...' : 'FULL DECOY DEPLOYED', W/2, H-8);
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 13: BOEING HIDDEN TOWN ──
+makeCard(13, 'Boeing Plant — Hidden Town',
+  '<strong>Principle:</strong> Surface texture mimicry at architectural scale.<br><strong>Camouflage:</strong> 26-acre fake residential town built over Boeing plant in Seattle.<br><strong>Tracking:</strong> Aerial reconnaissance saw houses, streets, parked cars — not a factory.<br><span class="date">ORIGIN: WWII — Boeing Plant 2, Seattle</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      const t = (Date.now() % 5000) / 5000;
+      const reveal = t < 0.5 ? 0 : (t - 0.5) * 2;
+      for (let i = 0; i < 8; i++) {
+        const x = i * 35 + 10;
+        const h = 30 + Math.sin(i*2)*15;
+        ctx.fillStyle = `rgba(200,160,78,${0.4 + reveal*0.3})`;
+        ctx.fillRect(x, H - 40 - h, 25, h);
+        ctx.beginPath(); ctx.moveTo(x-3, H-40-h); ctx.lineTo(x+12.5, H-55-h); ctx.lineTo(x+28, H-40-h); ctx.fill();
+        ctx.fillStyle = `rgba(78,120,78,${0.3 + reveal*0.2})`;
+        ctx.beginPath(); ctx.arc(x+30, H-45, 10, 0, Math.PI*2); ctx.fill();
+      }
+      if (reveal > 0) {
+        ctx.fillStyle = `rgba(138,110,48,${reveal * 0.5})`; ctx.fillRect(20, H-20, W-40, 15);
+        ctx.fillStyle = `rgba(200,160,78,${reveal})`; ctx.font = '12px "Courier New"'; ctx.textAlign = 'center';
+        ctx.fillText('BOEING PLANT 2', W/2, H-8);
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 14: CAMOUFLEUR ARTIST UNIT ──
+makeCard(14, 'Camoufleur Artist Unit',
+  '<strong>Principle:</strong> Artists trained in perception manipulation applied to battlefield deception.<br><strong>Camouflage:</strong> Lucien Victor Guirand de Scevola commanded first official camouflage unit.<br><strong>Tracking:</strong> Stage designers, architects, painters recruited across Allied forces.<br><span class="date">ORIGIN: 1915 — French Army, first official camo unit</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    let t = 0;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      const cx = W/2, cy = H/2;
+      ctx.save(); ctx.translate(cx, cy); ctx.rotate(t * 0.5);
+      ctx.fillStyle = '#1a1510';
+      ctx.beginPath(); ctx.ellipse(0, 0, 60, 45, 0, 0, Math.PI*2); ctx.fill();
+      ctx.strokeStyle = '#c8a04e'; ctx.lineWidth = 2; ctx.stroke();
+      const blobs = [[-25,-15,12], [-10,20,15], [25,-10,10], [15,25,8], [-30,10,9]];
+      blobs.forEach((b, i) => {
+        const morph = Math.sin(t + i);
+        ctx.fillStyle = morph > 0 ? '#c8a04e' : '#8a6e30';
+        ctx.beginPath(); ctx.arc(b[0], b[1], b[2], 0, Math.PI*2); ctx.fill();
+      });
+      ctx.restore();
+      ctx.strokeStyle = '#8a6e30'; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.moveTo(W-40, H-20); ctx.lineTo(W-20, H-50); ctx.stroke();
+      ctx.fillStyle = '#c8a04e'; ctx.fillRect(W-25, H-55, 12, 20);
+      t += 0.02;
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 15: DIGITAL MARPAT ──
+makeCard(15, 'Digital MARPAT Pattern',
+  '<strong>Principle:</strong> Micro-patterns exploit lateral inhibition to break edge detection at viewing distance.<br><strong>Camouflage:</strong> USMC adopted MARPAT in 2002 — pixelated pattern replaces organic shapes.<br><strong>Tracking:</strong> Digital pixels blur into natural texture at distance, unlike blob patterns.<br><span class="date">ORIGIN: 2002 — USMC MARPAT adoption</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      const pixel = 8;
+      const colors = ['#1a2515', '#2a3520', '#3a4530', '#0f1a0a', '#c8a04e'];
+      for (let y = 0; y < H; y += pixel) {
+        for (let x = 0; x < W; x += pixel) {
+          const idx = Math.floor(Math.abs(Math.sin(x*0.1) * Math.cos(y*0.1) * colors.length));
+          ctx.fillStyle = colors[idx % colors.length];
+          ctx.fillRect(x, y, pixel, pixel);
+        }
+      }
+      ctx.fillStyle = 'rgba(10,10,15,0.3)'; ctx.fillRect(0,0,W,H);
+      ctx.fillStyle = '#7a7060'; ctx.font = '11px "Courier New"'; ctx.textAlign = 'center';
+      ctx.fillText('PIXELS BLUR → NATURAL TEXTURE', W/2, H-8);
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 16: SCORPION II ──
+makeCard(16, 'Scorpion II Multi-Environment',
+  '<strong>Principle:</strong> Fragmented patterns break body-shape recognition from any viewing angle.<br><strong>Camouflage:</strong> US military Scorpion II (2014) — one pattern for woodland, desert, urban.<br><strong>Tracking:</strong> Prey animals with broken outlines (zebra, giraffe) confuse motion detection.<br><span class="date">ORIGIN: 2014 — US Military Scorpion II release</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    let t = 0;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      const cx = W/2, cy = H/2 + 20;
+      ctx.fillStyle = '#1a1510'; ctx.fillRect(cx-25, cy-60, 50, 80);
+      ctx.beginPath(); ctx.arc(cx, cy-75, 18, 0, Math.PI*2); ctx.fill();
+      const patches = [
+        [cx-20, cy-50, 15, 12], [cx+5, cy-40, 12, 15], [cx-15, cy-20, 18, 10],
+        [cx+8, cy-15, 10, 14], [cx-22, cy-5, 14, 8], [cx+12, cy+5, 16, 10],
+        [cx-18, cy+15, 12, 12], [cx+5, cy+20, 14, 8]
+      ];
+      patches.forEach((p, i) => {
+        ctx.fillStyle = i % 3 === 0 ? '#c8a04e' : i % 3 === 1 ? '#8a6e30' : '#2a2015';
+        ctx.fillRect(p[0], p[1], p[2], p[3]);
+      });
+      ctx.strokeStyle = `rgba(200,160,78,${0.3 + Math.sin(t)*0.2})`; ctx.lineWidth = 1;
+      ctx.setLineDash([4,4]); ctx.beginPath(); ctx.arc(cx, cy-20, 55, 0, Math.PI*2); ctx.stroke(); ctx.setLineDash([]);
+      t += 0.03;
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 17: ACTIVE CAMOUFLAGE SUIT ──
+makeCard(17, 'Active Camouflage Suit',
+  '<strong>Principle:</strong> Real-time surface texture projection — camera captures, fabric displays.<br><strong>Camouflage:</strong> Japanese researchers developed camera-equipped suits projecting surroundings.<br><strong>Tracking:</strong> Chameleon-inspired color-changing fibers in development.<br><span class="date">ORIGIN: 21st Century — active research phase</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    let t = 0;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      for (let i = 0; i < 20; i++) {
+        ctx.fillStyle = i % 2 === 0 ? '#1a2515' : '#0f1a0a';
+        ctx.fillRect(i*15, 0, 8, H);
+      }
+      const cx = W/2, cy = H/2;
+      const suitW = 60, suitH = 100;
+      ctx.save(); ctx.beginPath(); ctx.ellipse(cx, cy, suitW/2, suitH/2, 0, 0, Math.PI*2); ctx.clip();
+      for (let i = 0; i < 20; i++) {
+        const off = Math.sin(t + i*0.5) * 3;
+        ctx.fillStyle = i % 2 === 0 ? '#1a2515' : '#0f1a0a';
+        ctx.fillRect(i*15 + off, 0, 8, H);
+      }
+      ctx.restore();
+      ctx.strokeStyle = `rgba(200,160,78,${0.5 + Math.sin(t*2)*0.3})`; ctx.lineWidth = 1;
+      ctx.setLineDash([3,3]); ctx.beginPath(); ctx.ellipse(cx, cy, suitW/2, suitH/2, 0, 0, Math.PI*2); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = '#7a7060'; ctx.font = '10px "Courier New"'; ctx.textAlign = 'center';
+      ctx.fillText('ACTIVE CAMOUFLAGE — PROJECTED', W/2, H-8);
+      t += 0.03;
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 18: OP-ART RENAISSANCE ──
+makeCard(18, 'Op-Art Renaissance',
+  '<strong>Principle:</strong> High-contrast geometric patterns create physiological discomfort and motion illusions.<br><strong>Camouflage:</strong> 1960s op-art was civilian renaissance of WWI dazzle camouflage principles.<br><strong>Tracking:</strong> Bridget Riley and Victor Vasarely patterns disorient spatial judgment.<br><span class="date">ORIGIN: 1960s — Op-Art movement, 50 years post-WWI dazzle</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    let t = 0;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      const rings = 12;
+      for (let i = rings; i >= 0; i--) {
+        const r = 10 + i * 10;
+        const off = Math.sin(t + i*0.5) * 3;
+        ctx.fillStyle = i % 2 === 0 ? '#c8a04e' : '#0a0a0f';
+        ctx.beginPath(); ctx.arc(W/2 + off, H/2 + off, r, 0, Math.PI*2); ctx.fill();
+      }
+      ctx.strokeStyle = '#8a6e30'; ctx.lineWidth = 1;
+      for (let a = 0; a < Math.PI*2; a += Math.PI/12) {
+        ctx.beginPath(); ctx.moveTo(W/2, H/2);
+        ctx.lineTo(W/2 + Math.cos(a + t)*80, H/2 + Math.sin(a + t)*80); ctx.stroke();
+      }
+      t += 0.02;
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 19: GHILLIE SUIT ──
+makeCard(19, 'Ghillie Suit Silhouette Break',
+  '<strong>Principle:</strong> Irregular protrusions break the human silhouette into non-recognizable shapes.<br><strong>Camouflage:</strong> Scottish gamekeepers originated ghillie suits; adopted by military snipers.<br><strong>Tracking:</strong> Predators use silhouette recognition; ghillie eliminates the human form entirely.<br><span class="date">ORIGIN: Scottish gamekeepers → WWI military adoption</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    let t = 0;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      ctx.fillStyle = '#1a2515'; ctx.fillRect(0, H-40, W, 40);
+      const cx = W/2, cy = H-40;
+      ctx.fillStyle = '#2a2015'; ctx.fillRect(cx-15, cy-80, 30, 80);
+      for (let i = 0; i < 40; i++) {
+        const angle = (i / 40) * Math.PI * 2;
+        const len = 20 + Math.random() * 30;
+        const sx = cx + Math.cos(angle) * 15;
+        const sy = cy - 40 + Math.sin(angle) * 30;
+        const ex = sx + Math.cos(angle + t*0.5 + i) * len;
+        const ey = sy + Math.sin(angle + t*0.5 + i) * len;
+        ctx.strokeStyle = i % 3 === 0 ? '#c8a04e' : i % 3 === 1 ? '#8a6e30' : '#1a2515';
+        ctx.lineWidth = 2 + Math.random() * 2;
+        ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(ex, ey); ctx.stroke();
+      }
+      ctx.strokeStyle = `rgba(200,160,78,${0.1 + Math.sin(t)*0.05})`; ctx.setLineDash([4,4]);
+      ctx.beginPath(); ctx.ellipse(cx, cy-40, 20, 45, 0, 0, Math.PI*2); ctx.stroke(); ctx.setLineDash([]);
+      t += 0.01;
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 20: SHADOW DISRUPTION ──
+makeCard(20, 'Shadow Disruption Technique',
+  '<strong>Principle:</strong> Fake shadows painted on flat surfaces create false depth and conceal real objects.<br><strong>Camouflage:</strong> Camouflage netting with painted shadows; aircraft hangars disguised as houses.<br><strong>Tracking:</strong> Ground-nesting birds sit in depressions to eliminate shadow cast.<br><span class="date">ORIGIN: Ancient — shadow manipulation in architecture</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    let t = 0;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      ctx.fillStyle = '#1a1510'; ctx.fillRect(0, H-50, W, 50);
+      ctx.fillStyle = `rgba(0,0,0,${0.3 + Math.sin(t)*0.1})`;
+      ctx.beginPath(); ctx.ellipse(W/2 + 20, H-45, 40, 10, 0.2, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#2a2015'; ctx.fillRect(W/2 - 30, H-55, 60, 15);
+      ctx.fillStyle = '#c8a04e'; ctx.fillRect(W/2 - 10, H-70, 20, 15);
+      ctx.fillStyle = 'rgba(0,0,0,0.15)';
+      ctx.beginPath(); ctx.ellipse(W/2, H-40, 35, 8, 0, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#7a7060'; ctx.font = '10px "Courier New"'; ctx.textAlign = 'center';
+      ctx.fillText('FAKE SHADOW CONCEALS REAL OBJECT', W/2, H-8);
+      t += 0.02;
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 21: CUTTLEFISH TEXTURE MATCH ──
+makeCard(21, 'Cuttlefish Real-Time Texture Match',
+  '<strong>Principle:</strong> Chromatophore organs match substrate texture, color, and pattern in milliseconds.<br><strong>Camouflage:</strong> Bio-inspiration for active camouflage — faster than any human-made system.<br><strong>Tracking:</strong> Cuttlefish predators cannot resolve target against matched background.<br><span class="date">ORIGIN: Evolutionary — millions of years of natural selection</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    let t = 0;
+    function draw() {
+      const substrate = Math.sin(t * 0.3);
+      ctx.fillStyle = substrate > 0 ? '#2a2015' : '#1a1510'; ctx.fillRect(0,0,W,H);
+      for (let i = 0; i < 50; i++) {
+        ctx.fillStyle = Math.random() > 0.5 ? '#3a3025' : '#0f0c08';
+        ctx.fillRect(Math.random()*W, Math.random()*H, Math.random()*20+5, Math.random()*3+1);
+      }
+      const cx = W/2, cy = H/2;
+      ctx.save(); ctx.beginPath(); ctx.ellipse(cx, cy, 50, 30, 0, 0, Math.PI*2); ctx.clip();
+      ctx.fillStyle = substrate > 0 ? '#2a2015' : '#1a1510'; ctx.fillRect(0,0,W,H);
+      for (let i = 0; i < 40; i++) {
+        ctx.fillStyle = Math.random() > 0.5 ? '#3a3025' : '#0f0c08';
+        ctx.fillRect(Math.random()*W, Math.random()*H, Math.random()*20+5, Math.random()*3+1);
+      }
+      ctx.restore();
+      ctx.strokeStyle = `rgba(200,160,78,${0.2 + Math.sin(t*2)*0.1})`; ctx.lineWidth = 1; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.ellipse(cx, cy, 50, 30, 0, 0, Math.PI*2); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = '#c8a04e';
+      ctx.beginPath(); ctx.arc(cx-20, cy-5, 4, 0, Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx+20, cy-5, 4, 0, Math.PI*2); ctx.fill();
+      t += 0.03;
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 22: ZEBRA STRIPE CONFUSION ──
+makeCard(22, 'Zebra Stripe Motion Confusion',
+  '<strong>Principle:</strong> High-contrast stripes create motion dazzle — predators cannot track individual animals in a herd.<br><strong>Camouflage:</strong> Dazzle camouflage directly inspired by zebra stripe research.<br><strong>Tracking:</strong> Tsetse flies are less likely to land on striped surfaces (recent study).<br><span class="date">ORIGIN: Evolutionary — African savanna predator-prey arms race</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    let t = 0;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      for (let z = 0; z < 5; z++) {
+        const zx = 30 + z * 50 + Math.sin(t + z)*5;
+        const zy = H/2 + Math.cos(t + z*1.3)*10;
+        ctx.fillStyle = '#d4c8a8'; ctx.fillRect(zx-20, zy-15, 40, 30);
+        ctx.fillStyle = '#0a0a0f';
+        for (let s = -15; s < 15; s += 6) ctx.fillRect(zx + s, zy - 15, 3, 30);
+      }
+      ctx.strokeStyle = `rgba(200,160,78,${0.3 + Math.sin(t)*0.2})`; ctx.lineWidth = 1; ctx.setLineDash([4,4]);
+      ctx.beginPath(); ctx.moveTo(W-20, 20); ctx.quadraticCurveTo(W/2, H/2, 30 + 2*50, H/2); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = '#7a7060'; ctx.font = '10px "Courier New"'; ctx.textAlign = 'center';
+      ctx.fillText('PREDATOR: WHICH ONE?', W/2, H-8);
+      t += 0.03;
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 23: TIGER STRIPE EDGE BREAK ──
+makeCard(23, 'Tiger Stripe Edge Break',
+  '<strong>Principle:</strong> Vertical stripes break the body outline into vertical fragments, disrupting edge detection.<br><strong>Camouflage:</strong> Tiger stripe camouflage pattern used by US special forces in Vietnam.<br><strong>Tracking:</strong> Vertical vegetation (bamboo, tall grass) matches stripe orientation.<br><span class="date">ORIGIN: 1960s — Vietnam War special forces pattern</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      const cx = W/2, cy = H/2;
+      ctx.fillStyle = '#c8a04e';
+      ctx.beginPath(); ctx.ellipse(cx, cy, 70, 35, 0, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#0a0a0f';
+      for (let x = cx-60; x < cx+60; x += 12) {
+        const w = 4 + Math.sin(x*0.2)*2;
+        ctx.fillRect(x, cy-30, w, 60);
+      }
+      ctx.fillStyle = '#1a2515';
+      for (let i = 0; i < 15; i++) {
+        const vx = i * 20 + Math.sin(i)*5;
+        ctx.fillRect(vx, 0, 3, H);
+      }
+      ctx.strokeStyle = 'rgba(200,160,78,0.3)'; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.ellipse(cx, cy, 70, 35, 0, 0, Math.PI*2); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = '#7a7060'; ctx.font = '10px "Courier New"'; ctx.textAlign = 'center';
+      ctx.fillText('VERTICAL STRIPES = VERTICAL VEGETATION', W/2, H-8);
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 24: FLASHBANG SENSOR OVERLOAD ──
+makeCard(24, 'Flashbang Sensor Overload',
+  '<strong>Principle:</strong> Intense light overloads photoreceptors and electronic sensors simultaneously.<br><strong>Camouflage:</strong> Counter-surveillance devices blind thermal/night vision via sensor saturation.<br><strong>Tracking:</strong> Military and law enforcement use flashbangs to eliminate visual tracking.<br><span class="date">ORIGIN: 1970s — British SAS developed modern flashbang</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    function draw() {
+      const cycle = (Date.now() % 3000) / 3000;
+      if (cycle < 0.05) {
+        const intensity = 1 - cycle * 20;
+        ctx.fillStyle = `rgba(255,255,220,${intensity})`; ctx.fillRect(0,0,W,H);
+      } else {
+        ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+        const recovery = Math.min(1, (cycle - 0.05) * 2);
+        ctx.fillStyle = `rgba(200,160,78,${recovery * 0.5})`; ctx.fillRect(W/2-20, H/2-20, 40, 40);
+        const after = Math.max(0, 1 - (cycle - 0.05) * 3);
+        ctx.fillStyle = `rgba(78,120,200,${after * 0.3})`; ctx.fillRect(W/2-25, H/2-25, 50, 50);
+      }
+      ctx.fillStyle = '#8a6e30'; ctx.fillRect(W/2-8, H/2+30, 16, 12);
+      ctx.fillStyle = '#c8a04e'; ctx.beginPath(); ctx.arc(W/2, H/2+30, 5, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#7a7060'; ctx.font = '10px "Courier New"'; ctx.textAlign = 'center';
+      ctx.fillText('SENSOR OVERLOAD → TARGET LOST', W/2, H-8);
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+
+// ── 25: PERCEPTION WARFARE TIMELINE ──
+makeCard(25, 'Perception Warfare Timeline',
+  '<strong>Principle:</strong> All 24 illusions above are weapons in the same 2,400-year arms race.<br><strong>Camouflage:</strong> From Greek entasis to digital MARPAT — the same perceptual vulnerabilities exploited.<br><strong>Tracking:</strong> Every tracking system (biological or electronic) has an illusion that defeats it.<br><span class="date">ORIGIN: 450 B.C. — Present Day. The war never ended.</span>',
+  wrap => {
+    const c = document.createElement('canvas');
+    c.width = 280; c.height = 180;
+    const ctx = c.getContext('2d');
+    const W = c.width, H = c.height;
+    let t = 0;
+    function draw() {
+      ctx.fillStyle = '#0a0a0f'; ctx.fillRect(0,0,W,H);
+      // Timeline
+      const events = [
+        { year: 450, label: 'Greek Philosophers', y: 30 },
+        { year: 1899, label: 'Boer War Camo', y: 50 },
+        { year: 1915, label: 'Camoufleur Unit', y: 70 },
+        { year: 1917, label: 'Dazzle Ships', y: 90 },
+        { year: 1944, label: 'Ghost Army', y: 110 },
+        { year: 2002, label: 'MARPAT Digital', y: 130 },
+        { year: 2014, label: 'Scorpion II', y: 150 },
+        { year: 2024, label: 'Active Research', y: 170 }
+      ];
+      ctx.strokeStyle = '#c8a04e'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(40, 20); ctx.lineTo(40, H-10); ctx.stroke();
+      events.forEach((e, i) => {
+        const x = 40 + (e.year - 450) / (2024 - 450) * (W - 80);
+        ctx.fillStyle = '#c8a04e';
+        ctx.beginPath(); ctx.arc(40, e.y, 3, 0, Math.PI*2); ctx.fill();
+        ctx.fillStyle = '#7a7060'; ctx.font = '9px "Courier New"';
+        ctx.fillText(e.year, 8, e.y + 3);
+        ctx.fillStyle = `rgba(200,160,78,${0.5 + Math.sin(t + i)*0.3})`; ctx.font = '8px "Courier New"';
+        ctx.fillText(e.label, 50, e.y + 3);
+      });
+      // Pulsing endpoint
+      ctx.fillStyle = `rgba(200,160,78,${0.3 + Math.sin(t*2)*0.2})`;
+      ctx.beginPath(); ctx.arc(40, H-10, 5, 0, Math.PI*2); ctx.fill();
+      ctx.strokeStyle = '#c8a04e'; ctx.beginPath(); ctx.arc(40, H-10, 5, 0, Math.PI*2); ctx.stroke();
+      t += 0.02;
+      requestAnimationFrame(draw);
+    }
+    draw();
+    wrap.appendChild(c);
+  }
+);
+</script>
+
+</body>
+</html>
