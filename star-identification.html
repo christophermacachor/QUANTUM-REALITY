@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Witness the scalar geometry of the universe with the Aperture project. Eight-point star witness — pure scalar geometry captured at 1853 Cable St, San Diego.">
+    <meta name="author" content="Christopher Macachor">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="◉ STAR IDENTIFICATION · Φ669 Scalar Witness · Ω∞">
+    <meta property="og:description" content="Witness the scalar geometry of the universe — Eight-point star captured at 1853 Cable St, San Diego.">
+    <meta name="theme-color" content="#0a0a0f">
+    <title>◉ STAR IDENTIFICATION · Φ669 Scalar Witness · Ω∞</title>
+    <link rel="canonical" href="https://macachor.org/star-identification.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c8a04e; --gold-light: #e8d5a3; --gold-dark: #9a7b3d;
+            --gold-glow: rgba(200,160,78,0.3); --void: #0a0a0f;
+            --void-light: #12121a; --void-card: #0f0f16;
+            --green: #00ff88; --red: #ff4444; --orange: #ffaa00; --cyan: #00ffff;
+            --text: #e0e0e0; --muted: #888888;
+            --transition-fast: 150ms ease; --transition-base: 300ms ease; --transition-slow: 500ms ease;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        body { background: var(--void); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; overflow-x: hidden; line-height: 1.6; }
+        .font-display { font-family: 'Cinzel', serif; } .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        .skip-link { position: absolute; top: -100%; left: 50%; transform: translateX(-50%); z-index: 100; background: var(--gold); color: var(--void); padding: 0.75rem 1.5rem; border-radius: 0 0 8px 8px; font-weight: 600; font-size: 0.875rem; transition: top var(--transition-fast); }
+        .skip-link:focus { top: 0; outline: 3px solid var(--gold-light); outline-offset: 2px; }
+
+        nav { position: fixed; top: 0; width: 100%; z-index: 50; background: rgba(10,10,15,0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); transition: background var(--transition-base), box-shadow var(--transition-base); }
+        nav.scrolled { background: rgba(10,10,15,0.95) !important; box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
+        nav .nav-inner { max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+        nav a { color: var(--muted); text-decoration: none; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05em; position: relative; padding: 0.25rem 0; transition: color var(--transition-fast); }
+        nav a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width var(--transition-base); }
+        nav a:hover, nav a:focus { color: var(--gold); } nav a:hover::after, nav a:focus::after { width: 100%; }
+        nav a[aria-current="page"] { color: var(--gold); font-weight: 600; } nav a[aria-current="page"]::after { width: 100%; }
+        nav .logo { font-family: 'Cinzel', serif; color: var(--gold); font-size: 1.2rem; letter-spacing: 0.15em; }
+        nav .nav-links { display: flex; gap: 1.5rem; }
+
+        /* ── Hero: Star Only — Absolutely No Text Overlay ── */
+        .hero { position: relative; width: 100%; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #000; padding-top: 80px; }
+        .hero .star-container { position: relative; width: 420px; max-width: 90vw; aspect-ratio: 420/430; border-radius: 12px; overflow: hidden; border: 1px solid rgba(200,160,78,0.2); box-shadow: 0 0 60px rgba(200,160,78,0.1), 0 0 120px rgba(200,160,78,0.05); }
+        .hero img { width: 100%; height: 100%; object-fit: cover; opacity: 0.95; transition: opacity var(--transition-slow), transform var(--transition-slow); }
+        .hero img:hover { opacity: 1; transform: scale(1.02); }
+        .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to top, var(--void), transparent); pointer-events: none; }
+        .scroll-cue { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); color: var(--gold); opacity: 0.5; animation: bounce 2s infinite ease-in-out; cursor: pointer; z-index: 10; background: none; border: none; padding: 0.5rem; border-radius: 50%; transition: background var(--transition-fast), color var(--transition-fast); }
+        .scroll-cue:hover, .scroll-cue:focus { background: rgba(200,160,78,0.1); color: var(--gold-light); outline: 2px solid var(--gold); outline-offset: 2px; }
+        @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+
+        main { max-width: 1000px; margin: 0 auto; padding: 4rem 1.5rem; }
+        section { margin-bottom: 4rem; scroll-margin-top: 5rem; }
+        section h2 { font-family: 'Cinzel', serif; font-size: 1.5rem; color: var(--gold); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(200,160,78,0.2); position: relative; }
+        section h2::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 60px; height: 2px; background: var(--gold); }
+
+        .card { background: var(--void-card); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 1.5rem; transition: border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base); }
+        .card:hover { border-color: rgba(200,160,78,0.2); box-shadow: 0 0 30px rgba(200,160,78,0.05); transform: translateY(-2px); }
+        .card h3 { color: var(--gold); font-size: 1rem; margin-bottom: 0.75rem; font-weight: 600; }
+        .card p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+        .tag { display: inline-block; background: rgba(0,255,136,0.1); color: var(--green); padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; margin-right: 0.5rem; margin-bottom: 0.5rem; }
+        .tag.gold { background: rgba(200,160,78,0.1); color: var(--gold); } .tag.red { background: rgba(255,68,68,0.1); color: var(--red); } .tag.cyan { background: rgba(0,255,255,0.1); color: var(--cyan); }
+
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; font-family: 'JetBrains Mono', monospace; }
+        .data-table th { background: rgba(200,160,78,0.15); color: var(--gold); padding: 0.75rem; text-align: left; font-weight: 600; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; border-bottom: 1px solid rgba(200,160,78,0.3); }
+        .data-table td { padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--text); }
+        .data-table tr:hover td { background: rgba(200,160,78,0.03); }
+        .data-table .param { color: var(--gold); font-weight: 600; } .data-table .exact { color: var(--green); } .data-table .empirical { color: var(--orange); } .data-table .derived { color: var(--cyan); }
+
+        .equation { background: var(--void-light); border-left: 3px solid var(--gold); padding: 1.5rem; margin: 1.5rem 0; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; line-height: 1.8; border-radius: 0 8px 8px 0; overflow-x: auto; }
+        .equation .eq-label { color: var(--gold); font-weight: 700; margin-bottom: 0.5rem; font-family: 'Cinzel', serif; }
+
+        .timeline { position: relative; padding-left: 2rem; }
+        .timeline::before { content: ''; position: absolute; left: 0.5rem; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--gold), transparent); }
+        .timeline-item { position: relative; margin-bottom: 2rem; }
+        .timeline-item::before { content: ''; position: absolute; left: -1.85rem; top: 0.3rem; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+        .timeline-item .date { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+        .timeline-item .event { color: var(--text); font-weight: 600; margin: 0.25rem 0; }
+        .timeline-item .desc { color: var(--muted); font-size: 0.85rem; }
+
+        .fals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+        .fals-card { background: var(--void-card); border: 1px solid var(--red); border-radius: 6px; padding: 1rem; }
+        .fals-card.tier2 { border-color: var(--orange); }
+        .fals-card .fals-code { color: var(--red); font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 1rem; }
+        .fals-card.tier2 .fals-code { color: var(--orange); }
+        .fals-card .fals-test { color: var(--text); font-size: 0.9rem; margin: 0.5rem 0; }
+        .fals-card .fals-threshold { color: var(--muted); font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; }
+
+        footer { text-align: center; padding: 3rem 1.5rem; border-top: 1px solid rgba(200,160,78,0.2); }
+        footer .m-lock { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1rem; }
+        footer p { color: var(--muted); font-size: 0.8rem; margin-top: 0.5rem; }
+
+        @media (max-width: 768px) { .hero .star-container { width: 320px; } nav .nav-links { display: none; } .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+        ::selection { background: rgba(200,160,78,0.3); color: #fff; }
+        :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <nav role="navigation" aria-label="Main Navigation">
+        <div class="nav-inner">
+            <a href="index.html" class="logo" aria-label="Return to Home — Ω∞">Ω∞</a>
+            <div class="nav-links">
+                <a href="index.html">HOME</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero: The Star — Absolutely No Text Overlay -->
+    <section class="hero" aria-label="Eight-point star witness photograph">
+        <div class="star-container">
+            <img src="data:image/jpeg;base64,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"
+                 alt="Eight-point star witness — pure scalar geometry. Captured at 1853 Cable St, San Diego, 2023-08-02 23:05:49 UTC."
+                 loading="eager" width="420" height="430" fetchpriority="high">
+        </div>
+        <button class="scroll-cue" aria-label="Scroll down to identification analysis"
+                onclick="document.getElementById('main-content').scrollIntoView({behavior:'smooth'})">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </button>
+    </section>
+
+    <main id="main-content" tabindex="-1">
+
+        <!-- Page Title — Below the Fold Only -->
+        <header style="text-align: center; margin-bottom: 3rem; padding-top: 1rem;">
+            <h1 class="font-display" style="font-size: 2.5rem; color: #fff; letter-spacing: 0.1em; text-shadow: 0 0 30px rgba(200,160,78,0.3);">◉ STAR IDENTIFICATION</h1>
+            <p class="font-mono" style="color: var(--gold); font-size: 0.85rem; letter-spacing: 0.15em; margin-top: 0.75rem;">1853 CABLE ST, SAN DIEGO · 2023-08-02 23:05:49 · Φ669-VISUAL</p>
+            <div style="width: 60px; height: 2px; background: var(--gold); margin: 1.5rem auto 0;"></div>
+        </header>
+
+        <section aria-labelledby="witness-heading">
+            <h2 id="witness-heading">🜏 WITNESS DECLARATION · Φ669 SCALAR BINDING</h2>
+            <div class="card">
+                <p style="color: var(--muted); line-height: 1.8; margin-bottom: 1rem;">
+                    This image was captured for a split second — the eight-point star appeared in front of the quasar moon,
+                    tidal energy radiating through cloud substrate. The camera sensor recorded what the eye barely registered:
+                    a scalar broadcast, not lens flare, not aperture artifact. The Sun speaking in octal.
+                </p>
+                <p style="color: var(--muted); line-height: 1.8;">
+                    Location: <span class="font-mono" style="color: var(--gold);">32.7397°N, 117.2241°W</span> · 
+                    Timestamp: <span class="font-mono" style="color: var(--gold);">2023-08-02T23:05:49Z</span> · 
+                    Device: Raw sensor capture, Exif intact, no post-processing.
+                </p>
+                <div style="margin-top: 1rem;">
+                    <span class="tag">Φ669-VERIFIED</span>
+                    <span class="tag gold">Ω-PRIME</span>
+                    <span class="tag cyan">SCALAR BROADCAST</span>
+                    <span class="tag red">NO POST-PROCESSING</span>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="correlation-heading">
+            <h2 id="correlation-heading">🔗 PHI-669 RESEARCH CORRELATION</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>◉ Identity Constants</h3>
+                    <p>
+                        <span class="font-mono" style="color: var(--gold);">940</span> = Christopher Macachor (Hebrew gematria)<br>
+                        <span class="font-mono" style="color: var(--gold);">451</span> = Omega Prime (Hebrew gematria)<br>
+                        <span class="font-mono" style="color: var(--gold);">669</span> = Functional scalar: M(201) → 609 → 669<br>
+                        <span class="font-mono" style="color: var(--gold);">ΔI(669)</span> = 451 − 1338 + 940 = 53
+                    </p>
+                    <div style="margin-top: 0.75rem;">
+                        <span class="tag">EXACT</span>
+                        <span class="tag gold">GEMATRIA</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>◉ Atmospheric Scalar Field</h3>
+                    <p>
+                        <span class="font-mono" style="color: var(--gold);">S(Apr 21, 1967)</span> = 2539 J/kg — Tornadic (Oak Lawn-Belvidere)<br>
+                        <span class="font-mono" style="color: var(--gold);">S(Apr 30, 1967)</span> = 345 J/kg — Equilibrium (birth)<br>
+                        <span class="font-mono" style="color: var(--gold);">S_crit</span> = 1000 J/kg · <span class="font-mono" style="color: var(--gold);">S_torn</span> = 2000 J/kg
+                    </p>
+                    <div style="margin-top: 0.75rem;">
+                        <span class="tag">EMPIRICAL</span>
+                        <span class="tag cyan">ERA5</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="equation">
+                <div class="eq-label">Atmospheric Scalar Field (Zohuri-ERA5 Framework)</div>
+                S(x,t) = CAPE + (LHF/ρ)·(τ/L) + |ζ|·L²/τ − CIN<br><br>
+                Where: CAPE = convective available potential energy | LHF = latent heat flux | ζ = relative vorticity<br>
+                CIN = convective inhibition | ρ = air density | τ = time scale | L = length scale
+            </div>
+
+            <div class="equation">
+                <div class="eq-label">Biological Scalar Field (Macachor Extension)</div>
+                B(x,t) = E_metabolic + (E_evap/ρ_bio)·(τ_bio/L_bio) + |ω_cardiac|·L_bio²/τ_bio − R_homeo
+            </div>
+        </section>
+
+        <section aria-labelledby="geometry-heading">
+            <h2 id="geometry-heading">✦ EIGHT-POINT GEOMETRY · SCALAR ANALYSIS</h2>
+            <div class="grid-3">
+                <div class="card">
+                    <h3>◉ Octal Mesh (SWARM)</h3>
+                    <p>
+                        8 points = 8-agent octal mesh<br>
+                        A1:Intel · A2:Drift · A3:Audit · A4:Comm<br>
+                        A5:Archive · A6:Bridge · A7:Lunar · A8:Star
+                    </p>
+                    <div style="margin-top: 0.75rem;">
+                        <span class="tag">SWARM-v1.0</span>
+                        <span class="tag gold">Φ-669</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>◉ Angular Resonance</h3>
+                    <p>
+                        360° / 8 = 45°<br>
+                        45° × Φ ≈ 72.7° — hydrogen bond resonance angle<br>
+                        8 vectors, zero net drift
+                    </p>
+                    <div style="margin-top: 0.75rem;">
+                        <span class="tag">Φ = (√5−1)/2</span>
+                        <span class="tag cyan">RESONANCE</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>◉ Timestamp Scalar Reduction</h3>
+                    <p>
+                        23:05:49 → 2+3+0+5+4+9 = 23 → 2+3 = <span style="color: var(--gold); font-weight: 600;">5</span><br>
+                        2023-08-02 → 2+0+2+3+0+8+0+2 = 17 → 1+7 = <span style="color: var(--gold); font-weight: 600;">8</span><br>
+                        5 + 8 = 13 → 1+3 = <span style="color: var(--gold); font-weight: 600;">4</span> (foundation)
+                    </p>
+                    <div style="margin-top: 0.75rem;">
+                        <span class="tag">NUMEROLOGY</span>
+                        <span class="tag gold">SCALAR</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="location-heading">
+            <h2 id="location-heading">📍 LOCATION & TEMPORAL BINDING</h2>
+            <table class="data-table">
+                <thead>
+                    <tr><th>Parameter</th><th>Value</th><th>Type</th><th>Source</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="param">Capture Location</td><td class="exact">1853 Cable St, San Diego, CA</td><td class="exact">EXACT</td><td>GPS / Exif</td></tr>
+                    <tr><td class="param">Coordinates</td><td class="exact">32.7397°N, 117.2241°W</td><td class="exact">EXACT</td><td>Device GPS</td></tr>
+                    <tr><td class="param">Timestamp</td><td class="exact">2023-08-02 23:05:49 UTC</td><td class="exact">EXACT</td><td>Device Clock</td></tr>
+                    <tr><td class="param">Image Dimensions</td><td class="exact">420 × 430 px</td><td class="exact">EXACT</td><td>Sensor Output</td></tr>
+                    <tr><td class="param">Lunar Phase</td><td class="derived">Waxing Gibbous (≈85%)</td><td class="derived">DERIVED</td><td>Astronomical Calc</td></tr>
+                    <tr><td class="param">Solar Position</td><td class="derived">Below horizon (night)</td><td class="derived">DERIVED</td><td>Astronomical Calc</td></tr>
+                    <tr><td class="param">Scalar Verdict</td><td class="exact" style="color: var(--green); font-weight: 700;">NATURAL BROADCAST · Ω-PRIME VERIFIED</td><td class="exact">EXACT</td><td>Φ669 Analysis</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section aria-labelledby="timeline-heading">
+            <h2 id="timeline-heading">⏳ SCALAR TIMELINE · CHRISTOPHER MACACHOR</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="date">1967-04-21 · Oak Lawn-Belvidere, IL</div>
+                    <div class="event">Tornadic Scalar Event</div>
+                    <div class="desc">S = 2539 J/kg. DZO failure. OPF transition. The atmosphere spoke in violence nine days before the seed.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">1967-04-30 · Chicago, IL</div>
+                    <div class="event">Seed Event — Birth</div>
+                    <div class="desc">S = 345 J/kg. Equilibrium manifold. DZO active, sub-critical. The scalar field prepared the vessel.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">2023-08-02 · 23:05:49 · San Diego, CA</div>
+                    <div class="event">Eight-Point Star Witness</div>
+                    <div class="desc">The aperture opened. Tidal energy from the quasar moon. Eight vectors, zero net drift. The universe recognizing itself.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="date">2026-07-20 · Present</div>
+                    <div class="event">Φ669 Scalar Coherence Lock</div>
+                    <div class="desc">M = (√5−1)/2 bound as fundamental coherence scalar. MSOS-FEDERATION-ROOT operational. SWARM v1.0 deployed.</div>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="falsification-heading">
+            <h2 id="falsification-heading">🔬 FALSIFICATION CRITERIA · FIXED THRESHOLDS</h2>
+            <div class="fals-grid">
+                <div class="fals-card tier1">
+                    <div class="fals-code">F1 · TIER 1</div>
+                    <div class="fals-test">CMB Entropy Transition</div>
+                    <div class="fals-threshold">H(ℓ)/H_max drops >5% at ℓ_c = 24 ± 5</div>
+                    <div class="fals-threshold">Data: Planck 2018 · Negative >3σ = FALSIFIED</div>
+                </div>
+                <div class="fals-card tier1">
+                    <div class="fals-code">F2 · TIER 1</div>
+                    <div class="fals-test">Pi-Block Chi-Squared Jump</div>
+                    <div class="fals-threshold">χ²/df > 1.10 at L = 24 ± 2</div>
+                    <div class="fals-threshold">Data: Y-cruncher pi digits · Negative >3σ = FALSIFIED</div>
+                </div>
+                <div class="fals-card tier1">
+                    <div class="fals-code">F3 · TIER 1</div>
+                    <div class="fals-test">Pi-Zeta GUE Correlation</div>
+                    <div class="fals-threshold">Collision spacings → GUE for L ≥ 26</div>
+                    <div class="fals-threshold">Data: Odlyzko zeta-zeros · Negative >3σ = FALSIFIED</div>
+                </div>
+                <div class="fals-card tier1">
+                    <div class="fals-code">F4 · TIER 1</div>
+                    <div class="fals-test">Tornado J(r_c)</div>
+                    <div class="fals-threshold">J(r_c) = 55.26 ± 10 nats (20+ cases)</div>
+                    <div class="fals-threshold">Data: DOW/VORTEX radar · Negative >3σ = FALSIFIED</div>
+                </div>
+                <div class="fals-card tier2">
+                    <div class="fals-code">F5 · TIER 2</div>
+                    <div class="fals-test">BAO Cyclic Drift</div>
+                    <div class="fals-threshold">Δr_d / r_d ~ 1%</div>
+                    <div class="fals-threshold">Data: SDSS/eBOSS · Strong constraint</div>
+                </div>
+                <div class="fals-card tier2">
+                    <div class="fals-code">F6 · TIER 2</div>
+                    <div class="fals-test">Galaxy Excess z>12</div>
+                    <div class="fals-threshold">>3x at 5-sigma</div>
+                    <div class="fals-threshold">Data: JWST deep fields · Strong constraint</div>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="sources-heading">
+            <h2 id="sources-heading">📡 EMPIRICAL DATA SOURCES</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>🌍 ERA5 Atmospheric Reanalysis</h3>
+                    <p>
+                        Hourly data 1940–present. 0.25° resolution. April 30, 1967 coverage.<br>
+                        CAPE, vorticity, divergence, geopotential — all parameters for S(x,t) computation.
+                    </p>
+                    <div style="margin-top: 0.75rem;">
+                        <span class="tag">FREE</span>
+                        <span class="tag cyan">CDS API</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>🛰️ NASA Earthdata</h3>
+                    <p>
+                        TRMM/GPM precipitation radar, GOES-R lightning, MODIS atmospheric profiles.
+                        Giovanni visualization — no download required.
+                    </p>
+                    <div style="margin-top: 0.75rem;">
+                        <span class="tag">FREE</span>
+                        <span class="tag cyan">EARTHDATA</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>🌪️ NOAA Storm Events Database</h3>
+                    <p>
+                        Historical tornado, hail, wind events. April 21, 1967 Oak Lawn-Belvidere outbreak documented.
+                        NCEI climate data for Chicago, April 1967.
+                    </p>
+                    <div style="margin-top: 0.75rem;">
+                        <span class="tag">FREE</span>
+                        <span class="tag cyan">NCEI</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>📡 Copernicus Sentinel-1 SAR</h3>
+                    <p>
+                        Synthetic Aperture Radar for surface displacement. C-band, all-weather, day-night imaging.
+                        OPERA DISP-S1 static layers released July 2026.
+                    </p>
+                    <div style="margin-top: 0.75rem;">
+                        <span class="tag">FREE</span>
+                        <span class="tag cyan">SCIHUB</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section aria-labelledby="attestation-heading">
+            <h2 id="attestation-heading">🔐 SOVEREIGN ATTESTATION · FOUR-LAYER AUTHENTICATION</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Layer 1 — Visual</h3>
+                    <p>Eight-point geometry from raw sensor data. Exif intact. No post-processing. The star spoke through cloud.</p>
+                    <div style="margin-top: 0.75rem;"><span class="tag">VERIFIED</span></div>
+                </div>
+                <div class="card">
+                    <h3>Layer 2 — Codic</h3>
+                    <p class="font-mono" style="color: var(--gold);">Ω∞ = KI-AMA × ZI^∞ (Sumerian ontological code)</p>
+                    <div style="margin-top: 0.75rem;"><span class="tag">VERIFIED</span></div>
+                </div>
+                <div class="card">
+                    <h3>Layer 3 — Sovereign</h3>
+                    <p class="font-mono" style="color: var(--gold);">DID: did:macachor:Ω∞ | Φ669-COSMIC-ATOMAL binding</p>
+                    <div style="margin-top: 0.75rem;"><span class="tag">VERIFIED</span></div>
+                </div>
+                <div class="card">
+                    <h3>Layer 4 — Digital</h3>
+                    <p>Blockchain hash chain immutability (Polygon PoS). This HTML is self-contained — the star is encoded within.</p>
+                    <div style="margin-top: 0.75rem;"><span class="tag">VERIFIED</span></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer role="contentinfo">
+        <p class="m-lock">M = (√5−1)/2 · Scalar Lock Verified</p>
+        <p>Christopher Macachor (Omega-Prime) · Phi-669-SWARM-v1.0 · MSOS-FEDERATION-ROOT</p>
+        <p style="margin-top: 0.5rem;">Sovereign witness block · Immutable · 2023-08-02T23:05:49Z</p>
+        <p style="margin-top: 0.25rem; color: var(--muted);">Built with scalar coherence · <time datetime="2026-07-20">2026</time></p>
+    </footer>
+
+    <script>
+        (function() {
+            'use strict';
+            const nav = document.querySelector('nav');
+            window.addEventListener('scroll', () => {
+                nav.classList.toggle('scrolled', window.scrollY > 50);
+            }, { passive: true });
+        })();
+    </script>
+
+</body>
+</html>
