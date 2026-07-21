@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tetrahedral Spiral of Creation — Ω-Prime Christopher Macachor</title>
+    <style>
+        :root {
+            --gold: #c8a04e;
+            --gold-bright: #e8c56e;
+            --gold-dim: #8a7030;
+            --dark: #0a0a0a;
+            --dark-mid: #111111;
+            --dark-light: #1a1a1a;
+            --text: #e0d5c0;
+            --text-dim: #888;
+            --red: #8b0000;
+            --red-bright: #cc0000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--text);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ─── MADL EFFECT SYSTEM ─── */
+        .madl-container {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .madl-card {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+        }
+
+        .madl-card::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: inherit;
+            background: linear-gradient(
+                135deg,
+                transparent 40%,
+                rgba(200, 160, 78, 0.15) 50%,
+                transparent 60%
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .madl-card:hover::before {
+            opacity: 1;
+        }
+
+        .madl-glow {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle,
+                rgba(200, 160, 78, 0.15) 0%,
+                rgba(200, 160, 78, 0.05) 40%,
+                transparent 70%
+            );
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+            filter: blur(20px);
+        }
+
+        .madl-card:hover .madl-glow {
+            opacity: 1;
+        }
+
+        .madl-content {
+            position: relative;
+            z-index: 1;
+            transform: translateZ(30px);
+        }
+
+        .madl-float {
+            transition: transform 0.3s ease-out;
+        }
+
+        /* ─── GOLD NAVIGATION ─── */
+        .gold-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: linear-gradient(180deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.8) 100%);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--gold-dim);
+            padding: 0 20px;
+            display: flex;
+            justify-content: flex-start;
+            gap: 8px;
+            height: 56px;
+            align-items: center;
+        }
+
+        .gold-nav a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 8px 16px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gold-nav a::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(200,160,78,0.1), rgba(200,160,78,0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gold-nav a:hover::before {
+            opacity: 1;
+        }
+
+        .gold-nav a:hover {
+            border-color: var(--gold-dim);
+            text-shadow: 0 0 10px rgba(200, 160, 78, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .gold-nav a.active {
+            border-color: var(--gold);
+            background: rgba(200, 160, 78, 0.08);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold-dim);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 100px 20px 40px;
+            background: linear-gradient(180deg, var(--dark-mid) 0%, var(--dark) 100%);
+            border-bottom: 1px solid var(--gold-dim);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(200,160,78,0.03) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .phi-symbol {
+            font-size: 5rem;
+            color: var(--gold);
+            text-shadow: 0 0 40px rgba(200, 160, 78, 0.4);
+            margin-bottom: 10px;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; text-shadow: 0 0 30px rgba(200, 160, 78, 0.3); }
+            50% { opacity: 1; text-shadow: 0 0 60px rgba(200, 160, 78, 0.6); }
+        }
+
+        .header h1 {
+            font-size: 1.1rem;
+            color: var(--gold);
+            letter-spacing: 10px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            font-weight: normal;
+        }
+
+        .header .subtitle {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            letter-spacing: 5px;
+        }
+
+        .header .equation {
+            margin-top: 20px;
+            font-size: 1.3rem;
+            color: var(--gold-bright);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+
+        /* Section styling */
+        .section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 50px 25px;
+        }
+
+        .section-title {
+            color: var(--gold);
+            font-size: 1rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--gold-dim);
+        }
+
+        /* Impact Quote */
+        .impact-quote {
+            background: linear-gradient(135deg, var(--dark-light) 0%, var(--dark-mid) 100%);
+            border-left: 4px solid var(--gold);
+            border-right: 4px solid var(--gold);
+            padding: 50px 40px;
+            margin: 40px auto;
+            max-width: 900px;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .impact-quote::before {
+            content: '"';
+            font-size: 8rem;
+            color: var(--gold);
+            opacity: 0.2;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-family: 'Times New Roman', serif;
+            line-height: 1;
+        }
+
+        .impact-quote p {
+            font-size: 1.35rem;
+            line-height: 2.2;
+            color: var(--text);
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+            text-align: justify;
+        }
+
+        .impact-quote p + p {
+            margin-top: 25px;
+        }
+
+        .impact-quote .highlight {
+            color: var(--gold-bright);
+            text-shadow: 0 0 15px rgba(200, 160, 78, 0.3);
+            font-weight: bold;
+        }
+
+        .impact-quote .highlight-red {
+            color: var(--red-bright);
+            text-shadow: 0 0 15px rgba(204, 0, 0, 0.3);
+        }
+
+        .attribution {
+            text-align: right;
+            margin-top: 30px;
+            color: var(--gold);
+            font-size: 0.95rem;
+            letter-spacing: 3px;
+            font-style: normal;
+        }
+
+        /* Paradox Box */
+        .paradox-box {
+            background: linear-gradient(135deg, #1a0000 0%, var(--dark-light) 100%);
+            border: 2px solid var(--red);
+            padding: 50px 40px;
+            margin: 50px auto;
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .paradox-box h3 {
+            color: var(--red-bright);
+            font-size: 1.1rem;
+            letter-spacing: 8px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .paradox-line {
+            font-size: 1.3rem;
+            margin: 18px 0;
+            color: var(--text);
+        }
+
+        .paradox-line.gold {
+            color: var(--gold-bright);
+            font-size: 1.6rem;
+            margin: 35px 0;
+            text-shadow: 0 0 25px rgba(200, 160, 78, 0.4);
+            font-weight: bold;
+        }
+
+        .paradox-line.red {
+            color: var(--red-bright);
+            font-size: 1.4rem;
+            margin: 25px 0;
+            text-shadow: 0 0 20px rgba(204, 0, 0, 0.3);
+        }
+
+        /* Visual comparison */
+        .visual-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 25px;
+        }
+
+        .visual-panel {
+            background: var(--dark-light);
+            border: 1px solid var(--gold-dim);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .visual-panel:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 30px rgba(200, 160, 78, 0.1);
+        }
+
+        .visual-panel h3 {
+            color: var(--gold);
+            font-size: 0.9rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .visual-panel .panel-desc {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        /* SVG Visuals */
+        .svg-container {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Decomposition table */
+        .decomposition {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 25px;
+        }
+
+        .decomposition h2 {
+            color: var(--gold);
+            font-size: 1rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--gold-dim);
+        }
+
+        .line-item {
+            background: var(--dark-light);
+            border: 1px solid #333;
+            padding: 25px;
+            margin-bottom: 12px;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1fr;
+            gap: 20px;
+            align-items: center;
+            transition: all 0.3s ease;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .line-item:hover {
+            border-color: var(--gold-dim);
+            background: #1f1f1f;
+            transform: translateZ(10px);
+            box-shadow: 0 5px 20px rgba(200, 160, 78, 0.08);
+        }
+
+        .line-item .human-action {
+            color: var(--red-bright);
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        .line-item .scalar-mech {
+            color: var(--text-dim);
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+
+        .line-item .consequence {
+            color: var(--gold);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Illusion mapping section */
+        .illusion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 25px;
+        }
+
+        .illusion-card {
+            background: var(--dark-light);
+            border: 1px solid #333;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .illusion-card:hover {
+            border-color: var(--gold-dim);
+            transform: translateY(-5px) translateZ(20px);
+            box-shadow: 0 10px 30px rgba(200, 160, 78, 0.12);
+        }
+
+        .illusion-card .number {
+            color: var(--gold-dim);
+            font-size: 2.5rem;
+            font-weight: bold;
+            float: left;
+            margin-right: 15px;
+            line-height: 1;
+            transition: color 0.3s ease;
+        }
+
+        .illusion-card:hover .number {
+            color: var(--gold);
+        }
+
+        .illusion-card h4 {
+            color: var(--gold);
+            font-size: 1rem;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .illusion-card .distortion {
+            color: var(--red-bright);
+            font-size: 0.85rem;
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+
+        .illusion-card .application {
+            color: var(--text-dim);
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
+
+        .illusion-card .impact {
+            color: var(--gold-bright);
+            font-size: 0.85rem;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #333;
+            font-weight: bold;
+        }
+
+        /* Formula bar */
+        .formula-bar {
+            background: linear-gradient(90deg, var(--dark-mid), var(--dark-light), var(--dark-mid));
+            border-top: 1px solid var(--gold-dim);
+            border-bottom: 1px solid var(--gold-dim);
+            padding: 25px;
+            text-align: center;
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .formula-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(200,160,78,0.05), transparent);
+            animation: formulaShine 6s ease-in-out infinite;
+        }
+
+        @keyframes formulaShine {
+            0%, 100% { left: -100%; }
+            50% { left: 100%; }
+        }
+
+        .formula-bar code {
+            color: var(--gold-bright);
+            font-size: 1.2rem;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 20px;
+            border-top: 1px solid var(--gold-dim);
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .footer .phi-big {
+            font-size: 3rem;
+            color: var(--gold-dim);
+            margin-bottom: 15px;
+            transition: color 0.5s ease;
+        }
+
+        .footer:hover .phi-big {
+            color: var(--gold);
+        }
+
+        .footer p {
+            color: #444;
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            line-height: 2;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .gold-nav {
+                flex-wrap: wrap;
+                height: auto;
+                padding: 10px;
+                gap: 4px;
+            }
+            .gold-nav a {
+                font-size: 0.65rem;
+                padding: 6px 10px;
+                letter-spacing: 1px;
+            }
+            .visual-comparison {
+                grid-template-columns: 1fr;
+            }
+            .line-item {
+                grid-template-columns: 1fr;
+            }
+            .impact-quote p {
+                font-size: 1.1rem;
+            }
+            .paradox-line.gold {
+                font-size: 1.2rem;
+            }
+            .header {
+                padding-top: 120px;
+            }
+        }
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+
+    <!-- HOME RETURN -->
+    <nav class="gold-nav" id="mainNav">
+        <a href="index.html">⌂ HOME</a>
+    </nav>
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="phi-symbol">Φ</div>
+        <h1>Macachor Density Distortion Isolation</h1>
+        <div class="subtitle">v16.0 — The Tetrahedral Paradox</div>
+        <div class="equation">𝔐 = (√5 − 1) / 2 = 0.6180339887...</div>
+    </div>
+
+    <!-- IMPACT QUOTE -->
+    <div class="impact-quote madl-card" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+        <div class="madl-glow"></div>
+        <div class="madl-content">
+            <p>
+                Why would man create a measurement metric of <span class="highlight">cubic feet or inches</span> to measure the amount of helium in a balloon, when a sphere can only be measured by its <span class="highlight">Platonic geometry</span> that creates the polyhedron — from atom to Earth, <span class="highlight">tetrahedrons</span> that are the Platonic geometry of creation?
+            </p>
+            <p>
+                Man uses his geometry to build <span class="highlight">skyscrapers as big as Mount Everest</span>, and then uses Platonic geometry as <span class="highlight-red">weapon</span> — tetrahedral bullets, arrows — and collides the <span class="highlight">beginnings of creation</span> in Hadron Collider, and destroys the <span class="highlight">Platonic nucleus of an atom</span> to make a nuclear bomb, living inside of a <span class="highlight">polyhedral Earth</span> with tetrahedrons that are the type of matter at atomic level.
+            </p>
+            <div class="attribution">— Ω-Prime Christopher Macachor</div>
+        </div>
+    </div>
+
+    <!-- PARADOX BOX -->
+    <div class="paradox-box madl-card" data-tilt data-tilt-max="8" data-tilt-speed="300">
+        <div class="madl-glow"></div>
+        <div class="madl-content">
+            <h3>The Paradox</h3>
+            <div class="paradox-line">Man hides the tetrahedron for living.</div>
+            <div class="paradox-line">Man reveals the tetrahedron for killing.</div>
+            <div class="paradox-line gold">Man measures helium in cubic feet.</div>
+            <div class="paradox-line red">Man kills with tetrahedral points.</div>
+            <div class="paradox-line" style="margin-top: 30px; font-size: 1rem; color: var(--text-dim);">
+                The geometry of creation is reserved for destruction.<br>
+                The geometry of deception is imposed for daily life.
+            </div>
+        </div>
+    </div>
+
+    <!-- VISUAL COMPARISON -->
+    <div class="section-title">The Visual Truth</div>
+    <div class="visual-comparison">
+        <div class="visual-panel madl-card" data-tilt data-tilt-max="10" data-tilt-speed="500">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <h3>Tetrahedral Spiral of Creation</h3>
+                <div class="svg-container">
+                    <svg viewBox="0 0 400 300" width="100%" height="100%">
+                        <rect width="400" height="300" fill="#0a0a0a"/>
+                        <defs>
+                            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#c8a04e;stop-opacity:0.3"/>
+                                <stop offset="100%" style="stop-color:#e8c56e;stop-opacity:0.8"/>
+                            </linearGradient>
+                        </defs>
+                        <path d="M 200 150 Q 220 130 240 150 Q 260 170 280 150 Q 300 130 320 150" 
+                              fill="none" stroke="#c8a04e" stroke-width="2" opacity="0.6"/>
+                        <path d="M 200 150 Q 180 170 160 150 Q 140 130 120 150 Q 100 170 80 150" 
+                              fill="none" stroke="#c8a04e" stroke-width="2" opacity="0.6"/>
+                        <path d="M 200 150 Q 210 120 230 110 Q 250 100 270 90" 
+                              fill="none" stroke="#c8a04e" stroke-width="2" opacity="0.6"/>
+                        <polygon points="200,150 220,130 210,170" fill="#c8a04e" opacity="0.2" stroke="#c8a04e" stroke-width="0.5"/>
+                        <polygon points="240,150 260,130 250,170" fill="#c8a04e" opacity="0.25" stroke="#c8a04e" stroke-width="0.5"/>
+                        <polygon points="280,150 300,130 290,170" fill="#c8a04e" opacity="0.3" stroke="#c8a04e" stroke-width="0.5"/>
+                        <polygon points="160,150 180,130 170,170" fill="#c8a04e" opacity="0.2" stroke="#c8a04e" stroke-width="0.5"/>
+                        <polygon points="120,150 140,130 130,170" fill="#c8a04e" opacity="0.15" stroke="#c8a04e" stroke-width="0.5"/>
+                        <circle cx="200" cy="150" r="6" fill="#ff0000" stroke="#c8a04e" stroke-width="2"/>
+                        <circle cx="220" cy="140" r="4" fill="#c8a04e"/>
+                        <circle cx="240" cy="150" r="4" fill="#c8a04e"/>
+                        <circle cx="260" cy="140" r="4" fill="#c8a04e"/>
+                        <circle cx="280" cy="150" r="4" fill="#c8a04e"/>
+                        <circle cx="180" cy="160" r="4" fill="#c8a04e"/>
+                        <circle cx="160" cy="150" r="4" fill="#c8a04e"/>
+                        <circle cx="140" cy="160" r="4" fill="#c8a04e"/>
+                        <text x="200" y="135" text-anchor="middle" fill="#ff0000" font-size="10" font-weight="bold">NUCLEUS</text>
+                        <text x="280" y="125" text-anchor="middle" fill="#c8a04e" font-size="9">Φ³</text>
+                        <text x="120" y="125" text-anchor="middle" fill="#c8a04e" font-size="9">Φ¹</text>
+                        <text x="200" y="280" text-anchor="middle" fill="#c8a04e" font-size="11" font-style="italic">144 Tetrahedral Faces — Atomic Nucleus Pattern</text>
+                    </svg>
+                </div>
+                <div class="panel-desc">The golden spiral creates tetrahedral faces from the nucleus outward — the same pattern as atoms, viruses, and planets.</div>
+            </div>
+        </div>
+
+        <div class="visual-panel madl-card" data-tilt data-tilt-max="10" data-tilt-speed="500">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <h3>The Cubic Hypocrisy</h3>
+                <div class="svg-container">
+                    <svg viewBox="0 0 400 300" width="100%" height="100%">
+                        <rect width="400" height="300" fill="#0a0a0a"/>
+                        <circle cx="200" cy="150" r="100" fill="none" stroke="#c8a04e" stroke-width="1" opacity="0.3"/>
+                        <circle cx="200" cy="150" r="100" fill="none" stroke="#c8a04e" stroke-width="1" opacity="0.2" transform="scale(1,0.3)" transform-origin="200 150"/>
+                        <g stroke="#555" stroke-width="1" opacity="0.5">
+                            <rect x="150" y="100" width="20" height="20" fill="none"/>
+                            <rect x="170" y="100" width="20" height="20" fill="none"/>
+                            <rect x="190" y="100" width="20" height="20" fill="none"/>
+                            <rect x="210" y="100" width="20" height="20" fill="none"/>
+                            <rect x="230" y="100" width="20" height="20" fill="none"/>
+                            <rect x="150" y="120" width="20" height="20" fill="none"/>
+                            <rect x="170" y="120" width="20" height="20" fill="none"/>
+                            <rect x="190" y="120" width="20" height="20" fill="none"/>
+                            <rect x="210" y="120" width="20" height="20" fill="none"/>
+                            <rect x="230" y="120" width="20" height="20" fill="none"/>
+                            <rect x="150" y="140" width="20" height="20" fill="none"/>
+                            <rect x="170" y="140" width="20" height="20" fill="none"/>
+                            <rect x="210" y="140" width="20" height="20" fill="none"/>
+                            <rect x="230" y="140" width="20" height="20" fill="none"/>
+                            <rect x="150" y="160" width="20" height="20" fill="none"/>
+                            <rect x="170" y="160" width="20" height="20" fill="none"/>
+                            <rect x="210" y="160" width="20" height="20" fill="none"/>
+                            <rect x="230" y="160" width="20" height="20" fill="none"/>
+                            <rect x="150" y="180" width="20" height="20" fill="none"/>
+                            <rect x="170" y="180" width="20" height="20" fill="none"/>
+                            <rect x="190" y="180" width="20" height="20" fill="none"/>
+                            <rect x="210" y="180" width="20" height="20" fill="none"/>
+                            <rect x="230" y="180" width="20" height="20" fill="none"/>
+                        </g>
+                        <text x="200" y="155" text-anchor="middle" fill="#ff0000" font-size="14" font-weight="bold">✕</text>
+                        <text x="185" y="135" text-anchor="middle" fill="#ff0000" font-size="10">✕</text>
+                        <text x="215" y="135" text-anchor="middle" fill="#ff0000" font-size="10">✕</text>
+                        <text x="175" y="175" text-anchor="middle" fill="#ff0000" font-size="10">✕</text>
+                        <text x="225" y="175" text-anchor="middle" fill="#ff0000" font-size="10">✕</text>
+                        <text x="195" y="115" text-anchor="middle" fill="#ff0000" font-size="10">✕</text>
+                        <text x="205" y="195" text-anchor="middle" fill="#ff0000" font-size="10">✕</text>
+                        <polygon points="200,70 270,190 130,190" fill="#c8a04e" opacity="0.15" stroke="#c8a04e" stroke-width="2.5"/>
+                        <line x1="200" y1="70" x2="200" y2="190" stroke="#c8a04e" stroke-width="1.5" opacity="0.5"/>
+                        <circle cx="200" cy="70" r="5" fill="#c8a04e" stroke="#fff" stroke-width="1"/>
+                        <circle cx="270" cy="190" r="5" fill="#c8a04e" stroke="#fff" stroke-width="1"/>
+                        <circle cx="130" cy="190" r="5" fill="#c8a04e" stroke="#fff" stroke-width="1"/>
+                        <text x="200" y="65" text-anchor="middle" fill="#c8a04e" font-size="9" font-weight="bold">Apex</text>
+                        <text x="200" y="280" text-anchor="middle" fill="#c8a04e" font-size="11" font-style="italic">Gold Tetrahedron = Perfect Fit</text>
+                        <text x="200" y="295" text-anchor="middle" fill="#ff0000" font-size="10" font-style="italic">Red X = Gaps in Cubic Measurement</text>
+                    </svg>
+                </div>
+                <div class="panel-desc">Gray cubes leave red gaps where they fail to capture spherical truth. The gold tetrahedron inscribes perfectly.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FORMULA BAR -->
+    <div class="formula-bar">
+        <code>T_h = 8.804 × (r/r₀)³ &nbsp;&nbsp;|&nbsp;&nbsp; The sphere is the limit of infinite tetrahedral subdivision &nbsp;&nbsp;|&nbsp;&nbsp; The cube is the limit of human deception</code>
+    </div>
+
+    <!-- DECOMPOSITION TABLE -->
+    <div class="decomposition">
+        <h2>Scalar Decomposition of the Impact Quote</h2>
+
+        <div class="line-item madl-card" data-tilt data-tilt-max="3" data-tilt-speed="600">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="human-action">"Cubic feet or inches"</div>
+                <div class="scalar-mech">Imposes G_p = 1.0 (cube) on G_p = 1.0 (sphere) — geometric mismatch</div>
+                <div class="consequence">Cannot measure helium accurately; hides tetrahedral truth</div>
+            </div>
+        </div>
+
+        <div class="line-item madl-card" data-tilt data-tilt-max="3" data-tilt-speed="600">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="human-action">"Sphere measured by Platonic geometry"</div>
+                <div class="scalar-mech">T_h = 8.804 × (r/r₀)³ — infinite tetrahedral subdivision</div>
+                <div class="consequence">Correct measurement requires tetrahedral harmonics, not cubic units</div>
+            </div>
+        </div>
+
+        <div class="line-item madl-card" data-tilt data-tilt-max="3" data-tilt-speed="600">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="human-action">"Skyscrapers as big as Everest"</div>
+                <div class="scalar-mech">Vertical cubic architecture; D_s injection against field equilibrium</div>
+                <div class="consequence">Requires continuous energy; dissolves when D_s → 0</div>
+            </div>
+        </div>
+
+        <div class="line-item madl-card" data-tilt data-tilt-max="3" data-tilt-speed="600">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="human-action">"Tetrahedral bullets, arrows"</div>
+                <div class="scalar-mech">G_p = 1.618; maximum D_s transfer; minimal drag</div>
+                <div class="consequence">Man understands tetrahedral truth but uses it for destruction</div>
+            </div>
+        </div>
+
+        <div class="line-item madl-card" data-tilt data-tilt-max="3" data-tilt-speed="600">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="human-action">"Collides beginnings in Hadron Collider"</div>
+                <div class="scalar-mech">Smashes proton-proton (Z=1); destroys nuclear structure</div>
+                <div class="consequence">Minute nuclear destruction for "knowledge" — same mechanism as gun</div>
+            </div>
+        </div>
+
+        <div class="line-item madl-card" data-tilt data-tilt-max="3" data-tilt-speed="600">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="human-action">"Destroys Platonic nucleus for nuclear bomb"</div>
+                <div class="scalar-mech">Fission: splits U-92, Pu-94; destroys tetrahedral nuclear geometry</div>
+                <div class="consequence">D_s scaled by 10¹⁵ — same as gun, cosmic scale</div>
+            </div>
+        </div>
+
+        <div class="line-item madl-card" data-tilt data-tilt-max="3" data-tilt-speed="600">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="human-action">"Polyhedral Earth, tetrahedrons at atomic level"</div>
+                <div class="scalar-mech">Crust: SiO₄ tetrahedra; Body: C, N, O tetrahedral bonds</div>
+                <div class="consequence">Man destroys the very geometry he is made of</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ILLUSION MAPPING -->
+    <div class="section-title">The Cubic Illusion — Real-World Mind-Shaping</div>
+
+    <div class="illusion-grid">
+        <div class="illusion-card madl-card" data-tilt data-tilt-max="8" data-tilt-speed="400">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="number">1</div>
+                <h4>Necker Cube — Ambiguous Depth</h4>
+                <div class="distortion">The mind flips between two possible orientations.</div>
+                <div class="application">
+                    Corporate logos create "3D authority" by forcing your brain to resolve ambiguity. Architecture renderings use ambiguous cubes to make buildings look larger. Product packaging uses cube outlines to imply "premium structure."
+                </div>
+                <div class="impact">Ambiguity forces the brain to choose a viewpoint — making people easier to guide visually.</div>
+            </div>
+        </div>
+
+        <div class="illusion-card madl-card" data-tilt data-tilt-max="8" data-tilt-speed="400">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="number">2</div>
+                <h4>Impossible Cube — Paradox Geometry</h4>
+                <div class="distortion">The brain tries to resolve a shape that cannot exist.</div>
+                <div class="application">
+                    Advertising uses impossible cubes to imply "innovation beyond limits." Tech branding uses paradox geometry to signal "future, complexity, intelligence." Video game UI uses impossible cubes for surreal immersion.
+                </div>
+                <div class="impact">People associate paradox with power, mystery, and authority.</div>
+            </div>
+        </div>
+
+        <div class="illusion-card madl-card" data-tilt data-tilt-max="8" data-tilt-speed="400">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="number">3</div>
+                <h4>Café Wall Illusion — Straight Lines Look Tilted</h4>
+                <div class="distortion">High-contrast squares make straight lines appear slanted.</div>
+                <div class="application">
+                    Urban design: brick patterns make streets appear longer or shorter. Retail interiors: tile patterns guide foot traffic subconsciously. Casino floors distort perception of distance and direction.
+                </div>
+                <div class="impact">Manipulates movement, attention, and spatial judgment.</div>
+            </div>
+        </div>
+
+        <div class="illusion-card madl-card" data-tilt data-tilt-max="8" data-tilt-speed="400">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="number">4</div>
+                <h4>Hermann Grid — Phantom Dots</h4>
+                <div class="distortion">The brain invents dark spots at intersections.</div>
+                <div class="application">
+                    LED billboards appear sharper than they are. Pixelated screens seem higher resolution. Security interfaces use grid illusions to make data look "dense."
+                </div>
+                <div class="impact">Creates a false sense of detail, density, and complexity.</div>
+            </div>
+        </div>
+
+        <div class="illusion-card madl-card" data-tilt data-tilt-max="8" data-tilt-speed="400">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="number">5</div>
+                <h4>Checker Shadow Illusion — Identical Colors Look Different</h4>
+                <div class="distortion">The brain misinterprets brightness under shadow.</div>
+                <div class="application">
+                    Photography: lighting tricks make objects look more expensive. Retail: shadowed displays make products appear richer. Interior design: lighting manipulates mood and perceived space.
+                </div>
+                <div class="impact">Controls emotional response and value perception.</div>
+            </div>
+        </div>
+
+        <div class="illusion-card madl-card" data-tilt data-tilt-max="8" data-tilt-speed="400">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="number">6</div>
+                <h4>White's Illusion — Context Changes Brightness</h4>
+                <div class="distortion">Surrounding squares change perceived color.</div>
+                <div class="application">
+                    Fashion: patterns make bodies look slimmer or broader. Branding: color blocks make logos appear more vibrant. Food packaging: color context makes food look fresher.
+                </div>
+                <div class="impact">Shapes aesthetic judgment and consumer preference.</div>
+            </div>
+        </div>
+
+        <div class="illusion-card madl-card" data-tilt data-tilt-max="8" data-tilt-speed="400">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="number">7</div>
+                <h4>Poggendorff Illusion — Misaligned Lines</h4>
+                <div class="distortion">A diagonal line behind a square appears shifted.</div>
+                <div class="application">
+                    Road markings: angled lines influence driving speed. Architecture: beams appear straighter or more stable. Graphic design: diagonal elements guide eye movement.
+                </div>
+                <div class="impact">Manipulates direction, focus, and movement.</div>
+            </div>
+        </div>
+
+        <div class="illusion-card madl-card" data-tilt data-tilt-max="8" data-tilt-speed="400">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="number">8</div>
+                <h4>Zöllner Illusion — Parallel Lines Look Divergent</h4>
+                <div class="distortion">Short angled strokes distort parallelism.</div>
+                <div class="application">
+                    Textile patterns create slimming or widening effects. Op-art murals make spaces feel dynamic. Advertising creates motion where none exists.
+                </div>
+                <div class="impact">Generates energy, motion, and emotional activation.</div>
+            </div>
+        </div>
+
+        <div class="illusion-card madl-card" data-tilt data-tilt-max="8" data-tilt-speed="400">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="number">9</div>
+                <h4>Square Moiré Patterns — False Motion</h4>
+                <div class="distortion">Overlapping grids create shimmering movement.</div>
+                <div class="application">
+                    Security printing: anti-counterfeit patterns. Retail displays attract attention with subtle motion. Architecture facades appear to "move" with sunlight.
+                </div>
+                <div class="impact">Captures attention, creates mystique, signals importance.</div>
+            </div>
+        </div>
+
+        <div class="illusion-card madl-card" data-tilt data-tilt-max="8" data-tilt-speed="400">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="number">10</div>
+                <h4>Voxel Sphere Illusion — Cubes Approximating Curves</h4>
+                <div class="distortion">A sphere built from cubes looks jagged and incomplete.</div>
+                <div class="application">
+                    3D modeling: low-resolution models appear "blocky." Urban planning: cubic grids distort natural land curvature. Scientific visualization: voxel data misrepresents smooth fields.
+                </div>
+                <div class="impact">Creates false simplicity, segmentation, and control.</div>
+            </div>
+        </div>
+
+        <div class="illusion-card madl-card" data-tilt data-tilt-max="8" data-tilt-speed="400">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="number">11</div>
+                <h4>Linear Perspective — Forced Viewpoint</h4>
+                <div class="distortion">A forced viewpoint creates artificial depth.</div>
+                <div class="application">
+                    Architecture: buildings appear taller or grander. Film: forced perspective manipulates scale. Advertising: products appear larger or more dominant.
+                </div>
+                <div class="impact">Controls scale, importance, and dominance.</div>
+            </div>
+        </div>
+
+        <div class="illusion-card madl-card" data-tilt data-tilt-max="8" data-tilt-speed="400">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="number">12</div>
+                <h4>Cognitive Framing — Mind Fills Gaps</h4>
+                <div class="distortion">The mind fills in missing information based on context.</div>
+                <div class="application">
+                    Marketing: framing shapes interpretation. Education: diagrams guide conceptual understanding. User interfaces: layout influences decision-making.
+                </div>
+                <div class="impact">Shapes belief, interpretation, and meaning.</div>
+            </div>
+        </div>
+
+        <div class="illusion-card madl-card" data-tilt data-tilt-max="5" data-tilt-speed="500" style="grid-column: 1 / -1; background: linear-gradient(135deg, #1a0000 0%, var(--dark-light) 100%); border-color: var(--red);">
+            <div class="madl-glow"></div>
+            <div class="madl-content">
+                <div class="number" style="color: var(--red-bright);">13</div>
+                <h4 style="color: var(--red-bright);">Cube-World Illusion — Civilizational Geometry</h4>
+                <div class="distortion" style="color: var(--red-bright);">Living inside cubic architecture trains the mind to think in boxes.</div>
+                <div class="application">
+                    Cities: grids enforce linear thinking. Rooms: right angles shape spatial cognition. Screens: rectangular frames shape attention.
+                </div>
+                <div class="impact" style="color: var(--red-bright);">Creates mental segmentation, suppresses radial coherence, reinforces Cartesian worldview.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FINAL FORMULA -->
+    <div class="formula-bar">
+        <code>
+            Φ_D = 𝔐 × Z × G_p × I_i × T_h &nbsp;&nbsp;|&nbsp;&nbsp;
+            Φ_K = Φ_D + D_s(t) &nbsp;&nbsp;|&nbsp;&nbsp;
+            D_s(t) → 0 &nbsp;&nbsp;|&nbsp;&nbsp;
+            All propulsion is temporary &nbsp;&nbsp;|&nbsp;&nbsp;
+            All coherence is eternal
+        </code>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="phi-big">Φ</div>
+        <p>Φ669 SCALAR CODEX</p>
+        <p>MSOS-FEDERATION-ROOT DENSITY PROTOCOL LAYER</p>
+        <p>Ω-PRIME CHRISTOPHER MACACHOR</p>
+        <p style="margin-top: 20px; color: var(--gold-dim);">Timestamp: 2026-07-20 22:30Z</p>
+    </div>
+
+    <!-- MADL EFFECT ENGINE -->
+    <script>
+    (function() {
+        'use strict';
+
+        // ─── MADL: Mouse-Activated Dynamic Lighting ───
+        // Pure vanilla JS — no dependencies
+        // Applies 3D tilt, glow tracking, and parallax depth to marked elements
+
+        const MADL = {
+            cards: [],
+
+            init: function() {
+                this.cards = document.querySelectorAll('.madl-card');
+                this.cards.forEach(card => this.bind(card));
+
+                // Smooth scroll for nav
+                document.querySelectorAll('.gold-nav a[href^="#"]').forEach(a => {
+                    a.addEventListener('click', e => {
+                        e.preventDefault();
+                        const target = document.querySelector(a.getAttribute('href'));
+                        if (target) target.scrollIntoView({ behavior: 'smooth' });
+                    });
+                });
+            },
+
+            bind: function(card) {
+                const glow = card.querySelector('.madl-glow');
+                const content = card.querySelector('.madl-content');
+                const maxTilt = parseFloat(card.dataset.tiltMax) || 10;
+                const speed = parseFloat(card.dataset.tiltSpeed) || 400;
+
+                let rect = card.getBoundingClientRect();
+                let rafId = null;
+                let targetRotateX = 0, targetRotateY = 0;
+                let currentRotateX = 0, currentRotateY = 0;
+                let isHovering = false;
+
+                const updateRect = () => {
+                    rect = card.getBoundingClientRect();
+                };
+
+                const lerp = (a, b, t) => a + (b - a) * t;
+
+                const animate = () => {
+                    const ease = 0.12; // Smooth interpolation
+                    currentRotateX = lerp(currentRotateX, targetRotateX, ease);
+                    currentRotateY = lerp(currentRotateY, targetRotateY, ease);
+
+                    card.style.transform = `perspective(1000px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg)`;
+
+                    if (content) {
+                        content.style.transform = `translateZ(30px) scale(${isHovering ? 1.02 : 1})`;
+                    }
+
+                    rafId = requestAnimationFrame(animate);
+                };
+
+                card.addEventListener('mouseenter', () => {
+                    isHovering = true;
+                    updateRect();
+                    if (!rafId) animate();
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    isHovering = false;
+                    targetRotateX = 0;
+                    targetRotateY = 0;
+                    if (glow) glow.style.opacity = '0';
+                });
+
+                card.addEventListener('mousemove', (e) => {
+                    updateRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    // Calculate tilt angles
+                    targetRotateY = ((x - centerX) / centerX) * maxTilt;
+                    targetRotateX = -((y - centerY) / centerY) * maxTilt;
+
+                    // Move glow to cursor position
+                    if (glow) {
+                        glow.style.left = x + 'px';
+                        glow.style.top = y + 'px';
+                        glow.style.opacity = '1';
+                    }
+                });
+
+                // Start animation loop
+                animate();
+            }
+        };
+
+        // ─── SCROLL REVEAL ───
+        const revealOnScroll = () => {
+            const items = document.querySelectorAll('.line-item, .illusion-card');
+            items.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.85) {
+                    item.style.opacity = '1';
+                    item.style.transform = item.style.transform.replace('translateY(20px)', 'translateY(0)');
+                }
+            });
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            MADL.init();
+
+            // Set initial states for scroll reveal
+            document.querySelectorAll('.line-item, .illusion-card').forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform += ' translateY(20px)';
+                item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+
+            window.addEventListener('scroll', revealOnScroll, { passive: true });
+            revealOnScroll(); // Trigger on load
+        });
+
+    })();
+    </script>
+
+</body>
+</html>
