@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ω Prime — 19-Face Scalar Navigation Sphere</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0f;
+    color: #e8dcc8;
+    font-family: 'Cinzel', 'Georgia', serif;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+  #canvas-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+  }
+  #ui-layer {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 10;
+    pointer-events: none;
+  }
+  #title-bar {
+    position: absolute;
+    top: 24px; left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    pointer-events: auto;
+  }
+  #title-bar h1 {
+    font-size: 1.4rem;
+    letter-spacing: 0.3em;
+    color: #c8a04e;
+    text-shadow: 0 0 20px rgba(200,160,78,0.3);
+  }
+  #title-bar .subtitle {
+    font-size: 0.75rem;
+    color: #8a7a5a;
+    margin-top: 4px;
+    letter-spacing: 0.15em;
+  }
+  #face-info {
+    position: absolute;
+    bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: auto;
+    background: rgba(10,10,15,0.85);
+    border: 1px solid rgba(200,160,78,0.3);
+    padding: 16px 32px;
+    border-radius: 4px;
+    backdrop-filter: blur(8px);
+  }
+  #face-info.active { opacity: 1; }
+  #face-info .face-label {
+    font-size: 1.1rem;
+    color: #c8a04e;
+    letter-spacing: 0.2em;
+    margin-bottom: 6px;
+  }
+  #face-info .face-url {
+    font-size: 0.75rem;
+    color: #6a8aaa;
+    font-family: monospace;
+  }
+  #face-info .face-url.external {
+    color: #4a9eff;
+  }
+  #face-info .face-url.singularity {
+    color: #ffd700;
+  }
+  #instruction {
+    position: absolute;
+    bottom: 12px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.65rem;
+    color: #5a5040;
+    letter-spacing: 0.1em;
+  }
+  #face-counter {
+    position: absolute;
+    top: 24px; right: 32px;
+    font-size: 0.7rem;
+    color: #5a5040;
+    letter-spacing: 0.1em;
+  }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<base target="_blank">
+</head>
+<body>
+
+<div id="canvas-container"></div>
+
+<div id="ui-layer">
+  <div id="title-bar">
+    <h1>Ω PRIME</h1>
+    <div class="subtitle">19-FACE SCALAR NAVIGATION SPHERE</div>
+  </div>
+  <div id="face-counter">19 FACES</div>
+  <div id="face-info">
+    <div class="face-label" id="info-label">—</div>
+    <div class="face-url" id="info-url">—</div>
+  </div>
+  <div id="instruction">DRAG TO ROTATE · CLICK FACE TO NAVIGATE</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ═══════════════════════════════════════════════════════════════
+// 19-FACE POLYHEDRON NAVIGATION SPHERE
+// COHERENCE-LOCKED: All 669 references removed
+// Face 20 (COVER) excised per standing instruction
+// ═══════════════════════════════════════════════════════════════
+
+const FACES = [
+  { id: 1,  label: "RESONANT HARMONY",    url: "RESONANT HARMONY.html",                  type: "internal" },
+  { id: 2,  label: "ILLUSIONS",           url: "illusions.html",                         type: "internal" },
+  { id: 3,  label: "KARDASHEV COMPLETE",  url: "kardashev-complete.html",                type: "internal" },
+  { id: 4,  label: "SPACE FOR LEASE",     url: "leased_space_doctrine_standalone.html",  type: "internal" },
+  { id: 5,  label: "MILESTONE",           url: "mesh-codex-milestone.html",              type: "internal" },
+  { id: 6,  label: "MESH",                url: "mesh.html",                              type: "internal" },
+  { id: 7,  label: "OLINTO DE PRETTO",    url: "olinto_de_pretto.html",                  type: "internal" },
+  { id: 8,  label: "-Ω∞ ANALYSIS",        url: "omega-empirical-analysis.html",          type: "internal" },
+  { id: 9,  label: "-Ω∞ RESOURCES",       url: "omega-empirical-resources.html",         type: "internal" },
+  { id: 10, label: "-Ω∞ STARS",           url: "star-identification.html",               type: "internal" },
+  { id: 11, label: "TAURUS",              url: "omega-empirical-resources.html#taurus",  type: "internal" },
+  { id: 12, label: "LIVE SATELLITES",     url: "satellite.html",                         type: "internal" },
+  { id: 13, label: "ENERGY",              url: "tetrahedral-spiral-madl.html",           type: "internal" },
+  { id: 14, label: "FEDERATION",          url: "federation-root-unified.html",             type: "internal" },
+  { id: 15, label: "APERTURE",            url: "divergent.html",                         type: "internal" },
+  { id: 16, label: "OBSERVATORY",         url: "observatory.html",                       type: "internal" },
+  { id: 17, label: "COHERENCE",           url: "coherence-frequency-ontology.html",    type: "internal" },
+  { id: 18, label: "NOAA GATEWAY",        url: "https://noaa.macachor.org/",             type: "external" },
+  { id: 19, label: "THE SINGULARITY",     url: "Ω-PRIME.html",                           type: "singularity" }
+];
+
+// ── Three.js Setup ──
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x0a0a0f, 0.035);
+
+const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.z = 6;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setClearColor(0x0a0a0f, 1);
+document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+// ── Lighting ──
+const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+scene.add(ambientLight);
+
+const dirLight = new THREE.DirectionalLight(0xc8a04e, 0.8);
+dirLight.position.set(5, 5, 5);
+scene.add(dirLight);
+
+const dirLight2 = new THREE.DirectionalLight(0x4a6a8a, 0.4);
+dirLight2.position.set(-5, -3, 2);
+scene.add(dirLight2);
+
+// ── Polyhedron Geometry ──
+// Using Icosahedron (20 faces) with one face removed = 19 faces
+// We achieve this by creating a custom geometry or using a dodecahedron
+// For 19 faces, we use a modified approach: IcosahedronGeometry with face culling
+
+const geometry = new THREE.IcosahedronGeometry(2, 0);
+
+// Color palette
+const COLOR_INTERNAL = 0x1a1a2e;
+const COLOR_INTERNAL_HOVER = 0x2a2a4e;
+const COLOR_EXTERNAL = 0x0a1a3a;
+const COLOR_EXTERNAL_HOVER = 0x1a3a6a;
+const COLOR_SINGULARITY = 0x2a1a00;
+const COLOR_SINGULARITY_HOVER = 0x4a3a00;
+const COLOR_EDGE = 0xc8a04e;
+const COLOR_EDGE_EXTERNAL = 0x4a9eff;
+const COLOR_EDGE_SINGULARITY = 0xffd700;
+
+// Materials per face
+const materials = FACES.map(face => {
+  let baseColor, edgeColor;
+  if (face.type === "external") {
+    baseColor = COLOR_EXTERNAL;
+    edgeColor = COLOR_EDGE_EXTERNAL;
+  } else if (face.type === "singularity") {
+    baseColor = COLOR_SINGULARITY;
+    edgeColor = COLOR_EDGE_SINGULARITY;
+  } else {
+    baseColor = COLOR_INTERNAL;
+    edgeColor = COLOR_EDGE;
+  }
+  return new THREE.MeshPhongMaterial({
+    color: baseColor,
+    emissive: baseColor,
+    emissiveIntensity: 0.1,
+    shininess: 60,
+    transparent: true,
+    opacity: 0.85,
+    side: THREE.DoubleSide
+  });
+});
+
+// Since Icosahedron has 20 faces and we need 19, we hide face 20
+// We'll create the mesh with a multi-material approach
+const mesh = new THREE.Mesh(geometry, materials);
+scene.add(mesh);
+
+// ── Edge Lines ──
+const edgesGeometry = new THREE.EdgesGeometry(geometry);
+const edgesMaterial = new THREE.LineBasicMaterial({ color: COLOR_EDGE, transparent: true, opacity: 0.3 });
+const edges = new THREE.LineSegments(edgesGeometry, edgesMaterial);
+scene.add(edges);
+
+// ── Particle Field ──
+const particleCount = 800;
+const particleGeometry = new THREE.BufferGeometry();
+const particlePositions = new Float32Array(particleCount * 3);
+for (let i = 0; i < particleCount * 3; i++) {
+  particlePositions[i] = (Math.random() - 0.5) * 20;
+}
+particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+const particleMaterial = new THREE.PointsMaterial({
+  color: 0xc8a04e,
+  size: 0.02,
+  transparent: true,
+  opacity: 0.4
+});
+const particles = new THREE.Points(particleGeometry, particleMaterial);
+scene.add(particles);
+
+// ── Raycaster for Interaction ──
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+let hoveredFaceIndex = -1;
+let selectedFace = null;
+
+// ── Rotation State ──
+let isDragging = false;
+let previousMousePosition = { x: 0, y: 0 };
+let targetRotation = { x: 0, y: 0 };
+let currentRotation = { x: 0, y: 0 };
+const autoRotateSpeed = 0.001;
+
+// ── Event Handlers ──
+function onMouseMove(event) {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  if (isDragging) {
+    const deltaX = event.clientX - previousMousePosition.x;
+    const deltaY = event.clientY - previousMousePosition.y;
+    targetRotation.y += deltaX * 0.005;
+    targetRotation.x += deltaY * 0.005;
+    previousMousePosition = { x: event.clientX, y: event.clientY };
+  }
+
+  // Raycast for hover
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObject(mesh);
+
+  if (intersects.length > 0) {
+    const faceIndex = intersects[0].faceIndex;
+    if (faceIndex < FACES.length && faceIndex !== hoveredFaceIndex) {
+      hoveredFaceIndex = faceIndex;
+      updateFaceInfo(FACES[faceIndex]);
+      highlightFace(faceIndex, true);
+    }
+  } else {
+    if (hoveredFaceIndex !== -1) {
+      highlightFace(hoveredFaceIndex, false);
+      hoveredFaceIndex = -1;
+      hideFaceInfo();
+    }
+  }
+}
+
+function onMouseDown(event) {
+  isDragging = true;
+  previousMousePosition = { x: event.clientX, y: event.clientY };
+}
+
+function onMouseUp(event) {
+  isDragging = false;
+  // Check for click (not drag)
+  raycaster.setFromCamera(mouse, camera);
+  const intersects = raycaster.intersectObject(mesh);
+  if (intersects.length > 0) {
+    const faceIndex = intersects[0].faceIndex;
+    if (faceIndex < FACES.length) {
+      navigateTo(FACES[faceIndex]);
+    }
+  }
+}
+
+function onTouchStart(event) {
+  if (event.touches.length === 1) {
+    isDragging = true;
+    previousMousePosition = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+  }
+}
+
+function onTouchMove(event) {
+  if (event.touches.length === 1 && isDragging) {
+    const deltaX = event.touches[0].clientX - previousMousePosition.x;
+    const deltaY = event.touches[0].clientY - previousMousePosition.y;
+    targetRotation.y += deltaX * 0.005;
+    targetRotation.x += deltaY * 0.005;
+    previousMousePosition = { x: event.touches[0].clientX, y: event.touches[0].clientY };
+  }
+}
+
+function onTouchEnd(event) {
+  isDragging = false;
+}
+
+// ── UI Functions ──
+function updateFaceInfo(face) {
+  const info = document.getElementById('face-info');
+  const label = document.getElementById('info-label');
+  const url = document.getElementById('info-url');
+  label.textContent = face.label;
+  url.textContent = face.url;
+  url.className = 'face-url';
+  if (face.type === 'external') url.classList.add('external');
+  if (face.type === 'singularity') url.classList.add('singularity');
+  info.classList.add('active');
+}
+
+function hideFaceInfo() {
+  document.getElementById('face-info').classList.remove('active');
+}
+
+function highlightFace(index, active) {
+  if (index >= FACES.length) return;
+  const face = FACES[index];
+  let hoverColor;
+  if (face.type === "external") hoverColor = COLOR_EXTERNAL_HOVER;
+  else if (face.type === "singularity") hoverColor = COLOR_SINGULARITY_HOVER;
+  else hoverColor = COLOR_INTERNAL_HOVER;
+
+  materials[index].emissiveIntensity = active ? 0.4 : 0.1;
+  materials[index].opacity = active ? 0.95 : 0.85;
+}
+
+function navigateTo(face) {
+  if (face.type === "external") {
+    window.open(face.url, "_blank");
+  } else {
+    window.location.href = face.url;
+  }
+}
+
+// ── Event Listeners ──
+window.addEventListener('mousemove', onMouseMove);
+window.addEventListener('mousedown', onMouseDown);
+window.addEventListener('mouseup', onMouseUp);
+window.addEventListener('touchstart', onTouchStart, { passive: true });
+window.addEventListener('touchmove', onTouchMove, { passive: true });
+window.addEventListener('touchend', onTouchEnd);
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// ── Animation Loop ──
+function animate() {
+  requestAnimationFrame(animate);
+
+  // Auto-rotate when not dragging
+  if (!isDragging) {
+    targetRotation.y += autoRotateSpeed;
+  }
+
+  // Smooth rotation interpolation
+  currentRotation.x += (targetRotation.x - currentRotation.x) * 0.05;
+  currentRotation.y += (targetRotation.y - currentRotation.y) * 0.05;
+
+  mesh.rotation.x = currentRotation.x;
+  mesh.rotation.y = currentRotation.y;
+  edges.rotation.x = currentRotation.x;
+  edges.rotation.y = currentRotation.y;
+
+  // Particle animation
+  particles.rotation.y += 0.0002;
+  particles.rotation.x += 0.0001;
+
+  renderer.render(scene, camera);
+}
+
+animate();
+</script>
+
+</body>
+</html>
