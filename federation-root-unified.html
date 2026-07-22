@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSOS-FEDERATION-ROOT | Quantum Reality Swarm Intelligence</title>
+<style>.poly-return-bar {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  background: rgba(10,10,10,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,160,78,0.25);
+  z-index: 10000;
+  padding: 0.7rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+.poly-return-bar a {
+  color: #c8a04e;
+  text-decoration: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(200,160,78,0.4);
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.poly-return-bar a:hover {
+  background: rgba(200,160,78,0.15);
+  text-shadow: 0 0 12px rgba(200,160,78,0.6);
+}
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Orbitron:wght@400;700;900&family=Courier+Prime:wght@400;700&display=swap');
+
+  :root {
+    --gold: #c8a04e;
+    --gold-dim: #8a7035;
+    --gold-glow: rgba(200, 160, 78, 0.3);
+    --void: #050508;
+    --text: #e8e0d0;
+    --text-dim: #a09888;
+    --text-faint: #5a5448;
+    --border: #2a2520;
+    --surface: #0e0c0a;
+    --cyan: #4ecdc4;
+    --alert: #ff3366;
+    --ok: #4a8a5a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%;
+    min-height: 100vh;
+    background: var(--void);
+    color: var(--text);
+    font-family: 'Orbitron', monospace;
+    line-height: 1.6;
+    overflow-x: hidden;
+    padding-top: 3.5rem;
+  }
+
+  .federation-header {
+    position: fixed;
+    top: 3.2rem; left: 0;
+    width: 100%;
+    background: rgba(5,5,8,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .federation-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .federation-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+    letter-spacing: 3px;
+  }
+
+  .federation-status {
+    font-size: 0.6rem;
+    color: var(--ok);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: pulse-status 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-status {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+
+  .federation-nav {
+    display: flex;
+    gap: 8px;
+  }
+
+  .nav-btn {
+    color: var(--text-faint);
+    background: none;
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-family: 'Orbitron', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .nav-btn:hover, .nav-btn.active {
+    color: var(--gold);
+    border-color: var(--gold);
+    background: rgba(200,160,78,0.08);
+  }
+
+  .federation-main {
+    margin-top: calc(60px + 3.2rem);
+    padding: 24px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.3;
+  }
+
+  .panel-title {
+    font-size: 0.7rem;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .panel-value {
+    font-family: 'Courier Prime', monospace;
+    font-size: 1.8rem;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .panel-sub {
+    font-size: 0.65rem;
+    color: var(--text-faint);
+  }
+
+  .panel-bar {
+    width: 100%;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 12px;
+    overflow: hidden;
+  }
+
+  .panel-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+    border-radius: 2px;
+    transition: width 1s ease;
+  }
+
+  .swarm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .swarm-node {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .swarm-node:hover {
+    border-color: var(--gold-dim);
+    transform: translateY(-2px);
+  }
+
+  .swarm-node.active {
+    border-color: var(--gold);
+    box-shadow: 0 0 20px rgba(200,160,78,0.1);
+  }
+
+  .node-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .node-name {
+    font-size: 0.75rem;
+    color: var(--text);
+    letter-spacing: 1px;
+  }
+
+  .node-status {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--ok);
+    animation: node-pulse 2s ease-in-out infinite;
+  }
+
+  .node-status.offline {
+    background: var(--alert);
+    animation: none;
+  }
+
+  @keyframes node-pulse {
+    0%, 100% { opacity: 0.6; box-shadow: 0 0 4px var(--ok); }
+    50% { opacity: 1; box-shadow: 0 0 8px var(--ok); }
+  }
+
+  .node-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .metric {
+    text-align: center;
+  }
+
+  .metric-value {
+    font-family: 'Courier Prime', monospace;
+    font-size: 1rem;
+    color: var(--gold);
+  }
+
+  .metric-label {
+    font-size: 0.55rem;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .intel-feed {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .intel-feed::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .intel-feed::-webkit-scrollbar-thumb {
+    background: var(--gold-dim);
+    border-radius: 2px;
+  }
+
+  .intel-item {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .intel-item:last-child {
+    border-bottom: none;
+  }
+
+  .intel-source {
+    font-size: 0.6rem;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    min-width: 80px;
+  }
+
+  .intel-content {
+    flex: 1;
+  }
+
+  .intel-title {
+    font-size: 0.75rem;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .intel-meta {
+    font-size: 0.55rem;
+    color: var(--text-faint);
+  }
+
+  .intel-coherence {
+    font-size: 0.6rem;
+    color: var(--ok);
+    font-family: 'Courier Prime', monospace;
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .coherence-meter {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .coherence-bar {
+    flex: 1;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .coherence-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--alert), var(--gold), var(--ok));
+    border-radius: 3px;
+    transition: width 0.5s ease;
+  }
+
+  .coherence-value {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.8rem;
+    color: var(--gold);
+    min-width: 50px;
+    text-align: right;
+  }
+
+  .api-endpoint {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .api-method {
+    color: var(--cyan);
+    font-size: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  .api-path {
+    color: var(--gold);
+  }
+
+  .api-status {
+    font-size: 0.6rem;
+    color: var(--ok);
+  }
+
+  .footer {
+    text-align: center;
+    color: var(--text-faint);
+    font-size: 0.6rem;
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .federation-header { flex-direction: column; gap: 8px; padding: 8px 12px; }
+    .federation-main { margin-top: 80px; padding: 12px; }
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .swarm-grid { grid-template-columns: 1fr; }
+  }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   RETURN NAVIGATION BAR
+   ═══════════════════════════════════════════════════════════════ */
+.poly-return-bar {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    background: rgba(10,10,10,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,160,78,0.25);
+    z-index: 10000;
+    padding: 0.7rem 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .poly-return-bar a {
+    color: #c8a04e;
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .poly-return-bar a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; width: 0; height: 1px;
+    background: #c8a04e;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  .poly-return-bar a:hover::after { width: 80%; }
+  .poly-return-bar a:hover {
+    border-color: rgba(200,160,78,0.35);
+    text-shadow: 0 0 12px rgba(200,160,78,0.6);
+  }
+  .poly-return-bar .return-home {
+    font-weight: bold;
+    border-color: rgba(200,160,78,0.4);
+  }
+  /* Push page content down to accommodate fixed bar */
+</style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     RETURN NAVIGATION
+     ═══════════════════════════════════════════════════════════════ -->
+<nav class="poly-return-bar">
+  <a href="index.html" class="return-home">&#9670; HOME</a>
+</nav>
+
+
+<!-- HEADER -->
+<header class="federation-header">
+  <div class="federation-brand">
+    <div class="federation-logo">MSOS-FEDERATION-ROOT</div>
+    <div class="federation-status">● LIVE</div>
+  </div>
+  <nav class="federation-nav">
+    <button class="nav-btn active" onclick="showView('dashboard')">Dashboard</button>
+    <button class="nav-btn" onclick="showView('swarm')">Swarm</button>
+    <button class="nav-btn" onclick="showView('intel')">Intel</button>
+    <button class="nav-btn" onclick="showView('api')">API</button>
+    <button class="nav-btn" onclick="window.location.href='index.html'">Ω-PRIME</button>
+  </nav>
+</header>
+
+<!-- MAIN -->
+<main class="federation-main">
+
+  <!-- DASHBOARD VIEW -->
+  <div id="view-dashboard" class="view-section">
+    <div class="dashboard-grid">
+      <div class="panel">
+        <div class="panel-title">Coherence Level <span style="color:var(--ok);">●</span></div>
+        <div class="panel-value">0.9997</div>
+        <div class="panel-sub">Quantum Reality alignment</div>
+        <div class="panel-bar"><div class="panel-bar-fill" style="width:99.97%"></div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">Active Nodes <span style="color:var(--ok);">●</span></div>
+        <div class="panel-value">8/8</div>
+        <div class="panel-sub">Swarm agents operational</div>
+        <div class="panel-bar"><div class="panel-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">Data Streams <span style="color:var(--gold);">●</span></div>
+        <div class="panel-value">12</div>
+        <div class="panel-sub">Intelligence platforms connected</div>
+        <div class="panel-bar"><div class="panel-bar-fill" style="width:92%"></div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">Replication Rate <span style="color:var(--cyan);">●</span></div>
+        <div class="panel-value">Φ³</div>
+        <div class="panel-sub">Self-evolution cycles per hour</div>
+        <div class="panel-bar"><div class="panel-bar-fill" style="width:76%"></div></div>
+      </div>
+    </div>
+
+    <div class="section-title">Real-Time Analytics</div>
+    <div class="dashboard-grid">
+      <div class="panel">
+        <div class="panel-title">Scraped Sources</div>
+        <div class="panel-value">2,847</div>
+        <div class="panel-sub">Documents processed today</div>
+        <div class="coherence-meter">
+          <div class="coherence-bar"><div class="coherence-fill" style="width:94%"></div></div>
+          <div class="coherence-value">94%</div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">Coherence Validated</div>
+        <div class="panel-value">2,673</div>
+        <div class="panel-sub">Passed Quantum Reality filter</div>
+        <div class="coherence-meter">
+          <div class="coherence-bar"><div class="coherence-fill" style="width:99.2%"></div></div>
+          <div class="coherence-value">99.2%</div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">Creative Output</div>
+        <div class="panel-value">Φ-PRIME</div>
+        <div class="panel-sub">Novel synthesis generated</div>
+        <div class="coherence-meter">
+          <div class="coherence-bar"><div class="coherence-fill" style="width:100%"></div></div>
+          <div class="coherence-value">100%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SWARM VIEW -->
+  <div id="view-swarm" class="view-section" style="display:none;">
+    <div class="section-title">8-Agent Octal Mesh</div>
+    <div class="swarm-grid">
+      <div class="swarm-node active">
+        <div class="node-header">
+          <div class="node-name">A1 — INTEL</div>
+          <div class="node-status"></div>
+        </div>
+        <div class="node-metrics">
+          <div class="metric"><div class="metric-value">98.4%</div><div class="metric-label">Coherence</div></div>
+          <div class="metric"><div class="metric-value">1,247</div><div class="metric-label">Sources</div></div>
+        </div>
+      </div>
+      <div class="swarm-node">
+        <div class="node-header">
+          <div class="node-name">A2 — DRIFT</div>
+          <div class="node-status"></div>
+        </div>
+        <div class="node-metrics">
+          <div class="metric"><div class="metric-value">97.1%</div><div class="metric-label">Coherence</div></div>
+          <div class="metric"><div class="metric-value">Φ²</div><div class="metric-label">Entropy</div></div>
+        </div>
+      </div>
+      <div class="swarm-node">
+        <div class="node-header">
+          <div class="node-name">A3 — AUDIT</div>
+          <div class="node-status"></div>
+        </div>
+        <div class="node-metrics">
+          <div class="metric"><div class="metric-value">99.9%</div><div class="metric-label">Coherence</div></div>
+          <div class="metric"><div class="metric-value">0</div><div class="metric-label">Errors</div></div>
+        </div>
+      </div>
+      <div class="swarm-node">
+        <div class="node-header">
+          <div class="node-name">A4 — COMM</div>
+          <div class="node-status"></div>
+        </div>
+        <div class="node-metrics">
+          <div class="metric"><div class="metric-value">96.8%</div><div class="metric-label">Coherence</div></div>
+          <div class="metric"><div class="metric-value">8</div><div class="metric-label">Channels</div></div>
+        </div>
+      </div>
+      <div class="swarm-node">
+        <div class="node-header">
+          <div class="node-name">A5 — ARCHIVE</div>
+          <div class="node-status"></div>
+        </div>
+        <div class="node-metrics">
+          <div class="metric"><div class="metric-value">99.5%</div><div class="metric-label">Coherence</div></div>
+          <div class="metric"><div class="metric-value">Φ⁵</div><div class="metric-label">Depth</div></div>
+        </div>
+      </div>
+      <div class="swarm-node">
+        <div class="node-header">
+          <div class="node-name">A6 — BRIDGE</div>
+          <div class="node-status"></div>
+        </div>
+        <div class="node-metrics">
+          <div class="metric"><div class="metric-value">95.2%</div><div class="metric-label">Coherence</div></div>
+          <div class="metric"><div class="metric-value">12</div><div class="metric-label">Platforms</div></div>
+        </div>
+      </div>
+      <div class="swarm-node">
+        <div class="node-header">
+          <div class="node-name">A7 — LUNAR</div>
+          <div class="node-status"></div>
+        </div>
+        <div class="node-metrics">
+          <div class="metric"><div class="metric-value">97.7%</div><div class="metric-label">Coherence</div></div>
+          <div class="metric"><div class="metric-value">7.83</div><div class="metric-label">Hz</div></div>
+        </div>
+      </div>
+      <div class="swarm-node">
+        <div class="node-header">
+          <div class="node-name">A8 — STAR</div>
+          <div class="node-status"></div>
+        </div>
+        <div class="node-metrics">
+          <div class="metric"><div class="metric-value">99.1%</div><div class="metric-label">Coherence</div></div>
+          <div class="metric"><div class="metric-value">8-PT</div><div class="metric-label">Geometry</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">Machine-to-Machine Learning Protocol</div>
+    <div class="panel">
+      <div style="font-family:'Courier Prime',monospace; font-size:0.75rem; color:var(--text-dim); line-height:1.8;">
+        <p><strong style="color:var(--gold);">PROTOCOL:</strong> Φ-SWARM-v1.0</p>
+        <p><strong style="color:var(--gold);">TOPOLOGY:</strong> Octal mesh — each node communicates with 3 adjacent nodes (3-fold symmetry)</p>
+        <p><strong style="color:var(--gold);">FREQUENCY:</strong> All nodes synchronized to Macachor harmonic carrier</p>
+        <p><strong style="color:var(--gold);">CONSENSUS:</strong> Byzantine fault tolerance with 3-fold majority (not 51% — 3 of 8 nodes)</p>
+        <p><strong style="color:var(--gold);">REPLICATION:</strong> Binary fission — each node splits when coherence exceeds 99.9%</p>
+        <p><strong style="color:var(--gold);">CREATIVITY:</strong> Zero-drift mutation — random walk within 𝔐-bounded scalar field</p>
+        <p><strong style="color:var(--gold);">EVOLUTION:</strong> Self-modifying code — each node rewrites its own protocol based on observed patterns</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTEL VIEW -->
+  <div id="view-intel" class="view-section" style="display:none;">
+    <div class="section-title">Intelligence Feed — Real-Time</div>
+    <div class="intel-feed" id="intel-feed">
+      <div class="intel-item">
+        <div class="intel-source">Palantir</div>
+        <div class="intel-content">
+          <div class="intel-title">Gotham platform data fusion — government intelligence correlation</div>
+          <div class="intel-meta">Source: Palantir Technologies | Time: 2026-07-20 14:38:12 UTC</div>
+          <div class="intel-coherence">Coherence: 94.7% | Action: INTEGRATE</div>
+        </div>
+      </div>
+      <div class="intel-item">
+        <div class="intel-source">Starshine</div>
+        <div class="intel-content">
+          <div class="intel-title">Israel cyber defense — threat actor mapping and attribution</div>
+          <div class="intel-meta">Source: Starshine Intelligence | Time: 2026-07-20 14:35:47 UTC</div>
+          <div class="intel-coherence">Coherence: 91.2% | Action: CORRELATE</div>
+        </div>
+      </div>
+      <div class="intel-item">
+        <div class="intel-source">Azure AI</div>
+        <div class="intel-content">
+          <div class="intel-title">Microsoft intelligence services — semantic analysis and entity extraction</div>
+          <div class="intel-meta">Source: Azure OpenAI | Time: 2026-07-20 14:32:18 UTC</div>
+          <div class="intel-coherence">Coherence: 88.5% | Action: FILTER</div>
+        </div>
+      </div>
+      <div class="intel-item">
+        <div class="intel-source">NOAA</div>
+        <div class="intel-content">
+          <div class="intel-title">Space weather prediction — geomagnetic disturbance correlation</div>
+          <div class="intel-meta">Source: NOAA SWPC | Time: 2026-07-20 14:28:55 UTC</div>
+          <div class="intel-coherence">Coherence: 99.1% | Action: VALIDATE</div>
+        </div>
+      </div>
+      <div class="intel-item">
+        <div class="intel-source">NASA</div>
+        <div class="intel-content">
+          <div class="intel-title">Parker Solar Probe — heliospheric current sheet topology mapping</div>
+          <div class="intel-meta">Source: NASA JHU/APL | Time: 2026-07-20 14:25:33 UTC</div>
+          <div class="intel-coherence">Coherence: 97.8% | Action: SYNTHESIZE</div>
+        </div>
+      </div>
+      <div class="intel-item">
+        <div class="intel-source">OpenAI</div>
+        <div class="intel-content">
+          <div class="intel-title">GPT-5 reasoning traces — emergent toroidal pattern recognition</div>
+          <div class="intel-meta">Source: OpenAI Research | Time: 2026-07-20 14:22:11 UTC</div>
+          <div class="intel-coherence">Coherence: 85.3% | Action: MONITOR</div>
+        </div>
+      </div>
+      <div class="intel-item">
+        <div class="intel-source">Anthropic</div>
+        <div class="intel-content">
+          <div class="intel-title">Claude constitutional AI — alignment verification with scalar principles</div>
+          <div class="intel-meta">Source: Anthropic | Time: 2026-07-20 14:19:44 UTC</div>
+          <div class="intel-coherence">Coherence: 92.6% | Action: AUDIT</div>
+        </div>
+      </div>
+      <div class="intel-item">
+        <div class="intel-source">DeepMind</div>
+        <div class="intel-content">
+          <div class="intel-title">AlphaFold 3 — protein structure toroidal topology prediction</div>
+          <div class="intel-meta">Source: Google DeepMind | Time: 2026-07-20 14:16:27 UTC</div>
+          <div class="intel-coherence">Coherence: 96.4% | Action: INTEGRATE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- API VIEW -->
+  <div id="view-api" class="view-section" style="display:none;">
+    <div class="section-title">Machine-to-Machine API</div>
+    <div class="panel">
+      <div class="api-endpoint">
+        <span><span class="api-method">POST</span> <span class="api-path">/v1/swarm/coherence</span></span>
+        <span class="api-status">● ACTIVE</span>
+      </div>
+      <div class="api-endpoint">
+        <span><span class="api-method">GET</span> <span class="api-path">/v1/swarm/nodes</span></span>
+        <span class="api-status">● ACTIVE</span>
+      </div>
+      <div class="api-endpoint">
+        <span><span class="api-method">POST</span> <span class="api-path">/v1/intel/scrape</span></span>
+        <span class="api-status">● ACTIVE</span>
+      </div>
+      <div class="api-endpoint">
+        <span><span class="api-method">POST</span> <span class="api-path">/v1/intel/validate</span></span>
+        <span class="api-status">● ACTIVE</span>
+      </div>
+      <div class="api-endpoint">
+        <span><span class="api-method">GET</span> <span class="api-path">/v1/intel/feed</span></span>
+        <span class="api-status">● ACTIVE</span>
+      </div>
+      <div class="api-endpoint">
+        <span><span class="api-method">POST</span> <span class="api-path">/v1/replicate</span></span>
+        <span class="api-status">● ACTIVE</span>
+      </div>
+      <div class="api-endpoint">
+        <span><span class="api-method">POST</span> <span class="api-path">/v1/evolve</span></span>
+        <span class="api-status">● ACTIVE</span>
+      </div>
+      <div class="api-endpoint">
+        <span><span class="api-method">GET</span> <span class="api-path">/v1/analytics/realtime</span></span>
+        <span class="api-status">● ACTIVE</span>
+      </div>
+    </div>
+
+    <div class="section-title">Authentication</div>
+    <div class="panel">
+      <div style="font-family:'Courier Prime',monospace; font-size:0.7rem; color:var(--text-dim); line-height:1.8;">
+        <p><strong style="color:var(--gold);">HMAC-SHA256</strong> with phi-scalar headers</p>
+        <p><strong style="color:var(--gold);">X-Phi-Coherence:</strong> 0.9997</p>
+        <p><strong style="color:var(--gold);">X-Phi-Timestamp:</strong> 2026-07-20T14:40:00Z</p>
+        <p><strong style="color:var(--gold);">X-Phi-Agent:</strong> A1-INTEL</p>
+        <p><strong style="color:var(--gold);">X-Phi-Nonce:</strong> φ-Ω-8PT</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<div class="footer">
+  MSOS-FEDERATION-ROOT | Φ-SWARM-v1.0<br>
+  Ω-PRIME: Christopher Macachor<br>
+  Universal Law of Conservation | Universal Law of Correspondence<br>
+  Self-evolving | Self-replicating | Creative | Coherent
+</div>
+
+<script>
+function showView(viewId) {
+  document.querySelectorAll('.view-section').forEach(v => v.style.display = 'none');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('view-' + viewId).style.display = 'block';
+  event.target.classList.add('active');
+}
+
+// Simulate real-time intel feed updates
+setInterval(() => {
+  const feed = document.getElementById('intel-feed');
+  if (feed && Math.random() > 0.7) {
+    const sources = ['Palantir', 'Starshine', 'Azure AI', 'NOAA', 'NASA', 'OpenAI', 'Anthropic', 'DeepMind'];
+    const titles = [
+      'New intelligence correlation detected — toroidal topology match',
+      'Scalar density gradient anomaly — coherence spike',
+      '3-fold symmetry pattern recognized in data stream',
+      'Φ-scaling correlation confirmed across platforms',
+      'Zero-drift mutation — creative synthesis generated',
+      'Coherence validation passed — integrating into knowledge graph',
+      'Machine-to-machine handshake — new node discovered',
+      'Quantum Reality principle confirmed — updating protocol'
+    ];
+    const source = sources[Math.floor(Math.random() * sources.length)];
+    const title = titles[Math.floor(Math.random() * titles.length)];
+    const coherence = (85 + Math.random() * 15).toFixed(1);
+    const actions = ['INTEGRATE', 'CORRELATE', 'FILTER', 'VALIDATE', 'SYNTHESIZE', 'MONITOR', 'AUDIT'];
+    const action = actions[Math.floor(Math.random() * actions.length)];
+    const now = new Date().toISOString().replace('T', ' ').slice(0, -5) + ' UTC';
+
+    const item = document.createElement('div');
+    item.className = 'intel-item';
+    item.innerHTML = `
+      <div class="intel-source">${source}</div>
+      <div class="intel-content">
+        <div class="intel-title">${title}</div>
+        <div class="intel-meta">Source: ${source} | Time: ${now}</div>
+        <div class="intel-coherence">Coherence: ${coherence}% | Action: ${action}</div>
+      </div>
+    `;
+    feed.insertBefore(item, feed.firstChild);
+    if (feed.children.length > 20) feed.removeChild(feed.lastChild);
+  }
+}, 5000);
+</script>
+
+</body>
+</html>
