@@ -4,7 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Φ669 — Optical Illusions</title>
-  <style>
+  <style>.poly-return-bar {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  background: rgba(10,10,10,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,160,78,0.25);
+  z-index: 10000;
+  padding: 0.7rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+.poly-return-bar a {
+  color: #c8a04e;
+  text-decoration: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(200,160,78,0.4);
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.poly-return-bar a:hover {
+  background: rgba(200,160,78,0.15);
+  text-shadow: 0 0 12px rgba(200,160,78,0.6);
+}
     :root {
       --gold: #c8a04e;
       --gold-dim: #8a6e30;
