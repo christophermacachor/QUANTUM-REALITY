@@ -18,7 +18,59 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
+  body<!-- ═══════════════════════════════════════════════════════════════
+     RETURN NAVIGATION SNIPPET — Add immediately after <body> tag
+     Single tab: HOME → returns to index.html
+     ═══════════════════════════════════════════════════════════════ -->
+<style>
+  .poly-return-bar {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    background: rgba(10,10,10,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,160,78,0.25);
+    z-index: 10000;
+    padding: 0.7rem 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .poly-return-bar a {
+    color: #c8a04e;
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .poly-return-bar a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; width: 0; height: 1px;
+    background: #c8a04e;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  .poly-return-bar a:hover::after { width: 80%; }
+  .poly-return-bar a:hover {
+    border-color: rgba(200,160,78,0.35);
+    text-shadow: 0 0 12px rgba(200,160,78,0.6);
+  }
+  .poly-return-bar .return-home {
+    font-weight: bold;
+    border-color: rgba(200,160,78,0.4);
+  }
+  /* Push page content down to accommodate fixed bar */
+  body { padding-top: 3.5rem !important; }
+</style>
+
+<nav class="poly-return-bar">
+  <a href="index.html" class="return-home">&#9670; HOME</a>
+</nav> {
     font-family: 'Inter', sans-serif;
     background: var(--void);
     color: var(--coherence);
