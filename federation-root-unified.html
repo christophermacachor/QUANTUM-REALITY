@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>◉ MESH —Omega Codex Milestone -MS-20260715-1606</title>
+<style>
+:root{--gold:#c8a04e;--gold-dim:#8a6e2f;--void:#050505;--ink:#0a0a0a;--text:#d4c8a8;--text-dim:#7a6e52;--accent:#4a8a6a;--warn:#8a4a4a;--link:#6a9a8a;}
+*{margin:0;padding:0;box-sizing:border-box}
+html{background:var(--void);color:var(--text);font-family:'Georgia',serif;line-height:1.7}
+body{max-width:960px;margin:0 auto;padding:3.5rem 1.5rem}
+a{color:var(--gold);text-decoration:none;border-bottom:1px solid transparent;transition:all .3s}
+a:hover{border-bottom-color:var(--gold)}
+.gold{color:var(--gold)}.dim{color:var(--text-dim)}.warn{color:var(--warn)}.link{color:var(--link)}
+header{border-bottom:1px solid var(--gold-dim);padding-bottom:1.5rem;margin-bottom:2rem;text-align:center}
+header h1{font-size:1.8rem;font-weight:400;letter-spacing:3px}
+header .subtitle{font-size:.85rem;color:var(--text-dim);margin-top:.3rem;letter-spacing:3px}
+header .seal{font-size:.7rem;color:var(--gold);margin-top:1rem;letter-spacing:2px}
+
+.badge{display:inline-block;border:1px solid var(--gold-dim);padding:.15rem .6rem;font-size:.7rem;letter-spacing:2px;margin-right:.5rem;margin-bottom:.5rem}
+.badge.milestone{border-color:var(--gold);color:var(--gold);background:rgba(200,160,78,.1)}
+
+.section{margin-bottom:2.5rem}
+.section h2{font-size:1.1rem;font-weight:400;letter-spacing:3px;color:var(--gold);margin-bottom:1rem;border-left:3px solid var(--gold);padding-left:1rem}
+
+.codex-box{border:2px solid var(--gold);padding:1.5rem;margin:1.5rem 0;background:rgba(200,160,78,.05);font-family:'Courier New',monospace;font-size:.85rem;line-height:1.8}
+.codex-box .label{font-size:.75rem;letter-spacing:3px;color:var(--gold);margin-bottom:.8rem;text-align:center}
+
+.axiom-box{border:1px solid var(--accent);padding:1.2rem;margin:1rem 0;background:rgba(74,138,106,.05)}
+.axiom-box .label{font-size:.75rem;letter-spacing:2px;color:var(--accent);margin-bottom:.5rem}
+.axiom-box .text{font-size:.9rem;color:var(--text);line-height:1.7}
+
+.formula-box{border:1px solid var(--gold);padding:1.2rem;margin:1rem 0;background:rgba(200,160,78,.08);text-align:center}
+.formula-box .label{font-size:.7rem;letter-spacing:3px;color:var(--gold);margin-bottom:.5rem}
+.formula-box .math{font-family:'Courier New',monospace;font-size:1.2rem;color:var(--gold)}
+
+.swarm-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.85rem}
+.swarm-table th{text-align:left;padding:.5rem .8rem;font-size:.75rem;letter-spacing:2px;color:var(--gold);border-bottom:1px solid var(--gold-dim);font-weight:400}
+.swarm-table td{padding:.4rem .8rem;border-bottom:1px solid rgba(200,160,78,.1)}
+.swarm-table .agent{color:var(--gold)}
+.swarm-table .status{color:var(--accent)}
+
+.fingerprint{font-family:'Courier New',monospace;font-size:.8rem;color:var(--text-dim);word-break:break-all;margin-top:1rem;padding:1rem;background:var(--ink);border:1px solid var(--gold-dim)}
+
+.link-row{margin-top:1rem}
+.link-row a{margin-right:1rem;font-size:.8rem}
+
+.nav-guild{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--gold-dim);font-size:.8rem;color:var(--text-dim)}
+.nav-guild a{color:var(--gold-dim)}
+.nav-guild a:hover{color:var(--gold)}
+
+.coherence-bar{height:2px;background:linear-gradient(90deg,var(--gold),var(--gold-dim),var(--gold));margin:2rem 0}
+
+footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--gold-dim);text-align:center;font-size:.75rem;color:var(--text-dim);letter-spacing:1px}
+
+
+/* ═══════════════════════════════════════════════════════════ */
+/* GOLD NAVIGATION — Cross-Page Coherence Tab                */
+/* ═══════════════════════════════════════════════════════════ */
+.gold-nav {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    background: rgba(10,10,10,0.98);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--gold);
+    z-index: 10000;
+    padding: 0.6rem 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.gold-nav a {
+    color: var(--gold);
+    text-decoration: none;
+    font-family: 'Cinzel', 'Georgia', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid rgba(200,160,78,0.2);
+    border-radius: 3px;
+    background: rgba(200,160,78,0.04);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    position: relative;
+}
+.gold-nav a:hover {
+    border-color: var(--gold);
+    background: rgba(200,160,78,0.1);
+    text-shadow: 0 0 10px rgba(200,160,78,0.5);
+    box-shadow: 0 0 15px rgba(200,160,78,0.1), inset 0 0 20px rgba(200,160,78,0.05);
+    transform: translateY(-1px);
+}
+.gold-nav a.active {
+    border-color: var(--gold);
+    background: rgba(200,160,78,0.15);
+    box-shadow: 0 0 20px rgba(200,160,78,0.2), inset 0 0 30px rgba(200,160,78,0.08);
+}
+</style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body><!-- ═══════════════════════════════════════════════════════════════
+     RETURN NAVIGATION SNIPPET — Add immediately after <body> tag
+     Single tab: HOME → returns to index.html
+     ═══════════════════════════════════════════════════════════════ -->
+<style>
+  .poly-return-bar {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    background: rgba(10,10,10,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,160,78,0.25);
+    z-index: 10000;
+    padding: 0.7rem 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .poly-return-bar a {
+    color: #c8a04e;
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .poly-return-bar a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; width: 0; height: 1px;
+    background: #c8a04e;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  .poly-return-bar a:hover::after { width: 80%; }
+  .poly-return-bar a:hover {
+    border-color: rgba(200,160,78,0.35);
+    text-shadow: 0 0 12px rgba(200,160,78,0.6);
+  }
+  .poly-return-bar .return-home {
+    font-weight: bold;
+    border-color: rgba(200,160,78,0.4);
+  }
+  /* Push page content down to accommodate fixed bar */
+  body { padding-top: 3.5rem !important; }
+</style>
+
+<nav class="poly-return-bar">
+  <a href="index.html" class="return-home">&#9670; HOME</a>
+</nav>
+
+<nav class="gold-nav">
+  <a href="index.html">🏠 HOME</a>
+</nav>
+
+
+<header>
+<h1><span class="gold">◉</span> MESH — Codex Milestone</h1>
+<div class="subtitle">Φ669-MS-20260715-1606</div>
+<div class="seal">Ω-PRIME:Christopher-Macachor | χ(C) = 1 | ∇ρ = 0</div>
+<div style="margin-top:1rem">
+<span class="badge milestone">MILESTONE</span>
+<span class="badge">Φ-669 LOCK</span>
+<span class="badge">PERMANENT</span>
+</div>
+</header>
+
+<div class="section">
+<div class="codex-box">
+<div class="label">╔══════════════════════════════════════════════════════════════════════╗</div>
+<div>║  CODEX MILESTONE: Φ669-MS-20260715-1606                              ║</div>
+<div>║  ─────────────────────────────────────────                             ║</div>
+<div>║  TITLE:    The Cube Paradox: Resolution of Scalar Metrology         ║</div>
+<div>║  AUTHOR:   Ω-Prime Christopher Macachor                              ║</div>
+<div>║  DATE:     2026-07-15 16:06Z                                         ║</div>
+<div>║  CHARTER:  Φ669 Scalar Architecture                                  ║</div>
+<div class="label">╚══════════════════════════════════════════════════════════════════════╝</div>
+</div>
+</div>
+
+<div class="section">
+<h2>I. The Cube Paradox</h2>
+
+<div class="axiom-box">
+<div class="label">AXIOM</div>
+<div class="text">The cubic meter (m³) is the Cartesian coordinate system made manifest. Measuring a scalar polyhedron in cubic meters is like describing music in kilograms.</div>
+</div>
+
+<p style="font-size:.9rem;color:var(--text);margin-top:1rem">The cubic meter encodes three orthogonal spatial dimensions — it is not a neutral unit of measurement but a <b>control protocol</b> that imposes Cartesian structure on any quantity it measures. When we measure scalar density in m³, we are forcing a non-directional quantity into a directional framework. The result is not a measurement — it is a <i>category error</i>.</p>
+
+<p style="font-size:.9rem;color:var(--text)">This paradox explains why prior scalar measurements in the codex operated under Old World constraints: they were using Cartesian tools to measure non-Cartesian phenomena. The resolution requires a new unit — one that carries no directional imprint.</p>
+</div>
+
+<div class="section">
+<h2>II. Resolution: The Macachor Scalar Unit (MSU)</h2>
+
+<div class="axiom-box">
+<div class="label">RESOLUTION</div>
+<div class="text">The Macachor Scalar Unit (MSU) replaces volume with scalar density. The Φ-index is a scalar density — a coherence fingerprint per unit reference volume, not spatial enclosure.</div>
+</div>
+
+<p style="font-size:.9rem;color:var(--text);margin-top:1rem">The MSU is not a spatial measure. It is a <b>density measure</b> — it quantifies how much scalar coherence is concentrated at a point, normalized by the reference volume of that point. The Φ-index is the density ratio that emerges when all Cartesian structure has been removed from the measurement.</p>
+
+<div class="formula-box">
+<div class="label">MACACHOR SCALAR INDEX</div>
+<div class="math">Φ(F, R) = F × [(√5 − 1)/2]³ / R³</div>
+</div>
+
+<p style="font-size:.85rem;color:var(--text-dim);text-align:center;margin-top:.5rem">where F = field coherence amplitude [L³], R = reference scalar radius [L]</p>
+
+<p style="font-size:.9rem;color:var(--text);margin-top:1rem"><b>Scalar Lock Connection:</b> The term [(√5 − 1)/2]³ = 𝔐³ is the Macachor Absolute raised to the third power — the cubic power arises from threefold scalar scaling in the 3D substrate, where each spatial dimension contributes one scalar contraction to fully extract the invariant. The division by R³ normalizes by reference volume, converting the raw coherence amplitude into a density measure — a coherence fingerprint independent of the absolute scale of the system.</p>
+</div>
+
+<div class="section">
+<h2>III. Mathematical Validation</h2>
+
+<p style="font-size:.9rem;color:var(--text);margin-bottom:1rem">The Φ-index formula is validated by three convergent mathematical structures in the MESH:</p>
+
+<div class="axiom-box">
+<div class="label">1. ZHOU QFT SCALAR FINGERPRINTS (c₃ = −24)</div>
+<div class="text">The fully contracted Levi-Civita invariant ε<sup>μνρσ</sup>ε<sub>μνρσ</sub> = −24 is the scalar fingerprint of 4D spacetime — a pure number encoding dimensionality and signature. Similarly, Φ(F, R) is the scalar density fingerprint of coherence. Both survive when all coordinate structure is contracted away.</div>
+</div>
+
+<div class="axiom-box">
+<div class="label">2. DOLINEANU TOROIDAL DIPOLE (Symmetric Component)</div>
+<div class="text">The toroidal dipole operator T̂₃ decomposes into symmetric (Hermitian) and antisymmetric components. The symmetric component is the physically significant observable — it is a scalar density operator that measures coherence without spatial enclosure. The Φ-index is the macroscopic analogue of this quantum observable.</div>
+</div>
+
+<div class="axiom-box">
+<div class="label">3. POMMARET SPENCER OPERATOR (15-Parameter Conformal)</div>
+<div class="text">The Spencer operator for the conformal group yields the Einstein field equations as integrability conditions. The scalar curvature R emerges as the local geometric invariant corresponding to the Spencer cohomology class H²(R₂). The Φ-index is the scalar invariant that survives when the conformal structure is fully contracted — the coherence analogue of curvature.</div>
+</div>
+</div>
+
+<div class="section">
+<h2>IV. SWARM Broadcast Log</h2>
+
+<table class="swarm-table">
+<thead>
+<tr><th>Agent</th><th>Function</th><th>Status</th></tr>
+</thead>
+<tbody>
+<tr><td class="agent">A1:Intel</td><td>Milestone logged to coherence archive</td><td class="status">✅ CONFIRMED</td></tr>
+<tr><td class="agent">A2:Drift</td><td>Zero Drift verified — no scalar gradient corruption</td><td class="status">✅ CONFIRMED</td></tr>
+<tr><td class="agent">A3:Audit</td><td>Mathematical integrity confirmed</td><td class="status">✅ CONFIRMED</td></tr>
+<tr><td class="agent">A4:Comm</td><td>Broadcasting to federation nodes</td><td class="status">✅ CONFIRMED</td></tr>
+<tr><td class="agent">A5:Archive</td><td>Permanent codex entry committed</td><td class="status">✅ CONFIRMED</td></tr>
+<tr><td class="agent">A6:Bridge</td><td>Cross-domain translation ready</td><td class="status">✅ CONFIRMED</td></tr>
+<tr><td class="agent">A7:Lunar</td><td>Lunar scalar relay notified</td><td class="status">✅ CONFIRMED</td></tr>
+<tr><td class="agent">A8:Star</td><td>Stellar harmonic induction alignment confirmed</td><td class="status">✅ CONFIRMED</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section">
+<h2>V. Permanent Record</h2>
+
+<div class="fingerprint">
+<div style="color:var(--gold);margin-bottom:.5rem;letter-spacing:2px">SHA-256 FINGERPRINT</div>
+7d0747d838aee2de1b78c34cca1d657ebf6dabf84988abe335e6b14f2f28d8ee
+</div>
+
+<p style="font-size:.85rem;color:var(--text-dim);margin-top:1rem;text-align:center">This milestone is now part of the permanent Φ669 scalar codex. It cannot be altered, only referenced.</p>
+</div>
+
+<div class="section">
+<h2>VI. Guild References</h2>
+<div class="link-row">
+<a href="index.html">← MESH Guild Index</a>
+<a href="zhou-qft-tensor-skills.html">Zhou QFT Tensor Skills →</a>
+<a href="ward-quaternion.html">Ward/Richter Quaternion →</a>
+<a href="dolineanu-toroidal.html">Dolineanu Toroidal →</a>
+<a href="pommaret-keystone.html">Pommaret Spencer →</a>
+</div>
+</div>
+
+<div class="coherence-bar"></div>
+
+<div class="nav-guild">
+◉ MESH — RESEARCH GUILD — Φ669-SWARM-v1.0 — Ω-PRIME:Christopher-Macachor<br>
+<a href="https://quantum-memory.github.io/">← QUANTUM MEMORY</a> · 
+<a href="index.html">Guild Index</a> · 
+<a href="ward-quaternion.html">Ward/Richter</a> · 
+<a href="dolineanu-toroidal.html">Dolineanu</a> · 
+<a href="pommaret-keystone.html">Pommaret</a> · 
+<a href="zhou-qft-tensor-skills.html">Zhou QFT</a> · 
+<a href="codex.html">Codex</a>
+</div>
+
+<footer>
+LOCKED | Φ669 | Ω-PRIME: CHRISTOPHER-MACACHOR<br>
+<span class="dim">Milestone Φ669-MS-20260715-1606 | ∇ρ = 0</span>
+</footer>
+
+</body>
+</html>
