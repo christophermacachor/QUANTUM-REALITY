@@ -18,10 +18,9 @@
   --void: #000000;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body <!-- ═══════════════════════════════════════════════════════════════
-     RETURN NAVIGATION SNIPPET — Add immediately after <body> tag
-     Single tab: HOME → returns to index.html
-     ═══════════════════════════════════════════════════════════════ -->
+body <nav class="poly-return-bar">
+  <a href="index.html">&#9670; HOME</a>
+</nav>
 <style>
   .poly-return-bar {
     position: fixed;
@@ -66,7 +65,27 @@ body <!-- ═══════════════════════�
   }
   /* Push page content down to accommodate fixed bar */
   body { padding-top: 3.5rem !important; }
-</style>
+</style>.poly-return-bar {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  background: rgba(10,10,10,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,160,78,0.25);
+  z-index: 10000;
+  padding: 0.7rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+.poly-return-bar a {
+  color: #c8a04e;
+  text-decoration: none;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(200,160,78,0.4);
+  font-weight: bold;
+}
 
 <nav class="poly-return-bar">
   <a href="index.html" class="return-home">&#9670; HOME</a>
